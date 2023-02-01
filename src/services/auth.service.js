@@ -1,14 +1,14 @@
 "use strict";
 
-const UsersRepository = require("../repository/auth.repository.js");
+const AuthRepository = require("../repository/auth.repository.js");
 
-class UsersService {
-  usersRepository = new UsersRepository();
+class AuthService {
+  authRepository = new AuthRepository();
 
   // 회원가입 API
   userRegister = async (a,b) => {
-    this.usersRepository.userRegister(a,b)
+    this.authRepository.userRegister(a,b)
   };
 }
 
-module.exports = UsersService;
+module.exports = AuthService;

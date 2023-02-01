@@ -1,10 +1,9 @@
 "use strict";
 
-// const { Users } = require("../../sequelize/models"); 
 
-class UsersRepository {
+class AuthRepository {
   userRegister = async (a,b) => {
   };
 }
 
-module.exports = UsersRepository;
+module.exports = AuthRepository;

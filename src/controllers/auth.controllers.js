@@ -1,14 +1,14 @@
 "use strict";
 
-const UsersService = require('../services/auth.service.js');
+const AuthService = require('../services/auth.service.js');
 
-class UsersController {
-    usersService = new UsersService();
+class AuthController {
+    authService = new AuthService();
     
     // 회원가입 API
     userRegister = async (req, res, next) => {
-      this.usersService.userRegister(a,b)
+      this.authService.userRegister(a,b)
     }
 }
 
-module.exports = UsersController;
+module.exports = AuthController;

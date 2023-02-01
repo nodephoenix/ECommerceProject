@@ -1,3 +1,5 @@
+"use strict";
+
 const http = require("./app.js");
 const port = 3000;
 

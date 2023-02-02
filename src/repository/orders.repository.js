@@ -1,7 +1,10 @@
 "use strict";
 const { Order, Order_product, Cart } = require("../../sequelize/models");
+const Status = require('../middleware/status.code')
 
 class OrdersRepository {
+  code = new Status();
+  
   createOrder = async (userId) => {
     try {
       const createOrderInfo = await Order.create({
@@ -10,7 +13,7 @@ class OrdersRepository {
       });
       return createOrderInfo;
     } catch {
-      throw new Error("알 수 없는 오류가 발생했습니다.");
+      throw new Error();
     }
   };
 
@@ -23,7 +26,7 @@ class OrdersRepository {
       });
       return orderDetail;
     } catch {
-      throw new Error("알 수 없는 오류가 발생했습니다.");
+      throw new Error();
     }
   };
 
@@ -35,7 +38,7 @@ class OrdersRepository {
 
       return myCartData;
     } catch {
-      throw new Error("알 수 없는 오류가 발생했습니다.");
+      throw new Error();
     }
   };
 
@@ -45,7 +48,7 @@ class OrdersRepository {
         where: { user_id: user_id },
       });
     } catch {
-      throw new Error("알 수 없는 오류가 발생했습니다.");
+      throw new Error();
     }
   };
 
@@ -55,7 +58,7 @@ class OrdersRepository {
         where: { orders_id: order_id },
       });
     } catch {
-      throw new Error("알 수 없는 오류가 발생했습니다.");
+      throw new Error();
     }
   };
 
@@ -67,7 +70,7 @@ class OrdersRepository {
       );
       return updataData;
     } catch {
-      throw new Error("알 수 없는 오류가 발생했습니다.");
+      throw new Error();
     }
   };
 
@@ -78,7 +81,7 @@ class OrdersRepository {
       });
       return orderListData;
     } catch {
-      throw new Error("알 수 없는 오류가 발생했습니다.");
+      throw new Error();
     }
   };
 
@@ -89,7 +92,7 @@ class OrdersRepository {
       });
       return orderDetailList;
     } catch {
-      throw new Error("알 수 없는 오류가 발생했습니다.");
+      throw new Error();
     }
   };
 }

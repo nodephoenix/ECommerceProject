@@ -11,7 +11,7 @@ class OrdersService {
       const orderDetail =  await this.ordersRepository.createOrderDetail(createOrder.id, productId, count)
       return orderDetail
     } catch {
-      throw new Error("알 수 없는 오류가 발생했습니다.");
+      return
     }
   }
 

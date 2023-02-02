@@ -42,6 +42,12 @@ class OrdersService {
     console.log(orderStautsChange)
     await this.ordersRepository.cancelOrder(order_id)
   }
+
+  orderList = async (user_id) => {
+    const orderList = this.ordersRepository.orderList(user_id)
+
+    return orderList
+  }
 }
 
 module.exports = OrdersService;

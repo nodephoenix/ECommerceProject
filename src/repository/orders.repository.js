@@ -49,6 +49,14 @@ class OrdersRepository {
     const updataData = await Order.update({status : 4},{where :{id : order_id, user_id : user_id}})
     return updataData
   }
+
+  orderList = async (user_id) => {
+    const orderListData = await Order.findAll({
+      where : { user_id : user_id}
+    })
+    
+    return orderListData
+  }
 }
 
 module.exports = OrdersRepository;

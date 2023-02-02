@@ -32,7 +32,14 @@ class OrdersController {
     const userId = 1 // 임시
     const cancelOrder= await this.ordersService.cancelOrder(orderId, userId)
 
-    res.json({message : '성공?'})
+    res.json({message : '주문이 취소되었습니다.'})
+  }
+
+  myOrdersList = async (req, res) => {
+    const userId = 1 // 임시 
+    const orderList = await this.ordersService.orderList(userId)
+
+    res.json(orderList)
   }
 }
 

@@ -62,8 +62,8 @@ class AdminController {
    * @param {Response} res
    * @param {NextFunction} next
    */
-  getProducts = async (req, res, next) => {
-    const orders = await this.adminService.getProducts();
+  getOrderProducts = async (req, res, next) => {
+    const orders = await this.adminService.getOrderProducts();
     res.json(orders);
   };
 

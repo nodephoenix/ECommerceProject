@@ -44,20 +44,16 @@ class AdminRepository {
     return true;
   };
 
-  getProducts = async () => {
+  getOrderProducts = async () => {
     // TODO: association 관계를 이용해서 원하는 형태로 받을 필요 있음.
-    // const orders = await productModel.findAll({
-    //   include: {
-    //     model: orderProductModel,
-    //     include: {
-    //       model: productModel,
-    //     },
-    //   },
-    //   raw: true,
-    // });
-    // const data = orders.map(order => ({...order, }))
-    // return orders;
-    return []
+    const orders = await productModel.findAll({
+      include: {
+        model: orderProductModel,
+      },
+      raw: true,
+    });
+    const data = orders.map(order => ({...order, }))
+    return orders;
   };
 
   /**

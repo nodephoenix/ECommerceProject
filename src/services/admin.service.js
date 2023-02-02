@@ -28,8 +28,8 @@ class AdminService {
     return this.adminRepository.deleteProducts(productId);
   };
 
-  getProducts = async () => {
-    return this.adminRepository.getProducts();
+  getOrderProducts = async () => {
+    return this.adminRepository.getOrderProducts();
   };
 
   /**

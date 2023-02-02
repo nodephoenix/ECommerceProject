@@ -17,7 +17,7 @@ router.put('/admin/products/:productId', adminController.editProducts);
 router.delete('/admin/products/:productId', adminController.deleteProducts);
 
 // admin 주문 상품 목록 및 상태 조회 API
-router.get('/admin/products', adminController.getProducts);
+router.get('/admin/products', adminController.getOrderProducts);
 
 // admin 상품 상태 변경 API
 router.put('/admin/products/:productId/status', adminController.putProductsStatus);

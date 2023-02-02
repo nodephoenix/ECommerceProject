@@ -5,6 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
+    "start": "node src/server.js",
     "test": "jest"
   },
   "repository": {

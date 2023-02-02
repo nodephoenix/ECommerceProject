@@ -1,4 +1,4 @@
-require("dotenv").config('../../.env');
+require("dotenv").config("../../.env");
 
 const development = {
   username: process.env.SEQUELIZE_DEVELOPMENT_USERNAME || "root",

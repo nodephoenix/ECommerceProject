@@ -30,7 +30,8 @@
         height: 100%;
       }
       body {
-        background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbdByfl%2FbtrVf7i5Uq5%2FjJ5afu7vrUKkgNGmzP2kAk%2Fimg.jpg");
+        /* background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbdByfl%2FbtrVf7i5Uq5%2FjJ5afu7vrUKkgNGmzP2kAk%2Fimg.jpg"); */
+        background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
         background-repeat: no-repeat;
         background-size: cover;
       }
@@ -56,6 +57,7 @@
         height: 25%;
       }
       .input-bar {
+        padding-top: 100px;
       }
       .input-content {
         display: block;
@@ -65,11 +67,11 @@
       }
     </style>
 
-    <title>🖼그림사조 회원가입🎨</title>
+    <title>🖼그림사조 로그인🎨</title>
   </head>
   <body>
     <div class="top-bar">
-      <h1>🖼그림사조 회원가입🎨</h1>
+      <h1 style="color: #0a174e; font-weight: bold">🖼그림사조 로그인🎨</h1>
     </div>
     <div class="input-bar">
       <div class="form-floating mb-3 input-content">
@@ -80,23 +82,7 @@
         <input type="password" class="form-control" id="floatingPassword" placeholder="패스워드" />
         <label for="floatingPassword">패스워드</label>
       </div>
-      <div class="form-floating input-content" style="margin-top: 15px">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="패스워드 확인" />
-        <label for="floatingPassword">패스워드 확인</label>
-      </div>
-      <div class="form-floating mb-3 input-content" style="margin-top: 15px">
-        <input type="email" class="form-control" id="floatingInput" placeholder="이름" />
-        <label for="floatingInput">이름</label>
-      </div>
-      <div class="form-floating mb-3 input-content" style="margin-top: 15px">
-        <input type="email" class="form-control" id="floatingInput" placeholder="전화번호" />
-        <label for="floatingInput">전화번호</label>
-      </div>
-      <div class="form-floating mb-3 input-content" style="margin-top: 15px">
-        <input type="email" class="form-control" id="floatingInput" placeholder="주소" />
-        <label for="floatingInput">주소</label>
-      </div>
-      <button type="button" class="btn btn-success input-content" style="width: 150px">가입하기</button>
+      <button type="button" class="btn btn-success input-content" style="width: 150px; margin-top: 10px">로그인</button>
     </div>
   </body>
 </html>

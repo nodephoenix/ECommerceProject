@@ -14,9 +14,9 @@ class OrdersController {
       //
 
       const orderInfo = await this.ordersService.orderArt(userId, productId, count)
-      res.status(200).json(orderInfo)
+      res.status(200).json({message : '주문을 완료하였습니다.'})
     } catch(err){
-      res.status(err.code).json(err.message)
+      // res.status(err.code).json(err.message)
     }
   };
 
@@ -24,11 +24,15 @@ class OrdersController {
     const userId = 1 // 임시
     const orderCartInfo = await this.ordersService.orderCart(userId)
 
-    res.json(orderCartInfo)
+    res.json({message : "주문을 완료하였습니다."})
   }
 
   cancelOrder = async (req, res) => {
-    
+    const { orderId } = req.params
+    const userId = 1 // 임시
+    const cancelOrder= await this.ordersService.cancelOrder(orderId, userId)
+
+    res.json({message : '성공?'})
   }
 }
 

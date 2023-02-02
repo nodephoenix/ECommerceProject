@@ -35,6 +35,13 @@ class OrdersService {
     await this.ordersRepository.clearCart(userId)
     return myCartDetail
   }
+
+  cancelOrder = async (order_id, user_id) => {
+    
+    const orderStautsChange = await this.ordersRepository.orderStatusChange(order_id, user_id)
+    console.log(orderStautsChange)
+    await this.ordersRepository.cancelOrder(order_id)
+  }
 }
 
 module.exports = OrdersService;

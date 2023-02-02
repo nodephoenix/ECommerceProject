@@ -38,6 +38,17 @@ class OrdersRepository {
       where : { user_id : user_id }
     })
   }
+
+  cancelOrder = async (order_id) => {
+    await Order_product.destroy({
+      where : { orders_id : order_id }
+    })
+  }
+
+  orderStatusChange = async (order_id, user_id) => {
+    const updataData = await Order.update({status : 4},{where :{id : order_id, user_id : user_id}})
+    return updataData
+  }
 }
 
 module.exports = OrdersRepository;

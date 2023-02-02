@@ -48,6 +48,12 @@ class OrdersService {
 
     return orderList
   }
+
+  orderDetail = async (orderId) => {
+    const orderDetail = this.ordersRepository.orderDetail(orderId)
+
+    return orderDetail
+  }
 }
 
 module.exports = OrdersService;

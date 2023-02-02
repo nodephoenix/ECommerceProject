@@ -10,7 +10,7 @@ const ordersController = new OrdersController();
 router.get("/orders", ordersController.myOrdersList);
 
 // 자기 주문 상세 내역 조회 API
-router.get("/orders/:orderId",);
+router.get("/orders/:orderId", ordersController.orderDetail);
 
 // 장바구니 상품 주문하기 API
 router.post("/orders/carts", ordersController.orderCart);

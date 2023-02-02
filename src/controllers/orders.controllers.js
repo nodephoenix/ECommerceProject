@@ -41,6 +41,15 @@ class OrdersController {
 
     res.json(orderList)
   }
+
+  orderDetail = async (req, res) => {
+    const userId = 1 // 임시
+    const { orderId } = req.params;
+
+    const orderDetail = await this.ordersService.orderDetail(orderId)
+
+    res.json(orderDetail)
+  }
 }
 
 module.exports = OrdersController;

@@ -54,8 +54,15 @@ class OrdersRepository {
     const orderListData = await Order.findAll({
       where : { user_id : user_id}
     })
-    
+
     return orderListData
+  }
+
+  orderDetail = async (order_id) => {
+    const orderDetailList = await Order_product.findAll({
+      where : { orders_id : order_id}
+    })
+    return orderDetailList
   }
 }
 

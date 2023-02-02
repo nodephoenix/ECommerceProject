@@ -25,14 +25,19 @@ module.exports = (sequelize, DataTypes) => {
       category: DataTypes.INTEGER,
       desc: DataTypes.STRING,
       price: DataTypes.INTEGER,
-      image: DataTypes.INTEGER,
+      image: DataTypes.STRING,
       status: DataTypes.INTEGER,
+      defaultValue: 0,
       likes: DataTypes.INTEGER,
       views: DataTypes.INTEGER,
     },
     {
       sequelize,
       modelName: "Product",
+      timestamps: true,
+      paranoid: false,
+      charset: "utf8mb4",
+      collate: "utf8mb4_general_ci",
     }
   );
   return Product;

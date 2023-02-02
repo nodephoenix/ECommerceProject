@@ -33,6 +33,7 @@ class AuthService {
       userId: login.id,
       email: login.email,
       password: login.password,
+      salt: login.salt,
     };
   };
 }

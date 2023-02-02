@@ -43,22 +43,22 @@ class AuthController {
     try {
       const { email, password } = req.body;
       const user = await this.authService.userLogin(email);
+      // 입력한 비밀번호와 암호화된 비밀번호 같은지 확인
+      const { password: dbPassword, salt } = user;
+      const hashPassword = crypto
+        .createHash("sha512")
+        .update(password + salt)
+        .digest("hex");
 
-      // 입력한 비밀번호와 DB에 저장된 비밀번호 같은지 확인
-
-      if (email !== user.email || password !== user.password) {
-        return res
-          .status(400)
-          .json({ message: "이메일 또는 패스워드를 확인해주세요." });
+      if (dbPassword === hashPassword) {
+        // jwt 토큰 생성
+        const token = jwt.sign({ id: user.userId }, secretKey, option);
+        res.cookie("x_auth", token, {
+          httpOnly: true,
+          maxAge: 0.5 * 60 * 60 * 1000, // 쿠키 만료 시간 30분
+        });
+        res.status(200).json({ message: "로그인이 완료되었습니다." });
       }
-
-      // jwt 토큰 생성
-      const token = jwt.sign({ id: user.userId }, secretKey, option);
-      res.cookie("x_auth", token, {
-        httpOnly: true,
-        maxAge: 0.5 * 60 * 60 * 1000, // 쿠키 만료 시간 30분
-      });
-      res.status(200).json({ message: "로그인이 완료되었습니다." });
     } catch (error) {
       res.status(400).json({ errorMessage: error.message });
     }

@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const Sequelize = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Order extends Model {
     /**
@@ -20,11 +21,18 @@ module.exports = (sequelize, DataTypes) => {
   }
   Order.init(
     {
-      status: DataTypes.INTEGER,
+      status: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
     },
     {
       sequelize,
       modelName: "Order",
+      timestamps: true,
+      paranoid: false,
+      charset: "utf8mb4",
+      collate: "utf8mb4_general_ci",
     }
   );
   return Order;

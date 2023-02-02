@@ -7,30 +7,33 @@ class AuthService {
   authRepository = new AuthRepository();
 
   // 회원가입 API
-  userRegister = async (userName, email, password, phone) => {
+  userRegister = async (userName, email, password, phone, salt) => {
     const userData = await this.authRepository.userRegister(
       userName,
       email,
       password,
-      phone
+      phone,
+      salt
     );
     return {
       id: userData.null,
       userName: userData.userName,
       email: userData.email,
       password: userData.password,
+      salt: userData.salt,
       phone: userData.phone,
       createdAt: userData.createdAt,
       updatedAt: userData.updatedAt,
     };
   };
   // 로그인 API
-  userLogin = async (a, b) => {
-    this.authRepository.userLogin(a, b);
-  };
-  // 회원가입 API
-  userLogout = async (a, b) => {
-    this.authRepository.userLogout(a, b);
+  userLogin = async (email) => {
+    const login = await this.authRepository.userLogin(email);
+    return {
+      userId: login.id,
+      email: login.email,
+      password: login.password,
+    };
   };
 }
 module.exports = AuthService;

@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const Sequelize = require("sequelize");
 const orderProduct = require("./order_product");
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
@@ -25,14 +26,21 @@ module.exports = (sequelize, DataTypes) => {
       category: DataTypes.INTEGER,
       desc: DataTypes.STRING,
       price: DataTypes.INTEGER,
-      image: DataTypes.INTEGER,
-      status: DataTypes.INTEGER,
+      image: DataTypes.STRING,
+      status: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
       likes: DataTypes.INTEGER,
       views: DataTypes.INTEGER,
     },
     {
       sequelize,
       modelName: "Product",
+      timestamps: true,
+      paranoid: false,
+      charset: "utf8mb4",
+      collate: "utf8mb4_general_ci",
     }
   );
   return Product;

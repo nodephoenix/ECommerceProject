@@ -13,9 +13,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "user_id",
         targetKey: "id",
       });
-      models.Order.hasMany(models.Order_product, {
-        foreignKey: "orders_id",
-        sourceKey: "id",
+      models.Order.belongsToMany(models.Product, {
+        through: models.Order_product,
+        foreignKey: 'order_id',
+        as: 'items'
       });
     }
   }

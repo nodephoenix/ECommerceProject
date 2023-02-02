@@ -7,11 +7,11 @@ class OrdersService {
 
   orderArt = async (userId, productId, count) => {
     try{
-      const createOrder = await this.ordersRepository.createOrder(userId)
-      
+      const createOrder = await this.ordersRepository.createOrder(userId) 
       const orderDetail =  await this.ordersRepository.createOrderDetail(createOrder.id, productId, count)
       return orderDetail
     } catch {
+      throw new Error("알 수 없는 오류가 발생했습니다.");
     }
   }
 

@@ -15,15 +15,18 @@ class OrdersService {
         productId,
         count
       );
-      return this.code.created(orderDetail, '주문이 완료되었습니다.')
+      return this.code.created(orderDetail, "주문이 완료되었습니다.");
     } catch {
-      return this.code.Forbidden;
+      throw new Error();
     }
   };
 
   orderCart = async (userId) => {
     try {
       const myCart = await this.ordersRepository.myCart(userId);
+      if (!myCart.length) {
+        return this.code.badRequest("장바구니에 상품이 존재하지 않습니다");
+      }
       const createOrder = await this.ordersRepository.createOrder(userId);
       const myCartDetail = myCart.map((detail) => ({
         count: detail.count,
@@ -44,9 +47,9 @@ class OrdersService {
       // });
 
       await this.ordersRepository.clearCart(userId);
-      return this.code.created(myCartDetail, '장바구니 주문이 완료되었습니다')
+      return this.code.created(myCartDetail, "장바구니 주문이 완료되었습니다");
     } catch {
-      return this.code.Forbidden;
+      throw new Error();
     }
   };
 
@@ -56,30 +59,35 @@ class OrdersService {
         order_id,
         user_id
       );
+      if (!orderStautsChange) {
+        return this.code.badRequest("주문을 취소할 수 없습니다.");
+      }
       const cancelData = await this.ordersRepository.cancelOrder(order_id);
-      return this.code.ok(cancelData, '주문이 취소되었습니다')
+      return this.code.ok(cancelData, "주문이 취소되었습니다.");
     } catch {
-      return this.code.Forbidden;
+      throw new Error();
     }
   };
 
   orderList = async (user_id) => {
     try {
-      const orderList = this.ordersRepository.orderList(user_id);
-
-      return this.code.ok(orderList, '주문 이력 조회')
+      const orderList = await this.ordersRepository.orderList(user_id);
+      return this.code.ok(orderList, "주문 이력 조회");
     } catch {
-      return this.code.Forbidden;
+      throw new Error();
     }
   };
 
   orderDetail = async (orderId) => {
     try {
-      const orderDetail = this.ordersRepository.orderDetail(orderId);
+      const orderDetail = await this.ordersRepository.orderDetail(orderId);
+      if (!orderDetail.length) {
+        return this.code.badRequest('해당 건은 조회할 수 없습니다.')
+      }
 
-      return this.code.ok(orderDetail, '주문 상세 조회')
+      return this.code.ok(orderDetail, "주문 상세 조회");
     } catch {
-      return this.code.Forbidden;
+      throw new Error();
     }
   };
 }

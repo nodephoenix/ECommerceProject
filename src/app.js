@@ -25,6 +25,13 @@ app.use("/", (req, res, next) => {
   res.status(404).send("Not Found");
 });
 
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(err.statusCode || 500).json({
+    errorMessage: err.message || "Internal Error",
+  });
+});
+
 sequelize
   .sync({ force: false })
   .then(() => {

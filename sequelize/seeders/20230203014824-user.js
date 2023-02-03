@@ -14,8 +14,8 @@ module.exports = {
     let datas = [];
     for (let i = 0; i < 1; i++) {
       let obj = {
-        userName: "test" + i + "@exapmle.com",
-        email: "testUser" + i,
+        userName: "testUser" + i,
+        email: "test" + i + "@exapmle.com",
         password: hashPassword("alswn123*", "10"), // 테스트용이라 salt='10'
         salt: "10",
         phone: "010-1234-1234",

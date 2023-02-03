@@ -2,7 +2,7 @@
 
 const { equal } = require("joi");
 const OrdersService = require("../services/orders.service.js");
-const Status = require('../middleware/status.code')
+const Status = require('../middleware/status.code.js')
 
 class OrdersController {
   ordersService = new OrdersService();
@@ -21,9 +21,10 @@ class OrdersController {
         productId,
         count
       );
+      console.log(this.code.Forbidden.status)
       res.status(orderInfo.stauts).json(orderInfo.data)
     } catch (err) {
-      // res.status(err.code).json(err.message)
+      res.status(this.code.Forbidden.status).json(this.code.Forbidden.message)
     }
   };
 

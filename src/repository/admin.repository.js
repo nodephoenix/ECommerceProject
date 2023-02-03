@@ -27,10 +27,9 @@ class AdminRepository {
    * @param {{productName: string; desc: string; price: number; image: string;}} body
    */
   editProducts = async (productId, body) => {
-    await Product.update(body, {
+    return await Product.update(body, {
       where: { id: productId },
     });
-    return true;
   };
 
   /**
@@ -60,7 +59,7 @@ class AdminRepository {
    * @param {string} status
    */
   putProductsStatus = async (productId, status) => {
-    await Product.update(
+    return await Product.update(
       {
         status,
       },
@@ -68,7 +67,6 @@ class AdminRepository {
         where: { id: productId },
       }
     );
-    return true;
   };
 
   /**
@@ -76,7 +74,7 @@ class AdminRepository {
    * @param {number} grade
    */
   putUserGrade = async (userId, grade) => {
-    await User.update(
+    return await User.update(
       {
         grade,
       },
@@ -84,7 +82,6 @@ class AdminRepository {
         where: { id: userId },
       }
     );
-    return true;
   };
 }
 module.exports = AdminRepository;

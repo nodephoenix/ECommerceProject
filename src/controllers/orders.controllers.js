@@ -11,10 +11,12 @@ class OrdersController {
   orderArt = async (req, res) => {
     try {
       // req 임시
-      const userId = 1;
+      const userId = 1
       const productId = 2;
       const count = 4;
       //
+      console.log(res.locals.user.id)
+      
 
       const orderInfo = await this.ordersService.orderArt(
         userId,

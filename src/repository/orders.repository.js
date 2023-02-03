@@ -1,10 +1,10 @@
 "use strict";
 const { Order, Order_product, Cart } = require("../../sequelize/models");
-const Status = require('../middleware/status.code')
+const Status = require("../middleware/status.code");
 
 class OrdersRepository {
   code = new Status();
-  
+
   createOrder = async (userId) => {
     try {
       const createOrderInfo = await Order.create({
@@ -17,11 +17,11 @@ class OrdersRepository {
     }
   };
 
-  createOrderDetail = async (orders_id, product_id, count) => {
+  createOrderDetail = async (order_id, product_id, count) => {
     try {
       const orderDetail = await Order_product.create({
         count,
-        orders_id,
+        order_id,
         product_id,
       });
       return orderDetail;
@@ -54,9 +54,10 @@ class OrdersRepository {
 
   cancelOrder = async (order_id) => {
     try {
-      await Order_product.destroy({
-        where: { orders_id: order_id },
+      const cancelData = await Order_product.destroy({
+        where: { order_id: order_id },
       });
+      return cancelData;
     } catch {
       throw new Error();
     }
@@ -66,7 +67,7 @@ class OrdersRepository {
     try {
       const updataData = await Order.update(
         { status: 4 },
-        { where: { id: order_id, user_id: user_id } }
+        { where: { id: order_id, user_id: user_id, status: 0 } }
       );
       return updataData;
     } catch {
@@ -88,7 +89,7 @@ class OrdersRepository {
   orderDetail = async (order_id) => {
     try {
       const orderDetailList = await Order_product.findAll({
-        where: { orders_id: order_id },
+        where: { order_id: order_id },
       });
       return orderDetailList;
     } catch {

@@ -4,20 +4,20 @@
 /** @type {any} */
 const db = require("../../sequelize/models");
 /** @type {import("sequelize").ModelStatic<import('sequelize').Model>} */
-const userModel = db["User"];
+const User = db["User"];
 /** @type {import("sequelize").ModelStatic<import('sequelize').Model>} */
-const productModel = db["Product"];
+const Product = db["Product"];
 /** @type {import("sequelize").ModelStatic<import('sequelize').Model>} */
-const orderModel = db["Order"];
+const Order = db["Order"];
 /** @type {import("sequelize").ModelStatic<import('sequelize').Model>} */
-const orderProductModel = db["Order_product"];
+const OrderProduct = db["Order_product"];
 
 class AdminRepository {
   /**
    * @param {{productName: string; desc: string; price: number; image: string;}} body
    */
   registerProducts = async (body) => {
-    const products = await productModel.create(body);
+    const products = await Product.create(body);
     products.save();
     return true;
   };
@@ -27,7 +27,7 @@ class AdminRepository {
    * @param {{productName: string; desc: string; price: number; image: string;}} body
    */
   editProducts = async (productId, body) => {
-    await productModel.update(body, {
+    await Product.update(body, {
       where: { id: productId },
     });
     return true;
@@ -38,7 +38,7 @@ class AdminRepository {
   
    */
   deleteProducts = async (productId) => {
-    await productModel.destroy({
+    await Product.destroy({
       where: { id: productId },
     });
     return true;
@@ -46,9 +46,9 @@ class AdminRepository {
 
   getOrderProducts = async () => {
     // TODO: association 관계를 이용해서 원하는 형태로 받을 필요 있음.
-    const orders = await productModel.findAll({
+    const orders = await Product.findAll({
       include: {
-        model: orderProductModel,
+        model: OrderProduct,
       },
       raw: true,
     });
@@ -61,7 +61,7 @@ class AdminRepository {
    * @param {string} status
    */
   putProductsStatus = async (productId, status) => {
-    await productModel.update(
+    await Product.update(
       {
         status,
       },
@@ -77,7 +77,7 @@ class AdminRepository {
    * @param {number} grade
    */
   putUserGrade = async (userId, grade) => {
-    await userModel.update(
+    await User.update(
       {
         grade,
       },

@@ -1,7 +1,7 @@
 "use strict";
 
 const jwt = require("jsonwebtoken");
-const { secretKey, option } = require("../../sequelize/config/secretKey.js");
+require("dotenv").config("../../.env");
 const AuthService = require("../services/auth.service.js");
 const crypto = require("crypto");
 const UsersController = require("./users.controllers.js");
@@ -64,7 +64,15 @@ class AuthController {
 
       if (dbPassword === hashPassword) {
         // jwt 토큰 생성
-        const token = jwt.sign({ id: user.userId }, secretKey, option);
+        const token = jwt.sign(
+          { id: user.userId },
+          process.env.JWT_SECRET_KEY,
+          {
+            algorithm: "HS256", // 해싱 알고리즘
+            expiresIn: process.env.JWT_EXPIRES_IN, // 토큰 유효 기간
+            issuer: "issuer", // 발행자
+          }
+        );
         res.cookie("x_auth", token, {
           httpOnly: true,
           maxAge: 0.5 * 60 * 60 * 1000, // 쿠키 만료 시간 30분

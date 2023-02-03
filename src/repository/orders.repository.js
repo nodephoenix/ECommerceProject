@@ -1,13 +1,15 @@
 "use strict";
-const { Order, Order_product, Cart } = require("../../sequelize/models");
-const Status = require("../middleware/status.code");
 
 class OrdersRepository {
-  code = new Status();
+  constructor(Order, Order_product, Cart) {
+    this.order = Order;
+    this.orderProduct = Order_product;
+    this.cart = Cart;
+  }
 
   createOrder = async (userId) => {
     try {
-      const createOrderInfo = await Order.create({
+      const createOrderInfo = await this.order.create({
         status: 0,
         user_id: userId,
       });
@@ -19,7 +21,7 @@ class OrdersRepository {
 
   createOrderDetail = async (order_id, product_id, count) => {
     try {
-      const orderDetail = await Order_product.create({
+      const orderDetail = await this.orderProduct.create({
         count,
         order_id,
         product_id,
@@ -32,7 +34,7 @@ class OrdersRepository {
 
   myCart = async (user_id) => {
     try {
-      const myCartData = await Cart.findAll({
+      const myCartData = await this.cart.findAll({
         where: { user_id: user_id },
       });
 
@@ -44,7 +46,7 @@ class OrdersRepository {
 
   clearCart = async (user_id) => {
     try {
-      await Cart.destroy({
+      await this.cart.destroy({
         where: { user_id: user_id },
       });
     } catch {
@@ -54,7 +56,7 @@ class OrdersRepository {
 
   cancelOrder = async (order_id) => {
     try {
-      const cancelData = await Order_product.destroy({
+      const cancelData = await this.orderProduct.destroy({
         where: { order_id: order_id },
       });
       return cancelData;
@@ -65,7 +67,7 @@ class OrdersRepository {
 
   orderStatusChange = async (order_id, user_id) => {
     try {
-      const updataData = await Order.update(
+      const updataData = await this.order.update(
         { status: 4 },
         { where: { id: order_id, user_id: user_id, status: 0 } }
       );
@@ -77,7 +79,7 @@ class OrdersRepository {
 
   orderList = async (user_id) => {
     try {
-      const orderListData = await Order.findAll({
+      const orderListData = await this.order.findAll({
         where: { user_id: user_id },
       });
       return orderListData;
@@ -88,7 +90,7 @@ class OrdersRepository {
 
   orderDetail = async (order_id) => {
     try {
-      const orderDetailList = await Order_product.findAll({
+      const orderDetailList = await this.orderProduct.findAll({
         where: { order_id: order_id },
       });
       return orderDetailList;

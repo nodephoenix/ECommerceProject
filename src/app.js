@@ -21,6 +21,10 @@ app.set("views", path.join(__dirname, "../views"));
 
 app.use(express.static(path.join(__dirname, "../public"))); //정적파일, 이미지파일
 
+app.use("/", (req, res, next) => {
+  res.status(404).send("Not Found");
+});
+
 sequelize
   .sync({ force: false })
   .then(() => {

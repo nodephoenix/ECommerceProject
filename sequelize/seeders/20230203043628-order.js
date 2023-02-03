@@ -4,18 +4,13 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     let datas = [];
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 5; i++) {
       let obj = {
+        id: i + 1,
         status: 0,
-        user_id: 1,
-        createdAt: new Date()
-          .toISOString()
-          .replace(/T/, " ")
-          .replace(/\..+/, ""),
+        user_id: i + 1,
+        createdAt: new Date(),
         updatedAt: new Date()
-          .toISOString()
-          .replace(/T/, " ")
-          .replace(/\..+/, ""),
       };
       datas.push(obj);
     }

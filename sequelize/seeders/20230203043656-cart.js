@@ -4,21 +4,21 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     let datas = [];
-    for (let i = 0; i < 1; i++) {
-      let obj = {
+    for (let i = 0; i < 5; i++) {
+      let items = [{
         count: 1,
-        product_id: 1,
-        user_id: 1,
-        createdAt: new Date()
-          .toISOString()
-          .replace(/T/, " ")
-          .replace(/\..+/, ""),
-        updatedAt: new Date()
-          .toISOString()
-          .replace(/T/, " ")
-          .replace(/\..+/, ""),
-      };
-      datas.push(obj);
+        product_id: i + 1,
+        user_id: i + 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },{
+        count: 3,
+        product_id: i + 2,
+        user_id: i + 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      }];
+      datas.push(...items);
     }
     return queryInterface.bulkInsert("carts", datas, {});
   },

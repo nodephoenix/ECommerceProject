@@ -1,10 +1,87 @@
 "use strict";
 
 const OrdersRepository = require("../repository/orders.repository.js");
+const Status = require("../middleware/status.code");
 
 class OrdersService {
   ordersRepository = new OrdersRepository();
+  code = new Status();
 
+  orderArt = async (userId, productId, count) => {
+    try {
+      const createOrder = await this.ordersRepository.createOrder(userId);
+      const orderDetail = await this.ordersRepository.createOrderDetail(
+        createOrder.id,
+        productId,
+        count
+      );
+      return this.code.created(orderDetail, '주문이 완료되었습니다.')
+    } catch {
+      return this.code.Forbidden;
+    }
+  };
+
+  orderCart = async (userId) => {
+    try {
+      const myCart = await this.ordersRepository.myCart(userId);
+      const createOrder = await this.ordersRepository.createOrder(userId);
+      const myCartDetail = myCart.map((detail) => ({
+        count: detail.count,
+        order_id: createOrder.id,
+        product_id: detail.product_id,
+      }));
+
+      for (const detail of myCartDetail) {
+        await this.ordersRepository.createOrderDetail(
+          detail.order_id,
+          detail.product_id,
+          detail.count
+        );
+      }
+      // forEach는 배열의 각 항목에 비동기 처리가 불가능하다?
+      // myCartDetail.forEach(detail => {
+      //   this.ordersRepository.createOrderDetail(detail.order_id,detail.product_id,detail.count)
+      // });
+
+      await this.ordersRepository.clearCart(userId);
+      return this.code.created(myCartDetail, '장바구니 주문이 완료되었습니다')
+    } catch {
+      return this.code.Forbidden;
+    }
+  };
+
+  cancelOrder = async (order_id, user_id) => {
+    try {
+      const orderStautsChange = await this.ordersRepository.orderStatusChange(
+        order_id,
+        user_id
+      );
+      const cancelData = await this.ordersRepository.cancelOrder(order_id);
+      return this.code.ok(cancelData, '주문이 취소되었습니다')
+    } catch {
+      return this.code.Forbidden;
+    }
+  };
+
+  orderList = async (user_id) => {
+    try {
+      const orderList = this.ordersRepository.orderList(user_id);
+
+      return this.code.ok(orderList, '주문 이력 조회')
+    } catch {
+      return this.code.Forbidden;
+    }
+  };
+
+  orderDetail = async (orderId) => {
+    try {
+      const orderDetail = this.ordersRepository.orderDetail(orderId);
+
+      return this.code.ok(orderDetail, '주문 상세 조회')
+    } catch {
+      return this.code.Forbidden;
+    }
+  };
 }
 
 module.exports = OrdersService;

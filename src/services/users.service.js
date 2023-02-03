@@ -6,8 +6,20 @@ class UsersService {
   usersRepository = new UsersRepository();
 
   // 마이페이지 API
-  userInfo = async () => {
-    this.usersRepository.userFindByPk()
+  userInfo = async (userId) => {
+    const userInfo = await this.usersRepository.findUserInfo(userId);
+    return userInfo;
+  };
+
+  // 내 정보 수정 API
+  updateUserinfo = async (userId, userName, email, phone) => {
+    const updateUserinfo = await this.usersRepository.updateUserInfo(
+      userId,
+      userName,
+      email,
+      phone
+    );
+    return updateUserinfo;
   };
 }
 

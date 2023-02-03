@@ -9,8 +9,6 @@ const User = db["User"];
 const Product = db["Product"];
 /** @type {import("sequelize").ModelStatic<import('sequelize').Model>} */
 const Order = db["Order"];
-/** @type {import("sequelize").ModelStatic<import('sequelize').Model>} */
-const OrderProduct = db["Order_product"];
 
 class AdminRepository {
   /**

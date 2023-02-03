@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const express = require("express");
-const { secretKey } = require("../../sequelize/config/secretKey");
+require("dotenv").config("../../.env");
 
 const { User } = require("../../sequelize/models");
 
@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
     return res.status(401).json({ errorMessage: "로그인 후 이용 가능합니다." });
   }
   try {
-    const { id } = jwt.verify(cookie, secretKey);
+    const { id } = jwt.verify(cookie, process.env.JWT_SECRET_KEY);
     User.findByPk(id).then((user) => {
       res.locals.user = user;
       next();

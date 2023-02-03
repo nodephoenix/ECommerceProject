@@ -1,12 +1,7 @@
 const jwt = require("jsonwebtoken");
-const cookieParser = require("cookie-parser");
-const express = require("express");
 const { secretKey } = require("../../sequelize/config/secretKey");
 
 const { User } = require("../../sequelize/models");
-
-const app = express();
-app.use(cookieParser());
 
 module.exports = (req, res, next) => {
   const cookie = req.cookies["x_auth"];

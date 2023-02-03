@@ -22,4 +22,3 @@ npm-debug.log*
 
 node_modules
 .env
-secretKey.js

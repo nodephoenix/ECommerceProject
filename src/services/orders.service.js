@@ -3,8 +3,10 @@
 const OrdersRepository = require("../repository/orders.repository.js");
 const Status = require("../middleware/status.code");
 
+const { Order, Order_product, Cart } = require("../../sequelize/models");
+
 class OrdersService {
-  ordersRepository = new OrdersRepository();
+  ordersRepository = new OrdersRepository(Order, Order_product, Cart);
   code = new Status();
 
   orderArt = async (userId, productId, count) => {

@@ -12,7 +12,7 @@ const authMiddleware = require("../middleware/authMiddleware");
 router.get("/users/mypage", authMiddleware, usersController.userInfo);
 
 // 내 정보 수정 API
-router.put("/users/mypage/:id", authMiddleware, usersController.updateUserInfo);
+router.put("/users/mypage/", authMiddleware, usersController.updateUserInfo);
 
 // 로그아웃 API
 router.post("/users/logout", authMiddleware, usersController.userLogout);

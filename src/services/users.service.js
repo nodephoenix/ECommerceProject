@@ -12,7 +12,7 @@ class UsersService {
   };
 
   // 내 정보 수정 API
-  updateUserinfo = async (userId, userName, email, phone) => {
+  updateUserInfo = async (userId, userName, email, phone) => {
     const updateUserinfo = await this.usersRepository.updateUserInfo(
       userId,
       userName,

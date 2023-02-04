@@ -10,8 +10,8 @@ class OrdersController {
 
   orderArt = async (req, res) => {
     try {
-      const { productId , count } = req.body;
-      const userId = res.locals.user.id      
+      const { productId, count } = req.body;
+      const userId = res.locals.user.id;
 
       const orderInfo = await this.ordersService.orderArt(
         userId,
@@ -27,7 +27,7 @@ class OrdersController {
 
   orderCart = async (req, res) => {
     try {
-      const userId = res.locals.user.id
+      const userId = res.locals.user.id;
       const orderCartInfo = await this.ordersService.orderCart(userId);
 
       res.status(orderCartInfo.status).json(orderCartInfo.message);
@@ -39,7 +39,7 @@ class OrdersController {
   cancelOrder = async (req, res) => {
     try {
       const { orderId } = req.params;
-      const userId = res.locals.user.id
+      const userId = res.locals.user.id;
       const cancelOrder = await this.ordersService.cancelOrder(orderId, userId);
 
       res.status(cancelOrder.status).json(cancelOrder.message);
@@ -50,7 +50,7 @@ class OrdersController {
 
   myOrdersList = async (req, res) => {
     try {
-      const userId = res.locals.user.id
+      const userId = res.locals.user.id;
       const orderList = await this.ordersService.orderList(userId);
 
       res.status(orderList.status).json(orderList.data);

@@ -12,6 +12,10 @@ class OrdersService {
   orderArt = async (userId, productId, count) => {
     try {
       const createOrder = await this.ordersRepository.createOrder(userId);
+
+      if (!productId || !count){
+        return this.code.badRequest("잘못된 요청입니다.")
+      }      
       const orderDetail = await this.ordersRepository.createOrderDetail(
         createOrder.id,
         productId,

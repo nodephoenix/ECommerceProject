@@ -8,12 +8,20 @@ class CartsRepository {
     return CartData;
   };
 
-  addCart = async (count, productId, userId) => {
+  createCart = async (count, productId, userId) => {
+    const createCart = await Cart.create({
+      count: count,
+      product_id: productId,
+      user_id: userId,
+    });
+    return createCart;
+  };
+
+  updateCart = async (count, productId, userId) => {
     const updateCart = await Cart.update(
       { count },
       { where: { product_id: productId, user_id: userId } }
     );
-    console.log("확인", updateCart);
     return updateCart;
   };
 }

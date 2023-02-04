@@ -15,16 +15,27 @@ class CartsController {
     }
   };
 
-  addCart = async (req, res, next) => {
+  createCart = async (req, res, next) => {
     try {
       const userId = res.locals.user.id;
       const { count } = req.body;
       const { productId } = req.params;
-      console.log("확인", count, productId);
-      await this.cartsService.addCart(count, productId, userId);
+      await this.cartsService.createCart(count, productId, userId);
+      res.status(200).json({ message: "장바구니 상품이 추가되었습니다." });
+    } catch (error) {
+      res.status(404).json({ errorMessage: error.message });
+    }
+  };
+
+  updateCart = async (req, res, next) => {
+    try {
+      const userId = res.locals.user.id;
+      const { count } = req.body;
+      const { productId } = req.params;
+      await this.cartsService.updateCart(count, productId, userId);
       return res
         .status(200)
-        .json({ message: "장바구니 상품이 추가되었습니다." });
+        .json({ message: "담은 상품 수량이 변경되었습니다." });
     } catch (error) {
       res.status(400).json({ errormessage: error.message });
     }

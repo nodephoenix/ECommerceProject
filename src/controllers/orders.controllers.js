@@ -10,11 +10,9 @@ class OrdersController {
 
   orderArt = async (req, res) => {
     try {
-      // req 임시
-      const userId = 1;
-      const productId = 2;
-      const count = 4;
-      //
+      const { productId , count } = req.body;
+      const userId = res.locals.user.id
+      
 
       const orderInfo = await this.ordersService.orderArt(
         userId,
@@ -30,7 +28,7 @@ class OrdersController {
 
   orderCart = async (req, res) => {
     try {
-      const userId = 1; // 임시
+      const userId = res.locals.user.id
       const orderCartInfo = await this.ordersService.orderCart(userId);
 
       res.status(orderCartInfo.status).json(orderCartInfo.message);
@@ -42,7 +40,7 @@ class OrdersController {
   cancelOrder = async (req, res) => {
     try {
       const { orderId } = req.params;
-      const userId = 1; // 임시
+      const userId = res.locals.user.id
       const cancelOrder = await this.ordersService.cancelOrder(orderId, userId);
 
       res.status(cancelOrder.status).json(cancelOrder.message);
@@ -53,7 +51,7 @@ class OrdersController {
 
   myOrdersList = async (req, res) => {
     try {
-      const userId = 1; // 임시
+      const userId = res.locals.user.id
       const orderList = await this.ordersService.orderList(userId);
 
       res.status(orderList.status).json(orderList.data);
@@ -64,7 +62,6 @@ class OrdersController {
 
   orderDetail = async (req, res) => {
     try {
-      const userId = 1; // 임시
       const { orderId } = req.params;
 
       const orderDetail = await this.ordersService.orderDetail(orderId);

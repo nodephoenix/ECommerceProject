@@ -4,20 +4,18 @@
 /** @type {any} */
 const db = require("../../sequelize/models");
 /** @type {import("sequelize").ModelStatic<import('sequelize').Model>} */
-const userModel = db["User"];
+const User = db["User"];
 /** @type {import("sequelize").ModelStatic<import('sequelize').Model>} */
-const productModel = db["Product"];
+const Product = db["Product"];
 /** @type {import("sequelize").ModelStatic<import('sequelize').Model>} */
-const orderModel = db["Order"];
-/** @type {import("sequelize").ModelStatic<import('sequelize').Model>} */
-const orderProductModel = db["Order_product"];
+const Order = db["Order"];
 
 class AdminRepository {
   /**
    * @param {{productName: string; desc: string; price: number; image: string;}} body
    */
   registerProducts = async (body) => {
-    const products = await productModel.create(body);
+    const products = await Product.create(body);
     products.save();
     return true;
   };
@@ -27,10 +25,9 @@ class AdminRepository {
    * @param {{productName: string; desc: string; price: number; image: string;}} body
    */
   editProducts = async (productId, body) => {
-    await productModel.update(body, {
+    return await Product.update(body, {
       where: { id: productId },
     });
-    return true;
   };
 
   /**
@@ -38,7 +35,7 @@ class AdminRepository {
   
    */
   deleteProducts = async (productId) => {
-    await productModel.destroy({
+    await Product.destroy({
       where: { id: productId },
     });
     return true;
@@ -46,13 +43,12 @@ class AdminRepository {
 
   getOrderProducts = async () => {
     // TODO: association 관계를 이용해서 원하는 형태로 받을 필요 있음.
-    const orders = await productModel.findAll({
+    const orders = await Order.findAll({
       include: {
-        model: orderProductModel,
+        model: Product,
+        as: "items",
       },
-      raw: true,
     });
-    const data = orders.map(order => ({...order, }))
     return orders;
   };
 
@@ -61,7 +57,7 @@ class AdminRepository {
    * @param {string} status
    */
   putProductsStatus = async (productId, status) => {
-    await productModel.update(
+    return await Product.update(
       {
         status,
       },
@@ -69,7 +65,6 @@ class AdminRepository {
         where: { id: productId },
       }
     );
-    return true;
   };
 
   /**
@@ -77,7 +72,7 @@ class AdminRepository {
    * @param {number} grade
    */
   putUserGrade = async (userId, grade) => {
-    await userModel.update(
+    return await User.update(
       {
         grade,
       },
@@ -85,7 +80,6 @@ class AdminRepository {
         where: { id: userId },
       }
     );
-    return true;
   };
 }
 module.exports = AdminRepository;

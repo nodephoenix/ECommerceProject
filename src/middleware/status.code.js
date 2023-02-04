@@ -1,6 +1,6 @@
 class HttpStatus {
   ok = (data, message) => {
-    return {data : data, status : 200, message: message };
+    return { data : data, status : 200, message: message };
   };
 
   created = (data, message) => {

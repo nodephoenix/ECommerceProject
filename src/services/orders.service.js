@@ -17,6 +17,7 @@ class OrdersService {
         productId,
         count
       );
+      
       return this.code.created(orderDetail, "주문이 완료되었습니다.");
     } catch {
       throw new Error();

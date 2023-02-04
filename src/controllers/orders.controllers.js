@@ -11,8 +11,7 @@ class OrdersController {
   orderArt = async (req, res) => {
     try {
       const { productId , count } = req.body;
-      const userId = res.locals.user.id
-      
+      const userId = res.locals.user.id      
 
       const orderInfo = await this.ordersService.orderArt(
         userId,
@@ -21,8 +20,8 @@ class OrdersController {
       );
 
       res.status(orderInfo.status).json(orderInfo.message);
-    } catch (err) {
-      res.status(this.code.Forbidden.status).json(this.code.Forbidden.message);
+    } catch {
+      res.status(this.code.Found().status).json(this.code.Found().message);
     }
   };
 
@@ -33,7 +32,7 @@ class OrdersController {
 
       res.status(orderCartInfo.status).json(orderCartInfo.message);
     } catch {
-      res.status(this.code.Forbidden.status).json(this.code.Forbidden.message);
+      res.status(this.code.Found().status).json(this.code.Found().message);
     }
   };
 
@@ -45,7 +44,7 @@ class OrdersController {
 
       res.status(cancelOrder.status).json(cancelOrder.message);
     } catch {
-      res.status(this.code.Forbidden.status).json(this.code.Forbidden.message);
+      res.status(this.code.Found().status).json(this.code.Found().message);
     }
   };
 
@@ -56,7 +55,7 @@ class OrdersController {
 
       res.status(orderList.status).json(orderList.data);
     } catch {
-      res.status(this.code.Forbidden.status).json(this.code.Forbidden.message);
+      res.status(this.code.Found().status).json(this.code.Found().message);
     }
   };
 
@@ -70,7 +69,7 @@ class OrdersController {
       }
       res.status(orderDetail.status).json(orderDetail.data);
     } catch {
-      res.status(this.code.Forbidden.status).json(this.code.Forbidden.message);
+      res.status(this.code.Found().status).json(this.code.Found().message);
     }
   };
 }

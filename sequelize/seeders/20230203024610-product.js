@@ -3,8 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    let datas = [
-    ];
+    let datas = [];
     for (let i = 0; i < 6; i++) {
       let obj = {
         id: i + 1,

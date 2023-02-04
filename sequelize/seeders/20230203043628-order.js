@@ -10,7 +10,7 @@ module.exports = {
         status: 0,
         user_id: i + 1,
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       };
       datas.push(obj);
     }

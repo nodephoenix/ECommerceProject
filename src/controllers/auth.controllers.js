@@ -4,10 +4,11 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config("../../.env");
 const AuthService = require("../services/auth.service.js");
 const crypto = require("crypto");
-const UsersController = require("./users.controllers.js");
+const Status = require("../middleware/status.code.js");
 
 class AuthController {
   authService = new AuthService();
+  code = new Status();
 
   // 회원가입 API
   userRegister = async (req, res, next) => {
@@ -46,7 +47,9 @@ class AuthController {
 
       return res.status(200).json({ message: "회원가입이 완료되었습니다." });
     } catch (error) {
-      return res.status(404).json({ errorMessage: error.message });
+      return res
+        .status(this.code.badRequest.status)
+        .json(this.code.badRequest.status);
     }
   };
 
@@ -55,12 +58,17 @@ class AuthController {
     try {
       const { email, password } = req.body;
       const user = await this.authService.userLogin(email);
-      // 입력한 비밀번호와 암호화된 비밀번호가 같은지 확인
       const { password: dbPassword, salt } = user;
+
       const hashPassword = crypto
         .createHash("sha512")
         .update(password + salt)
         .digest("hex");
+
+      // 입력한 비밀번호와 저장된 비밀번호가 같은지 확인
+      if (dbPassword !== hashPassword) {
+        throw new Error("이메일 또는 비밀번호 확인해주세요");
+      }
 
       if (dbPassword === hashPassword) {
         // jwt 토큰 생성
@@ -80,14 +88,10 @@ class AuthController {
         res.status(200).json({ message: "로그인이 완료되었습니다." });
       }
     } catch (error) {
-      res.status(400).json({ errorMessage: error.message });
+      res
+        .status(this.code.badRequest.status)
+        .json(this.code.badRequest.message);
     }
-  };
-
-  // 로그아웃 API
-  userLogout = async (req, res, next) => {
-    res.clearCookie("x_auth");
-    return res.status(200).json({ message: "로그아웃 완료되었습니다." });
   };
 }
 

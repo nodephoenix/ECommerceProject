@@ -41,7 +41,26 @@ class CartsController {
     }
   };
 
-  // 장바구니 상품 제거
+  deleteCart = async (req, res, next) => {
+    try {
+      const userId = res.locals.user.id;
+      const { productId } = req.params;
+      await this.cartsService.deleteCart(productId, userId);
+      res.status(200).json({ message: "장바구니 상품을 삭제했습니다." });
+    } catch (error) {
+      res.status(400).json({ errormessage: error.message });
+    }
+  };
+
+  deleteAllCarts = async (req, res, next) => {
+    try {
+      const userId = res.locals.user.id;
+      await this.cartsService.deleteAllCarts(userId);
+      res.status(200).json({ message: "장바구니 상품을 전체 삭제했습니다." });
+    } catch (error) {
+      res.status(400).json({ errormessage: error.message });
+    }
+  };
 }
 
 module.exports = CartsController;

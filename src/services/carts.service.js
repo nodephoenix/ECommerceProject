@@ -28,6 +28,16 @@ class CartsService {
     );
     return updateCart;
   };
+
+  deleteCart = async (productId, userId) => {
+    const deleteCart = await this.cartsRepository.deleteCart(productId, userId);
+    return deleteCart;
+  };
+
+  deleteAllCarts = async (userId) => {
+    const deleteAllCarts = await this.cartsRepository.deleteAllCarts(userId);
+    return deleteAllCarts;
+  };
 }
 
 module.exports = CartsService;

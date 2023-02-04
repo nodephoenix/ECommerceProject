@@ -17,13 +17,9 @@ router.post("/carts/:productId", authMiddleware, cartsController.createCart);
 router.put("/carts/:productId", authMiddleware, cartsController.updateCart);
 
 // 장바구니 상품 삭제 API
-// router.delete(
-//   "/api/carts/:productId",
-//   authMiddleware,
-//   cartsController.deleteCarts
-// );
+router.delete("/carts/:productId", authMiddleware, cartsController.deleteCart);
 
 // 장바구니 상품 전체 삭제 API
-// router.delete("/api/carts", authMiddleware, cartsController.deleteAllCarts);
+router.delete("/carts", authMiddleware, cartsController.deleteAllCarts);
 
 module.exports = router;

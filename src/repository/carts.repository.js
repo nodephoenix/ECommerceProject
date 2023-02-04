@@ -24,6 +24,18 @@ class CartsRepository {
     );
     return updateCart;
   };
+
+  deleteCart = async (productId, userId) => {
+    const deleteCart = await Cart.destroy({
+      where: { product_id: productId, user_id: userId },
+    });
+    return deleteCart;
+  };
+
+  deleteAllCarts = async (userId) => {
+    const deleteAllcarts = await Cart.destroy({ where: { user_id: userId } });
+    return deleteAllcarts;
+  };
 }
 
 module.exports = CartsRepository;

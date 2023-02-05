@@ -11,17 +11,17 @@ class OrdersService {
 
   orderArt = async (userId, productId, count) => {
     try {
+      if (!productId || !count) {
+        return this.code.badRequest("잘못된 요청입니다.");
+      }
       const createOrder = await this.ordersRepository.createOrder(userId);
 
-      if (!productId || !count){
-        return this.code.badRequest("잘못된 요청입니다.")
-      }      
       const orderDetail = await this.ordersRepository.createOrderDetail(
         createOrder.id,
         productId,
         count
       );
-      
+
       return this.code.created(orderDetail, "주문이 완료되었습니다.");
     } catch {
       throw new Error();
@@ -35,7 +35,7 @@ class OrdersService {
         return this.code.badRequest("장바구니에 상품이 존재하지 않습니다");
       }
       const createOrder = await this.ordersRepository.createOrder(userId);
-      const myCartDetail = myCart.map((detail) => ({
+      const myCartDetail = await myCart.map((detail) => ({
         count: detail.count,
         order_id: createOrder.id,
         product_id: detail.product_id,
@@ -89,7 +89,7 @@ class OrdersService {
     try {
       const orderDetail = await this.ordersRepository.orderDetail(orderId);
       if (!orderDetail.length) {
-        return this.code.badRequest('해당 건은 조회할 수 없습니다.')
+        return this.code.badRequest("해당 건은 조회할 수 없습니다.");
       }
 
       return this.code.ok(orderDetail, "주문 상세 조회");

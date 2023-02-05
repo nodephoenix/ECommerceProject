@@ -12,7 +12,7 @@ class CartsController {
       const CartData = await this.cartsService.getCarts(userId);
       res.status(200).json({ data: CartData });
     } catch (error) {
-      res.status(404).json({ errorMessage: error.message });
+      res.status(40).json({ error: error.message });
     }
   };
 

@@ -31,20 +31,7 @@ class AuthController {
         });
       }
 
-      // 비밀번호 암호화를 위한 해시 함수 적용
-      const salt = Math.round(new Date().valueOf() * Math.random()) + "";
-      const hashPassword = crypto
-        .createHash("sha512")
-        .update(password + salt)
-        .digest("hex");
-      const user = await this.authService.userRegister(
-        userName,
-        email,
-        hashPassword,
-        phone,
-        salt
-      );
-
+      await this.authService.userRegister(userName, email, password, phone);
       return res.status(200).json({ message: "회원가입이 완료되었습니다." });
     } catch (error) {
       return res
@@ -52,35 +39,13 @@ class AuthController {
         .json(this.code.badRequest.status);
     }
   };
-
   // 로그인 API
   userLogin = async (req, res, next) => {
     try {
       const { email, password } = req.body;
-      const user = await this.authService.userLogin(email);
-      const { password: dbPassword, salt } = user;
+      await this.authService.userLogin(email, password);
 
-      const hashPassword = crypto
-        .createHash("sha512")
-        .update(password + salt)
-        .digest("hex");
-
-      // 입력한 비밀번호와 저장된 비밀번호가 같은지 확인
-      if (dbPassword !== hashPassword) {
-        throw new Error("이메일 또는 비밀번호 확인해주세요");
-      }
-
-      if (dbPassword === hashPassword) {
-        // jwt 토큰 생성
-        const token = jwt.sign(
-          { id: user.userId },
-          process.env.JWT_SECRET_KEY,
-          {
-            algorithm: "HS256", // 해싱 알고리즘
-            expiresIn: process.env.JWT_EXPIRES_IN, // 토큰 유효 기간
-            issuer: "issuer", // 발행자
-          }
-        );
+      if (token) {
         res.cookie("x_auth", token, {
           httpOnly: true,
           maxAge: 0.5 * 60 * 60 * 1000, // 쿠키 만료 시간 30분
@@ -88,11 +53,8 @@ class AuthController {
         res.status(200).json({ message: "로그인이 완료되었습니다." });
       }
     } catch (error) {
-      res
-        .status(this.code.badRequest.status)
-        .json(this.code.badRequest.message);
+      res.status(400).json({ error: error.message });
     }
   };
 }
-
 module.exports = AuthController;

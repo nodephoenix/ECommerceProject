@@ -1,9 +1,7 @@
 "use strict";
 
-const jwt = require("jsonwebtoken");
 require("dotenv").config("../../.env");
 const AuthService = require("../services/auth.service.js");
-const crypto = require("crypto");
 const Status = require("../middleware/status.code.js");
 
 class AuthController {
@@ -43,7 +41,7 @@ class AuthController {
   userLogin = async (req, res, next) => {
     try {
       const { email, password } = req.body;
-      await this.authService.userLogin(email, password);
+      const token = await this.authService.userLogin(email, password);
 
       if (token) {
         res.cookie("x_auth", token, {

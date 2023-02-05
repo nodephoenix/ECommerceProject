@@ -16,7 +16,7 @@ class AuthRepository {
   };
 
   // 로그인
-  userLogin = async (email) => {
+  findUser = async (email) => {
     const user = await User.findOne({ where: { email } });
     return user;
   };

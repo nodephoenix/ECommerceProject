@@ -19,6 +19,9 @@ class CartsService {
   };
 
   createCart = async (count, productId, userId) => {
+    // 장바구니에 같은 상품이 있는지 확인
+    const existCartData = await this.cartsService.getCartOne(productId, userId);
+
     const createCart = await this.cartsRepository.createCart(
       count,
       productId,

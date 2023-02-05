@@ -12,7 +12,7 @@ class CartsController {
       const CartData = await this.cartsService.getCarts(userId);
       res.status(200).json({ data: CartData });
     } catch (error) {
-      res.status(40).json({ error: error.message });
+      res.status(404).json({ errorMessage: error.message });
     }
   };
 
@@ -45,21 +45,6 @@ class CartsController {
       }
     } catch (error) {
       res.status(404).json({ errorMessage: error.message });
-    }
-  };
-
-  // 상품 상세 페이지에서 상품 수량을 추가
-  addCart = async (req, res, next) => {
-    try {
-      const userId = res.locals.user.id;
-      const { count } = req.body;
-      const { productId } = req.params;
-      await this.cartsService.addCart(count, productId, userId);
-      return res
-        .status(200)
-        .json({ message: "장바구니 상품 수량이 변경되었습니다." });
-    } catch (error) {
-      res.status(400).json({ errormessage: error.message });
     }
   };
 

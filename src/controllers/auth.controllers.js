@@ -1,6 +1,5 @@
 "use strict";
 
-require("dotenv").config("../../.env");
 const AuthService = require("../services/auth.service.js");
 const Status = require("../middleware/status.code.js");
 

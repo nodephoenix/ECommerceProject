@@ -1,5 +1,6 @@
 "use strict";
 
+require("dotenv").config("../../.env");
 const jwt = require("jsonwebtoken");
 const AuthRepository = require("../repository/auth.repository.js");
 const crypto = require("crypto");
@@ -23,7 +24,7 @@ class AuthService {
       salt
     );
     return {
-      id: userData.null,
+      id: userData.id,
       userName: userData.userName,
       email: userData.email,
       password: userData.hashPassword,
@@ -48,17 +49,13 @@ class AuthService {
 
     if (dbPassword === hashPassword) {
       // jwt 토큰 생성
-      const token = jwt.sign({ id: user.userId }, process.env.JWT_SECRET_KEY, {
+      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET_KEY, {
         algorithm: "HS256", // 해싱 알고리즘
         expiresIn: process.env.JWT_EXPIRES_IN, // 토큰 유효 기간
         issuer: "issuer", // 발행자
       });
       return token;
     }
-    // userId: login.id,
-    // email: login.email,
-    // password: login.hashPassword,
-    // salt: login.salt,
   };
 }
 module.exports = AuthService;

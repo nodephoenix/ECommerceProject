@@ -1,14 +1,21 @@
 "use strict";
 
 const CartsRepository = require("../repository/carts.repository.js");
-const ProductsRepository = require("../repository/products.repository.js");
 
 class CartsService {
   cartsRepository = new CartsRepository();
 
-  getCart = async (userId) => {
-    const getCart = await this.cartsRepository.getCart(userId);
-    return getCart;
+  getCarts = async (userId) => {
+    const CartData = await this.cartsRepository.getCarts(userId);
+    return CartData;
+  };
+
+  getCartOne = async (productId, userId) => {
+    const CartOneData = await this.cartsRepository.getCartOne(
+      productId,
+      userId
+    );
+    return CartOneData;
   };
 
   createCart = async (count, productId, userId) => {
@@ -17,7 +24,17 @@ class CartsService {
       productId,
       userId
     );
+
     return createCart;
+  };
+
+  addCart = async (count, productId, userId) => {
+    const addCart = await this.cartsRepository.addCart(
+      count,
+      productId,
+      userId
+    );
+    return addCart;
   };
 
   updateCart = async (count, productId, userId) => {

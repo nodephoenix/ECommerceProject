@@ -3,9 +3,18 @@
 const { Cart } = require("../../sequelize/models");
 
 class CartsRepository {
-  getCart = async (userId) => {
-    const CartData = await Cart.findAll({ where: { user_id: userId } });
+  getCarts = async (userId) => {
+    const CartData = await Cart.findAll({
+      where: { user_id: userId },
+    });
     return CartData;
+  };
+
+  getCartOne = async (productId, userId) => {
+    const CartOneData = await Cart.findOne({
+      where: { product_id: productId, user_id: userId },
+    });
+    return CartOneData;
   };
 
   createCart = async (count, productId, userId) => {
@@ -15,6 +24,14 @@ class CartsRepository {
       user_id: userId,
     });
     return createCart;
+  };
+
+  addCart = async (count, productId, userId) => {
+    const addCart = await Cart.increment("count", {
+      by: count,
+      where: { product_id: productId, user_id: userId },
+    });
+    return addCart;
   };
 
   updateCart = async (count, productId, userId) => {

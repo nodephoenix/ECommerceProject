@@ -8,7 +8,7 @@ const authMiddleware = require("../middleware/authMiddleware.js");
 const cartsController = new CartsController();
 
 // 장바구니 조회 API
-router.get("/carts/", authMiddleware, cartsController.getCart);
+router.get("/carts/", authMiddleware, cartsController.getCarts);
 
 // 장바구니 추가 API
 router.post("/carts/:productId", authMiddleware, cartsController.createCart);

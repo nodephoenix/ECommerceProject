@@ -27,8 +27,9 @@ class AdminController {
    * @param {NextFunction} next
    */
   async registerProducts(req, res, next) {
-    /** @type {{productName: string; desc: string; price: number; image: string;}} */
+    /** @type {{productName: string; desc: string; price: number; image: string | null;}} */
     const body = req.body;
+    body.image = req.file?.filename || null;
     await this.adminService.registerProducts(body);
     res.status(201).json({
       message: "상품 등록이 완료되었습니다.",

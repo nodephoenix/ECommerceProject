@@ -72,7 +72,6 @@ router.get("/admin/members/list", (req, res) => {
   }
   res.render("admin.member.list.ejs", { login: false });
 });
-admin.product.fix;
 
 router.get("/admin/register/product", (req, res) => {
   if (res.locals.user) {

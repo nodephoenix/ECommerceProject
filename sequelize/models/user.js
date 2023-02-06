@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const Sequelize = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -12,9 +13,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "user_id",
         sourceKey: "id",
       });
-      models.User.hasMany(models.Cart, {
-        foreignKey: "user_id",
-        sourceKey: "id",
+      models.User.belongsToMany(models.Product, {
+        through: models.Cart,
+        foreignKey: 'user_id',
+        as: 'carts'
       });
     }
   }
@@ -23,14 +25,28 @@ module.exports = (sequelize, DataTypes) => {
       userName: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
+      salt: DataTypes.STRING,
       phone: DataTypes.STRING,
-      point: DataTypes.INTEGER,
-      grade: DataTypes.INTEGER,
-      role: DataTypes.INTEGER,
+      point: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
+      grade: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
+      role: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
     },
     {
       sequelize,
       modelName: "User",
+      timestamps: true,
+      paranoid: false,
+      charset: "utf8mb4",
+      collate: "utf8mb4_general_ci",
     }
   );
   return User;

@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const Sequelize = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Order extends Model {
     /**
@@ -12,19 +13,27 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "user_id",
         targetKey: "id",
       });
-      models.Order.hasMany(models.Order_product, {
-        foreignKey: "orders_id",
-        sourceKey: "id",
+      models.Order.belongsToMany(models.Product, {
+        through: models.Order_product,
+        foreignKey: 'order_id',
+        as: 'items'
       });
     }
   }
   Order.init(
     {
-      status: DataTypes.INTEGER,
+      status: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
     },
     {
       sequelize,
       modelName: "Order",
+      timestamps: true,
+      paranoid: false,
+      charset: "utf8mb4",
+      collate: "utf8mb4_general_ci",
     }
   );
   return Order;

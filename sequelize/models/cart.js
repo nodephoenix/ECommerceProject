@@ -7,16 +7,7 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      models.Cart.belongsTo(models.User, {
-        foreignKey: "user_id",
-        targetKey: "id",
-      });
-      models.Cart.belongsTo(models.Product, {
-        foreignKey: "product_id",
-        targetKey: "id",
-      });
-    }
+    static associate(models) {}
   }
   Cart.init(
     {
@@ -25,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Cart",
+      timestamps: true,
+      paranoid: false,
+      charset: "utf8mb4",
+      collate: "utf8mb4_general_ci",
     }
   );
   return Cart;

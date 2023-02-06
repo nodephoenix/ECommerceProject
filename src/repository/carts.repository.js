@@ -54,5 +54,4 @@ class CartsRepository {
     return deleteAllcarts;
   };
 }
-
 module.exports = CartsRepository;

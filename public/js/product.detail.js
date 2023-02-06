@@ -51,6 +51,9 @@ function plus () {
 
 function minus () {
   let count = document.getElementById('count').innerText
+  if(count <= 1) {
+    return count
+  }
   return document.getElementById('count').innerText = Number(count) - 1
 }
 function order(productId){

@@ -53,6 +53,5 @@ class CartsRepository {
     const deleteAllcarts = await Cart.destroy({ where: { user_id: userId } });
     return deleteAllcarts;
   };
-}
 
 module.exports = CartsRepository;

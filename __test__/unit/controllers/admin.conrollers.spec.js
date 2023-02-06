@@ -43,13 +43,18 @@ describe("admin controller 유닛 테스트", () => {
         productName: "모나리자",
         desc: "모나리자 그림",
         price: 100000,
-        image: "",
+      },
+      file: {
+        filename: "filename",
       },
     });
     const res = mockResponse();
     await adminController.registerProducts(req, res);
 
-    expect(adminService.registerProducts).toHaveBeenCalledWith(req.body);
+    expect(adminService.registerProducts).toHaveBeenCalledWith({
+      ...req.body,
+      image: req.file.filename,
+    });
     expect(adminService.registerProducts).toHaveBeenCalledTimes(1);
     expect(res.status).toHaveBeenCalledTimes(1);
     expect(res.status).toHaveBeenCalledWith(201);
@@ -68,7 +73,9 @@ describe("admin controller 유닛 테스트", () => {
         productName: "모나리자",
         desc: "모나리자 그림",
         price: 100000,
-        image: "",
+      },
+      file: {
+        filename: "filename",
       },
     });
     const res = mockResponse();
@@ -76,7 +83,10 @@ describe("admin controller 유닛 테스트", () => {
 
     expect(adminService.editProducts).toHaveBeenCalledWith(
       +req.params.productId,
-      req.body
+      {
+        ...req.body,
+        image: req.file.filename,
+      }
     );
     expect(adminService.editProducts).toHaveBeenCalledTimes(1);
     expect(res.status).toHaveBeenCalledTimes(1);

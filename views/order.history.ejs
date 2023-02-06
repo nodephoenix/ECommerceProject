@@ -94,31 +94,23 @@
         width: 30px;
         font-size: 25px;
       }
-      .payment {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 30px;
-        color: #0a174e;
-        font-weight: bold;
-        font-size: 30px;
-      }
     </style>
 
-    <title>🖼주문 상세조회🎨</title>
+    <title>🖼주문내역🎨</title>
   </head>
   <body>
     <!-- 탑바 -->
     <div class="top-bar">
-      <h1 style="color: #0a174e; font-weight: bold">🖼주문 상세조회🎨</h1>
+      <h1 style="color: #0a174e; font-weight: bold">🖼주문내역🎨</h1>
     </div>
     <nav class="order-history">
-      <div>주문 상세조회</div>
+      <div>주문내역</div>
     </nav>
     <hr />
     <!-- 시작 -->
     <table style="margin: 20px auto 0 auto">
       <tr>
+        <td class="head-number">1</td>
         <td style="width: 150px">
           <img
             src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDGzHg%2FbtrXSxfvtYG%2FjgfqXjHXsLbtek9yidftEk%2Fimg.png"
@@ -130,15 +122,19 @@
           <div class="card" style="width: 18rem">
             <ul class="list-group list-group-flush">
               <li class="list-group-item">상품명: 해커고양이</li>
-              <li class="list-group-item">주문총액: 890$</li>
+              <li class="list-group-item">가격: 50$</li>
               <li class="list-group-item">수량: 7개</li>
             </ul>
           </div>
+        </td>
+        <td>
+          <button type="button" class="btn btn-success">조회</button>
         </td>
       </tr>
     </table>
     <table style="margin: 20px auto 0 auto">
       <tr>
+        <td class="head-number">2</td>
         <td style="width: 150px">
           <img
             src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDGzHg%2FbtrXSxfvtYG%2FjgfqXjHXsLbtek9yidftEk%2Fimg.png"
@@ -150,16 +146,16 @@
           <div class="card" style="width: 18rem">
             <ul class="list-group list-group-flush">
               <li class="list-group-item">상품명: 해커고양이</li>
-              <li class="list-group-item">주문총액: 10000$</li>
+              <li class="list-group-item">가격: 50$</li>
               <li class="list-group-item">수량: 7개</li>
             </ul>
           </div>
         </td>
+        <td>
+          <button type="button" class="btn btn-success">조회</button>
+        </td>
       </tr>
     </table>
-    <div class="payment">
-      <p>총 결제금액: 100$</p>
-    </div>
 
     <!-- 끝 -->
   </body>

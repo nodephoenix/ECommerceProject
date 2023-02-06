@@ -12,7 +12,6 @@ function productDetail() {
     url: `/api/products/${productId}`,
     data: {},
     success: function (response) {
-      console.log(response)
       let temp_html = `<div class="product-description">
                         <div class="product-image">
                           <img
@@ -42,6 +41,9 @@ function productDetail() {
                       </div>`;
       $(".detail").append(temp_html);
     },
+    error: function(error) {
+      alert(error.responseJSON.errorMessage)
+    }
   });
 }
 function plus () {
@@ -65,6 +67,9 @@ function order(productId){
     data: {productId : productId , count : count },
     success: function (response) {
       console.log(response)
+    },
+    error: function(error) {
+      alert(error.responseJSON.errorMessage)
     }
   })
 }

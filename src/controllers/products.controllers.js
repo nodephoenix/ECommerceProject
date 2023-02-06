@@ -18,7 +18,13 @@ class ProductsController {
    * @param {NextFunction} next
    */
   getProducts = async (req, res, next) => {
-    return await this.productsService.getProducts()
+    try {
+      const productListData = await this.productsService.getProducts();
+
+      res.status(200).json(productListData);
+    } catch {
+      res.status(404).json({message : "망함"})
+    }
   };
 
   /**
@@ -29,7 +35,7 @@ class ProductsController {
    */
   getProductDetail = async (req, res, next) => {
     const { productId } = req.params;
-    return await this.productsService.getProductDetail(Number(productId))
+    return await this.productsService.getProductDetail(Number(productId));
   };
 }
 

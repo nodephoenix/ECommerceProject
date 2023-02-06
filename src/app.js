@@ -6,9 +6,11 @@ const render = require("./render");
 const { Server } = require("http");
 const path = require("path");
 
+
 const app = express();
 const http = Server(app);
 
+ 
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -20,17 +22,6 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "../views"));
 
 app.use(express.static(path.join(__dirname, "../public"))); //정적파일, 이미지파일
-
-app.use("/", (req, res, next) => {
-  res.status(404).send("Not Found");
-});
-
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(err.statusCode || 500).json({
-    errorMessage: err.message || "Internal Error",
-  });
-});
 
 sequelize
   .sync({ force: false })

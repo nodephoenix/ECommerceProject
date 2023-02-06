@@ -4,16 +4,87 @@ const CartsService = require("../services/carts.service.js");
 
 class CartsController {
   cartsService = new CartsService();
-  async getCarts(req, res) {
-    const userId = req.params.userId;
-    const carts = await this.cartsService.getCarts(userId);
-    res.json(carts);
-  }
+
+  // 장바구니 상품 전체 조회
+  getCarts = async (req, res, next) => {
+    try {
+      const userId = res.locals.user.id;
+      const CartData = await this.cartsService.getCarts(userId);
+      res.status(200).json({ data: CartData });
+    } catch (error) {
+      res.status(404).json({ errorMessage: error.message });
+    }
+  };
+
+  // 장바구니 상품 추가
+  createCart = async (req, res, next) => {
+    try {
+      const userId = res.locals.user.id;
+      const { count } = req.body;
+      const { productId } = req.params;
+
+      // 장바구니에 같은 상품이 있는지 확인
+      const existCartData = await this.cartsService.getCartOne(
+        productId,
+        userId
+      );
+
+      // 같은 상품이 장바구니에 없으면 새로 추가
+      if (!existCartData) {
+        await this.cartsService.createCart(count, productId, userId);
+        return res
+          .status(200)
+          .json({ message: "장바구니 상품이 추가되었습니다." });
+      }
+      // 같은 상품이 있으면 기존 상품 수량에서 상품 수량 증가
+      if (existCartData.dataValues.product_id == req.params.productId) {
+        await this.cartsService.addCart(count, productId, userId);
+        res
+          .status(200)
+          .json({ message: "장바구니 상품 수량이 변경되었습니다." });
+      }
+    } catch (error) {
+      res.status(404).json({ errorMessage: error.message });
+    }
+  };
+
+  // 장바구니 페이지에서 상품 수량을 원하는 만큼 지정해서 변경
+  updateCart = async (req, res, next) => {
+    try {
+      const userId = res.locals.user.id;
+      const { count } = req.body;
+      const { productId } = req.params;
+      await this.cartsService.updateCart(count, productId, userId);
+      return res
+        .status(200)
+        .json({ message: "담은 상품 수량이 변경되었습니다." });
+    } catch (error) {
+      res.status(400).json({ errormessage: error.message });
+    }
+  };
+
+  // 장바구니 단일 상품 삭제
+  deleteCart = async (req, res, next) => {
+    try {
+      const userId = res.locals.user.id;
+      const { productId } = req.params;
+      await this.cartsService.deleteCart(productId, userId);
+      res.status(200).json({ message: "장바구니 상품을 삭제했습니다." });
+    } catch (error) {
+      res.status(400).json({ errormessage: error.message });
+    }
+  };
+
+  // 장바구니 전체 상품 삭제
+  deleteAllCarts = async (req, res, next) => {
+    try {
+      const userId = res.locals.user.id;
+      await this.cartsService.deleteAllCarts(userId);
+      res.status(200).json({ message: "장바구니 상품을 전체 삭제했습니다." });
+    } catch (error) {
+      res.status(400).json({ errormessage: error.message });
+    }
+  };
 }
 
 module.exports = CartsController;
-
-// 컨트롤러 => req,res정보를 받아서 필요한 정보를 뽑는다.
-// 서비스 => 필요한 정보를 서비스 메소드에 전달하여 원하는 정보를 받는다.
-// 리포지토리(데이터베이스 접근)로 userId로 carts 테이블을 조회한다 2. 조회한 정보를 가공 또는 반환
-// 역활을 생각하면서 구현

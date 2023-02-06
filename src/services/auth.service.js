@@ -1,40 +1,61 @@
 "use strict";
 
-const user = require("../../sequelize/models/user.js");
+require("dotenv").config("../../.env");
+const jwt = require("jsonwebtoken");
 const AuthRepository = require("../repository/auth.repository.js");
+const crypto = require("crypto");
 
 class AuthService {
   authRepository = new AuthRepository();
 
   // 회원가입 API
-  userRegister = async (userName, email, password, phone, salt) => {
+  userRegister = async (userName, email, password, phone) => {
+    // 비밀번호 암호화를 위한 해시 함수 적용
+    const salt = Math.round(new Date().valueOf() * Math.random()) + "";
+    const hashPassword = crypto
+      .createHash("sha512")
+      .update(password + salt)
+      .digest("hex");
     const userData = await this.authRepository.userRegister(
       userName,
       email,
-      password,
+      hashPassword,
       phone,
       salt
     );
     return {
-      id: userData.null,
+      id: userData.id,
       userName: userData.userName,
       email: userData.email,
-      password: userData.password,
+      password: userData.hashPassword,
       salt: userData.salt,
       phone: userData.phone,
-      createdAt: userData.createdAt,
-      updatedAt: userData.updatedAt,
     };
   };
+
   // 로그인 API
-  userLogin = async (email) => {
-    const login = await this.authRepository.userLogin(email);
-    return {
-      userId: login.id,
-      email: login.email,
-      password: login.password,
-      salt: login.salt,
-    };
+  userLogin = async (email, password) => {
+    const user = await this.authRepository.findUser(email);
+    const { password: dbPassword, salt } = user;
+
+    const hashPassword = crypto
+      .createHash("sha512")
+      .update(password + salt)
+      .digest("hex");
+    // 입력한 비밀번호와 저장된 비밀번호가 같은지 확인
+    if (dbPassword !== hashPassword) {
+      throw new Error("이메일 또는 비밀번호 확인해주세요");
+    }
+
+    if (dbPassword === hashPassword) {
+      // jwt 토큰 생성
+      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET_KEY, {
+        algorithm: "HS256", // 해싱 알고리즘
+        expiresIn: process.env.JWT_EXPIRES_IN, // 토큰 유효 기간
+        issuer: "issuer", // 발행자
+      });
+      return token;
+    }
   };
 }
 module.exports = AuthService;

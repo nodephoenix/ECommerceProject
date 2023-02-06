@@ -16,13 +16,9 @@ class AuthRepository {
   };
 
   // 로그인
-  userLogin = async (email) => {
-    try{
-      const user = await User.findOne({ where: { email } });
-      return user
-    }
-    catch (err) {
-    }
+  findUser = async (email) => {
+    const user = await User.findOne({ where: { email } });
+    return user;
   };
 }
 

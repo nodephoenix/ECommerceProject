@@ -14,8 +14,8 @@
    */
 module.exports = (req, res, next) => {
   /** @type {number} */
-  const role = res.locals.users;
-  if (role === 1) {
+  const user = res.locals.user;
+  if (user?.role === 1) {
     next();
   } else {
     return res.status(403).json({

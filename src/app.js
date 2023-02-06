@@ -22,6 +22,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "../views"));
 
 app.use(express.static(path.join(__dirname, "../public"))); //정적파일, 이미지파일
+app.use(express.static(path.join(__dirname, "../uploads"))); // 파일 업로드 폴더
 
 sequelize
   .sync({ force: false })

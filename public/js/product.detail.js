@@ -12,8 +12,6 @@ function productDetail() {
     url: `/api/products/${productId}`,
     data: {},
     success: function (response) {
-      console.log(response);
-      console.log(response.productName)
       let temp_html = `<div class="product-description">
                         <div class="product-image">
                           <img

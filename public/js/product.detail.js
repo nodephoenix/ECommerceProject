@@ -36,7 +36,7 @@ function productDetail() {
                             </li>
                           </div>
                           <button type="button" class="btn btn-success" onclick="order(${response.id})">구매하기</button>
-                          <button type="button" class="btn btn-success" style="margin-left: 20px">카트담기</button>
+                          <button type="button" class="btn btn-success" style="margin-left: 20px" onclick="putCart(${response.id})">카트담기</button>
                         </div>
                       </div>`;
       $(".detail").append(temp_html);
@@ -66,7 +66,27 @@ function order(productId){
     url: `/api/orders`,
     data: {productId : productId , count : count },
     success: function (response) {
-      console.log(response)
+      alert(response)
+      window.location.replace('/')
+    },
+    error: function(error) {
+      if(error.status === 401){
+        alert(error.responseJSON.errorMessage)
+        window.location.replace('/login')
+      }
+    }
+  })
+}
+
+function putCart(productId){
+  let count = Number(document.getElementById('count').innerText)
+
+  $.ajax({
+    type: "POST",
+    url: `/api/carts/${productId}`,
+    data: {count : count},
+    success: function (response) {
+      alert(response.message)
     },
     error: function(error) {
       alert(error.responseJSON.errorMessage)

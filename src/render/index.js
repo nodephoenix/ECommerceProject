@@ -61,5 +61,12 @@ router.get('/mypage', (req, res) => {
     res.render('mypage.ejs', { login: false });
 });
 
+router.get('/main', (req, res) => {
+    if (res.locals.user) {
+        res.render('main.ejs', { login: true });
+    }
+    res.render('main.ejs', { login: false });
+});
+
 
 module.exports = router

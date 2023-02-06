@@ -19,6 +19,8 @@
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"
     ></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="/js/order.history.js"></script>
     <!-- CSS -->
     <style>
       * {
@@ -95,7 +97,6 @@
         font-size: 25px;
       }
     </style>
-
     <title>🖼주문내역🎨</title>
   </head>
   <body>
@@ -112,58 +113,6 @@
     <hr />
     <!-- 시작 -->
     <div id="orderHistory">
-      <table style="margin: 20px auto 0 auto">
-        <tr>
-          <td class="head-number">1</td>
-          <td style="width: 150px">
-            <img
-              src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDGzHg%2FbtrXSxfvtYG%2FjgfqXjHXsLbtek9yidftEk%2Fimg.png"
-              class="img-thumbnail product-img"
-              alt="..."
-            />
-          </td>
-          <td style="width: 300px; padding-left: 20px">
-            <div class="card" style="width: 18rem">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">주문 번호: 1</li>
-                <li class="list-group-item">주 소: 우리집</li>
-                <li class="list-group-item">주문 일자: 2222-22-22</li>
-                <li class="list-group-item">배송 상태: 준비 중</li>
-              </ul>
-            </div>
-          </td>
-          <td>
-            <button type="button" class="btn btn-success" style="margin-left: 20px">조회</button>
-            <button type="button" class="btn btn-danger">취소</button>
-          </td>
-        </tr>
-      </table>
-      <table style="margin: 20px auto 0 auto">
-        <tr>
-          <td class="head-number">1</td>
-          <td style="width: 150px">
-            <img
-              src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDGzHg%2FbtrXSxfvtYG%2FjgfqXjHXsLbtek9yidftEk%2Fimg.png"
-              class="img-thumbnail product-img"
-              alt="..."
-            />
-          </td>
-          <td style="width: 300px; padding-left: 20px">
-            <div class="card" style="width: 18rem">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">주문 번호: 1</li>
-                <li class="list-group-item">주 소: 우리집</li>
-                <li class="list-group-item">주문 일자: 7개</li>
-                <li class="list-group-item">배송 상태: 준비 중</li>
-              </ul>
-            </div>
-          </td>
-          <td>
-            <button type="button" class="btn btn-success" style="margin-left: 20px">조회</button>
-            <button type="button" class="btn btn-danger">취소</button>
-          </td>
-        </tr>
-      </table>
     </div>
     <!-- 끝 -->
   </body>

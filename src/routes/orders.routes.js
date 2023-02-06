@@ -18,7 +18,7 @@ router.post("/orders/carts", authMiddleware, ordersController.orderCart);
 router.put("/orders/:orderId", authMiddleware, ordersController.cancelOrder);
 
 // 나의 주문 이력 조회 API x
-router.get("/orders", authMiddleware, ordersController.myOrdersList);
+router.get("/orders/list", authMiddleware, ordersController.myOrdersList);
 
 // 자기 주문 상세 내역 조회 API x
 router.get("/orders/:orderId", authMiddleware, ordersController.orderDetail);

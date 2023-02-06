@@ -87,6 +87,10 @@
     <title>:액자에_담긴_그림:제품 상세 페이지:예술:</title>
   </head>
   <body>
+    <% if(login) { %> 
+    <%- include('logoutheader.ejs') %> 
+    <% }else{ %>
+    <%-include('loginheader.ejs') %> <% } %>
     <!-- 탑바 -->
     <div class="top-bar">
       <h1 style="color: #0A174E; font-weight: bold">:액자에_담긴_그림:제품 상세 페이지:예술:</h1>

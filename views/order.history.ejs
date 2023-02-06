@@ -99,6 +99,10 @@
     <title>🖼주문내역🎨</title>
   </head>
   <body>
+    <% if(login) { %> 
+    <%- include('logoutheader.ejs') %> 
+    <% }else{ %>
+    <%-include('loginheader.ejs') %> <% } %>
     <!-- 탑바 -->
     <div class="top-bar">
       <h1 style="color: #0a174e; font-weight: bold">🖼주문내역🎨</h1>

@@ -40,9 +40,9 @@ router.get("/main", (req, res) => {
 
 router.get("/carts", (req, res) => {
   if (res.locals.user) {
-    res.render("cart.ejs", { login: true });
+    res.render("carts.ejs", { login: true });
   }
-  res.render("cart.ejs", { login: false });
+  res.render("carts.ejs", { login: false });
 });
 
 router.get("/login", (req, res) => {

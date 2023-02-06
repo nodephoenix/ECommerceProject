@@ -24,7 +24,6 @@
       * {
         margin: 0;
         padding: 0;
-        font-weight: bold;
       }
       html,
       body {
@@ -33,7 +32,11 @@
       }
       body {
         /* background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbdByfl%2FbtrVf7i5Uq5%2FjJ5afu7vrUKkgNGmzP2kAk%2Fimg.jpg"); */
-        background-image: linear-gradient(109.6deg, rgba(156, 252, 248, 1) 11.2%, rgba(110, 123, 251, 1) 91.1%);
+        background-image: linear-gradient(
+          109.6deg,
+          rgba(156, 252, 248, 1) 11.2%,
+          rgba(110, 123, 251, 1) 91.1%
+        );
         /* background-image: radial-gradient(circle farthest-corner at 52.1% -29.6%, rgba(144, 17, 105, 1) 0%, rgba(51, 0, 131, 1) 100.2%); */
         /* background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114)); */
         background-repeat: no-repeat;
@@ -90,9 +93,16 @@
         justify-content: center;
         font-weight: bold;
       }
-      .head-number {
-        width: 30px;
-        font-size: 25px;
+      .bottom-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 3rem;
+        color: #0a174e;
+      }
+      .card {
+        font-weight: bold;
       }
       .payment {
         display: flex;
@@ -104,19 +114,60 @@
         font-size: 30px;
       }
     </style>
+    <script>
+      $(document).ready(function () {
+        getCarts();
+      });
 
-    <title>🖼주문 상세조회🎨</title>
+      function getCarts() {
+        $.ajax({
+          method: "GET",
+          url: "/api/carts",
+          data: {},
+          success: function (response) {
+            let cartData = response.data;
+            for (let i = 0; i < cartData.length; i++) {
+              let productName = cartData[carts]["id"];
+              let grade = rows[i]["grade"];
+              let comment = rows[i]["comment"];
+              let createdAt = rows[i]["createdAt"];
+              let temp_html = `            <div class="product-image inline-block">
+    <img
+      src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDGzHg%2FbtrXSxfvtYG%2FjgfqXjHXsLbtek9yidftEk%2Fimg.png"
+      class="img-thumbnail product-img"
+      alt="..."
+    />
+  </div>
+  <div class="card inline-block">
+    <div class="card-body">
+      <h4>상품 : 해커고양이</h4>
+      <hr />
+      <p>가격: 50$</p>
+      <p>주문일자: 23.02.02</p>
+      <p>아무내용: 하하하하</p>
+    </div>
+  </div>`;
+              $("#cart-list").append(temp_html);
+            }
+          },
+          error: function (error) {
+            alert("목록 불러오기에 실패하였습니다.");
+          },
+        });
+      }
+    </script>
+    <title>🖼장바구니🎨</title>
   </head>
   <body>
     <!-- 탑바 -->
     <div class="top-bar">
-      <h1 style="color: #0a174e; font-weight: bold">🖼주문 상세조회🎨</h1>
+      <h1 style="color: #0a174e; font-weight: bold">🖼장바구니🎨</h1>
     </div>
     <nav class="order-history">
-      <div>주문 상세조회</div>
+      <div style="font-weight: bold">장바구니 목록</div>
     </nav>
     <hr />
-    <!-- 시작 -->
+    <!-- 상품표시화면 -->
     <table style="margin: 20px auto 0 auto">
       <tr>
         <td style="width: 150px">
@@ -130,8 +181,28 @@
           <div class="card" style="width: 18rem">
             <ul class="list-group list-group-flush">
               <li class="list-group-item">상품명: 해커고양이</li>
-              <li class="list-group-item">주문총액: 890$</li>
-              <li class="list-group-item">수량: 7개</li>
+              <li class="list-group-item">가격: 50$</li>
+              <li class="list-group-item">
+                수량:
+                <button
+                  type="button"
+                  class="btn btn-outline-success"
+                  id="minus"
+                >
+                  -
+                </button>
+                1
+                <button type="button" class="btn btn-outline-success" id="plus">
+                  +
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  style="margin-left: 35px"
+                >
+                  삭제
+                </button>
+              </li>
             </ul>
           </div>
         </td>
@@ -150,17 +221,49 @@
           <div class="card" style="width: 18rem">
             <ul class="list-group list-group-flush">
               <li class="list-group-item">상품명: 해커고양이</li>
-              <li class="list-group-item">주문총액: 10000$</li>
-              <li class="list-group-item">수량: 7개</li>
+              <li class="list-group-item">가격: 50$</li>
+              <li class="list-group-item">
+                수량:
+                <button
+                  type="button"
+                  class="btn btn-outline-success"
+                  id="minus"
+                >
+                  -
+                </button>
+                1
+                <button type="button" class="btn btn-outline-success" id="plus">
+                  +
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  style="margin-left: 35px"
+                >
+                  삭제
+                </button>
+              </li>
             </ul>
           </div>
         </td>
       </tr>
     </table>
+    <!-- 상품금액 -->
     <div class="payment">
       <p>총 결제금액: 100$</p>
     </div>
-
-    <!-- 끝 -->
+    <!-- 하단 버튼바 -->
+    <nav class="bottom-text" style="margin-top: 20px">
+      <button type="button" class="btn btn-success" style="font-weight: bold">
+        구매하기
+      </button>
+      <button
+        type="button"
+        class="btn btn-danger"
+        style="margin-left: 20px; font-weight: bold"
+      >
+        장바구니 비우기
+      </button>
+    </nav>
   </body>
 </html>

@@ -9,9 +9,9 @@ function productList() {
     data: {},
     success: function (response) {
       console.log(response);
-      
-      response.forEach(element => {
-        let temp_html =`<div class="col">
+
+      response.forEach((element) => {
+        let temp_html = `<div class="col">
                           <a href="/product/detail?productId=${element.id}" style="color: black;">
                             <div class="card h-100">
                               <img src=${element.image} class="card-img-top" alt="...">
@@ -24,8 +24,8 @@ function productList() {
                               </div>
                             </div>
                           </a>
-                        </div>`
-          $('#productList').append(temp_html) 
+                        </div>`;
+        $("#productList").append(temp_html);
       });
     },
   });

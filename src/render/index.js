@@ -33,5 +33,33 @@ router.get('/main', (req, res) => {
     res.render('main.ejs', { login: false });
 });
 
+router.get('/carts', (req, res) => {
+    if (res.locals.user) {
+        res.render('carts.ejs', { login: true });
+    }
+    res.render('carts.ejs', { login: false });
+});
+
+router.get('/login', (req, res) => {
+    if (res.locals.user) {
+        res.render('login.ejs', { login: true });
+    }
+    res.render('login.ejs', { login: false });
+});
+
+router.get('/register', (req, res) => {
+    if (res.locals.user) {
+        res.render('register.ejs', { login: true });
+    }
+    res.render('register.ejs', { login: false });
+});
+
+router.get('/mypage', (req, res) => {
+    if (res.locals.user) {
+        res.render('mypage.ejs', { login: true });
+    }
+    res.render('mypage.ejs', { login: false });
+});
+
 
 module.exports = router

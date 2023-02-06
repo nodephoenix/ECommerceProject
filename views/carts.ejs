@@ -121,8 +121,10 @@
       $(document).ready(function () {
         getCarts();
       });
-
+      
       function getCarts() {
+        let sum = 0
+
         $.ajax({
           method: "GET",
           url: "/api/carts",
@@ -137,6 +139,7 @@
               let productId = cartData[i]["Cart"]["product_id"];
               let cartDate = cartData[i]["Cart"]["updatedAt"];
               let sumPrice = price * count
+              sum = sum + sumPrice
               let temp_html = `      <table style="margin: 20px auto 0 auto">
         <tr>
           <td style="width: 150px">
@@ -157,15 +160,15 @@
                   <button
                     type="button"
                     class="btn btn-outline-success"
-                    id="minus" onclick="minus()"
+                    id="minus" onclick="minus(${productId})"
                   >
                     -
                   </button>
-                  <span id="count">${count}</span>
+                  <span id="${productId}count">${count}</span>
                   <button
                     type="button"
                     class="btn btn-outline-success"
-                    id="plus" onclick="plus()"
+                    id="plus" onclick="plus(${productId})"
                   >
                     +
                   </button>
@@ -194,6 +197,7 @@
       `;
               $("#cart-list").append(temp_html);
             }
+            document.getElementById('sumPrice').innerHTML = `${sum} 원`
           },
           error: function (error) {
             if(error.status === 401){
@@ -206,23 +210,23 @@
       }
 
       // 수량 증가시키기
-      function plus() {
-        let count = document.getElementById("count").innerText;
-        return (document.getElementById("count").innerText = Number(count) + 1);
+      function plus(productId) {
+        let count = document.getElementById(`${productId}count`).innerText;
+        return (document.getElementById(`${productId}count`).innerText = Number(count) + 1);
       }
 
       // 수량 감소시키기
-      function minus() {
-        let count = document.getElementById("count").innerText;
+      function minus(productId) {
+        let count = document.getElementById(`${productId}count`).innerText;
         if (count <= 1) {
           return count;
         }
-        return (document.getElementById("count").innerText = Number(count) - 1);
+        return (document.getElementById(`${productId}count`).innerText = Number(count) - 1);
       }
 
       // 수량 수정하기
       function editCount(productId) {
-        let count = Number(document.getElementById("count").innerText);
+        let count = Number(document.getElementById(`${productId}count`).innerText);
 
         $.ajax({
           type: "PUT",
@@ -237,28 +241,33 @@
 
       // 단일 상품 삭제하기
       function deleteItem(productId) {
+        const check = confirm("상품을 삭제하시겠습니까?");
+        if(!check) {
+          return window.location.reload();
+        }
+
         $.ajax({
           type: "delete",
           url: `/api/carts/${productId}`,
           data: { productId: productId },
           success: function (response) {
-            confirm("상품을 삭제하시겠습니까?");
-            alert("상품이 장바구니에서 삭제되었습니다.");
-            window.location.reload();
+            alert("상품이 장바구니에서 삭제되었습니다."); 
           },
         });
       }
 
       // 전체 상품 구매하기
-      function order(productId) {
-        let count = Number(document.getElementById("count").innerText);
-
+      function orderCart() {
+        const check = confirm("전체 상품을 주문하시겠습니까?");
+        if(!check){
+          return window.location.reload();
+        }
+        
         $.ajax({
           type: "POST",
-          url: `/api/orders`,
-          data: { productId: productId, count: count },
+          url: `/api/orders/carts`,
+          data: {},
           success: function (response) {
-            confirm("전체 상품을 주문하시겠습니까?");
             alert("주문이 완료되었습니다.");
             window.location.reload();
           },
@@ -301,7 +310,7 @@
     <div id="cart-list"></div>
     <!-- 상품금액 --> 
     <div class="payment">
-      <p>총 결제금액: 100원</p>
+      <p id="sumPrice">총 결제금액: 0원</p>
     </div>
     <!-- 하단 버튼바 -->
     <nav class="bottom-text" style="margin-top: 20px">
@@ -310,7 +319,7 @@
           type="button"
           class="btn btn-success"
           style="font-weight: bold"
-          onclick="order(productId)"
+          onclick="orderCart()"
         >
           구매하기
         </button>

@@ -18,6 +18,10 @@
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"
     ></script>
+
+    <!-- JQuery import -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
     <!-- CSS -->
     <style>
       * {
@@ -30,7 +34,11 @@
         height: 100%;
       }
       body {
-        background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
+        background: linear-gradient(
+          to right,
+          rgb(242, 112, 156),
+          rgb(255, 148, 114)
+        );
         background-repeat: no-repeat;
         background-size: cover;
       }
@@ -64,6 +72,31 @@
         height: 30%;
       }
     </style>
+    <script>
+      $(document).ready(function () {});
+
+      function userRegister() {
+        let email = $("#email").val();
+        let password = $("#password").val();
+        let confirmPassword = $("#confirmPassword").val();
+        let userName = $("#userName").val();
+        let phone = $("#phone").val();
+        $.ajax({
+          method: "POST",
+          url: "/api/auth/register",
+          data: {
+            email: email,
+            password: password,
+            confirmPassword: confirmPassword,
+            userName: userName,
+            phone: phone,
+          },
+          success: function (response) {
+            alert("회원가입이 완료되었습니다!");
+          },
+        });
+      }
+    </script>
 
     <title>🖼그림사조 회원가입🎨</title>
   </head>
@@ -73,30 +106,73 @@
     </div>
     <div class="input-bar">
       <div class="form-floating mb-3 input-content">
-        <input type="email" class="form-control" id="floatingInput" placeholder="이메일" />
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="이메일"
+        />
         <label for="floatingInput">이메일 주소</label>
       </div>
       <div class="form-floating input-content">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="패스워드" />
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          placeholder="패스워드"
+        />
         <label for="floatingPassword">패스워드</label>
       </div>
       <div class="form-floating input-content" style="margin-top: 15px">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="패스워드 확인" />
+        <input
+          type="password"
+          class="form-control"
+          id="confirmPassword"
+          name="confirmPassword"
+          placeholder="패스워드 확인"
+        />
         <label for="floatingPassword">패스워드 확인</label>
       </div>
       <div class="form-floating mb-3 input-content" style="margin-top: 15px">
-        <input type="email" class="form-control" id="floatingInput" placeholder="이름" />
+        <input
+          type="name"
+          class="form-control"
+          id="userName"
+          name="userName"
+          placeholder="이름"
+        />
         <label for="floatingInput">이름</label>
       </div>
       <div class="form-floating mb-3 input-content" style="margin-top: 15px">
-        <input type="email" class="form-control" id="floatingInput" placeholder="전화번호" />
+        <input
+          type="phone"
+          class="form-control"
+          id="phone"
+          name="phone"
+          placeholder="전화번호"
+        />
         <label for="floatingInput">전화번호</label>
       </div>
       <div class="form-floating mb-3 input-content" style="margin-top: 15px">
-        <input type="email" class="form-control" id="floatingInput" placeholder="주소" />
+        <input
+          type="email"
+          class="form-control"
+          id="floatingInput"
+          name="phone"
+          placeholder="주소"
+        />
         <label for="floatingInput">주소</label>
       </div>
-      <button type="button" class="btn btn-success input-content" style="width: 150px">가입하기</button>
+      <button
+        type="submit"
+        class="btn btn-success input-content"
+        style="width: 150px"
+        onclick="userRegister()"
+      >
+        가입하기
+      </button>
     </div>
   </body>
 </html>

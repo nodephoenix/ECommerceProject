@@ -81,8 +81,49 @@
         color: #0a174e;
       }
     </style>
+    <script>
+      $(document).ready(function () {
+        getCarts();
+      });
 
-    <title>🖼주문 완료🎨</title>
+      function getCarts() {
+        $.ajax({
+          method: "GET",
+          url: "/api/carts",
+          data: {},
+          success: function (response) {
+            let cartData = response.data;
+            for (let i = 0; i < cartData.length; i++) {
+              let productName = cartData[i]["id"];
+              let grade = rows[i]["grade"];
+              let comment = rows[i]["comment"];
+              let createdAt = rows[i]["createdAt"];
+              let temp_html = `            <div class="product-image inline-block">
+        <img
+          src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDGzHg%2FbtrXSxfvtYG%2FjgfqXjHXsLbtek9yidftEk%2Fimg.png"
+          class="img-thumbnail product-img"
+          alt="..."
+        />
+      </div>
+      <div class="card inline-block">
+        <div class="card-body">
+          <h4>상품 : 해커고양이</h4>
+          <hr />
+          <p>가격: 50$</p>
+          <p>주문일자: 23.02.02</p>
+          <p>아무내용: 하하하하</p>
+        </div>
+      </div>`;
+              $("#cart-list").append(temp_html);
+            }
+          },
+          error: function (error) {
+            alert("목록 불러오기에 실패하였습니다.");
+          },
+        });
+      }
+    </script>
+    <title>🖼장바구니🎨</title>
   </head>
   <body>
     <!-- 탑바 -->
@@ -90,7 +131,7 @@
       <h1 style="color: #0a174e; font-weight: bold">🖼장바구니🎨</h1>
     </div>
     <!-- 시작 -->
-    <nav class="detail">
+    <div class="detail" id="cart-list">
       <div class="product-image inline-block">
         <img
           src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDGzHg%2FbtrXSxfvtYG%2FjgfqXjHXsLbtek9yidftEk%2Fimg.png"
@@ -107,7 +148,7 @@
           <p>아무내용: 하하하하</p>
         </div>
       </div>
-    </nav>
+    </div>
     <nav class="bottom-text">
       <button type="button" class="btn btn-success">구매하기</button>
       <button type="button" class="btn btn-warning" style="margin-left: 20px">

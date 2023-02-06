@@ -1,0 +1,108 @@
+<!-- 주문상세조회 페이지 -->
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CSS -->
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+    <!-- CSS -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      body {
+        /* background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbdByfl%2FbtrVf7i5Uq5%2FjJ5afu7vrUKkgNGmzP2kAk%2Fimg.jpg"); */
+        background-image: linear-gradient(109.6deg, rgba(156, 252, 248, 1) 11.2%, rgba(110, 123, 251, 1) 91.1%);
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      .top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 23%;
+      }
+
+      .product-img {
+        width: 350px;
+        height: 350px;
+      }
+      .detail {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 50%;
+      }
+      .inline-block {
+        display: inline-block;
+      }
+      .card {
+        margin-left: 20px;
+        height: 200px;
+        width: 500px;
+        font-weight: bold;
+      }
+      .bottom-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 3rem;
+        color: #0a174e;
+      }
+    </style>
+
+    <title>🖼주문 완료🎨</title>
+  </head>
+  <body>
+    <!-- 탑바 -->
+    <div class="top-bar">
+      <h1 style="color: #0a174e; font-weight: bold">🖼주문 완료🎨</h1>
+    </div>
+    <!-- 시작 -->
+    <nav class="detail">
+      <div class="product-image inline-block">
+        <img
+          src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDGzHg%2FbtrXSxfvtYG%2FjgfqXjHXsLbtek9yidftEk%2Fimg.png"
+          class="img-thumbnail product-img"
+          alt="..."
+        />
+      </div>
+      <div class="card inline-block">
+        <div class="card-body">
+          <h4>상품 : 해커고양이</h4>
+          <hr />
+          <p>가격: 50$</p>
+          <p>주문일자: 23.02.02</p>
+          <p>아무내용: 하하하하</p>
+        </div>
+      </div>
+    </nav>
+    <nav class="bottom-text">
+      <p>구매해주셔서 감사합니다</p>
+    </nav>
+  </body>
+</html>

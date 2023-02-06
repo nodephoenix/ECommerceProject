@@ -194,7 +194,7 @@ describe("orders service 유닛 테스트", () => {
   test("OrdersService orderCart Method By Error", async () => {
     const orderCartReturnValue = new Error();
     mockOrdersRepository.myCart = jest.fn(() => {
-      return new Error;
+      return new Error();
     });
 
     try {
@@ -202,5 +202,45 @@ describe("orders service 유닛 테스트", () => {
     } catch {
       expect(orderCart).toEqual(orderCartReturnValue);
     }
+  });
+
+  // test("OrdersService cancelOrder Method By Success", async () => {
+  //   const cancelOrderReturnValue = {
+  //     status: 400,
+  //     message: "주문을 취소할 수 없습니다.",
+  //   };
+
+  //   mockOrdersRepository.orderStatusChange = jest.fn(() => {
+  //     return 1;
+  //   });
+
+  //   const cancelOrder = await ordersService.cancelOrder(1, 1);
+
+  //   // 1. myCart Method가 1번 호출된다. 입력받는 인자는 order_id, user_id 이다.
+  //   expect(mockOrdersRepository.orderStatusChange).toHaveBeenCalledTimes(1);
+  //   expect(mockOrdersRepository.orderStatusChange).toHaveBeenCalledWith(1, 1);
+
+  //   // 2. cancelOrder Method의 return 값이 0이 아니면 cancelOrderReturnValue 값과 일치한다.
+  //   expect(cancelOrder).toEqual(cancelOrderReturnValue);
+  // });
+
+  test("OrdersService cancelOrder Method By Bad Request", async () => {
+    const cancelOrderReturnValue = {
+      status: 400,
+      message: "주문을 취소할 수 없습니다.",
+    };
+
+    mockOrdersRepository.orderStatusChange = jest.fn(() => {
+      return 1;
+    });
+
+    const cancelOrder = await ordersService.cancelOrder(1, 1);
+
+    // 1. myCart Method가 1번 호출된다. 입력받는 인자는 order_id, user_id 이다.
+    expect(mockOrdersRepository.orderStatusChange).toHaveBeenCalledTimes(1);
+    expect(mockOrdersRepository.orderStatusChange).toHaveBeenCalledWith(1, 1);
+
+    // 2. cancelOrder Method의 return 값이 0이 아니면 cancelOrderReturnValue 값과 일치한다.
+    expect(cancelOrder).toEqual(cancelOrderReturnValue);
   });
 });

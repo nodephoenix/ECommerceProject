@@ -13,9 +13,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "user_id",
         sourceKey: "id",
       });
-      models.User.hasMany(models.Cart, {
-        foreignKey: "user_id",
-        sourceKey: "id",
+      models.User.belongsToMany(models.Product, {
+        through: models.Cart,
+        foreignKey: 'user_id',
+        as: 'carts'
       });
     }
   }
@@ -24,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       userName: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
+      salt: DataTypes.STRING,
       phone: DataTypes.STRING,
       point: {
         type: Sequelize.INTEGER,

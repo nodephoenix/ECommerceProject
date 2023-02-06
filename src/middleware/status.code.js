@@ -1,10 +1,10 @@
 class HttpStatus {
   ok = (data, message) => {
-    return { data: data, status: 200, message: message };
+    return { data : data, status : 200, message: message };
   };
 
   created = (data, message) => {
-    return { data, status: 201, message: message };
+    return { data : data, status: 201, message: message };
   };
 
   badRequest = (message) => {

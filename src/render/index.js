@@ -25,11 +25,11 @@ router.get("/productall", (req, res) => {
 });
 
 router.get("/product/detail", (req, res) => {
-    if (res.locals.user) {
-      res.render("product.detail.ejs", { login: true });
-    }
-    res.render("product.detail.ejs", { login: false });
-  });
+  if (res.locals.user) {
+    res.render("product.detail.ejs", { login: true });
+  }
+  res.render("product.detail.ejs", { login: false });
+});
 
 router.get("/main", (req, res) => {
   if (res.locals.user) {

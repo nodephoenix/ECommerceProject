@@ -11,7 +11,7 @@ function productList() {
       console.log(response);
 
       response.forEach((element) => {
-        let temp_html = `<div class="col">
+        let temp_html = `<div class="col-3">
                           <a href="/product/detail?productId=${element.id}" style="color: black;">
                             <div class="card h-100">
                               <img src=${element.image} class="card-img-top" alt="...">

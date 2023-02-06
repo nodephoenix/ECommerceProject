@@ -90,6 +90,12 @@
     <title>🤴어드민 회원관리🤴</title>
   </head>
   <body>
+    <% if(admin) { %>
+      <%- include('adminlogoutheader.ejs') %> 
+      <% } else if(login) { %> 
+      <%- include('logoutheader.ejs') %>
+      <% } else { %>
+      <%-include('loginheader.ejs') %> <% } %>
     <!-- 탑바 -->
     <div class="top-bar">
       <h1 style="color: #0a174e; font-weight: bold">🤴어드민 회원관리🤴</h1>

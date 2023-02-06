@@ -9,19 +9,24 @@
     <title>main page</title>
 </head>
 <body>
-  <% if(login) { %> 
-  <%- include('logoutheader.ejs') %> 
-  <% }else{ %>
-  <%-include('loginheader.ejs') %> <% } %>
+  <% if(admin) { %>
+    <%- include('adminlogoutheader.ejs') %> 
+    <% } else if(login) { %> 
+    <%- include('logoutheader.ejs') %>
+    <% } else { %>
+    <%-include('loginheader.ejs') %> <% } %>
   <!-- //토탈이미지 -->
   <img src="https://blog.kakaocdn.net/dn/bSC1F2/btqKwQF1fX6/KpWl8bFYn5HmzlLVRJhFk1/img.jpg" class="img-fluid" alt="...">
   <!-- //토탈이미지 종료 -->
-  <div class="badge bg-primary text-wrap" style="width: 6rem"; letf:50%;>
-    PRODUCT
-  </div>
+  
 <!-- 카드 -->
-<div class="row row-cols-1 row-cols-md-3 g-4" id = "productList">
-</div>
+  <div class="container">
+    <div class="badge bg-primary text-wrap" style="width: 6rem; text-align:center;">
+      <p>PRODUCT</p>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4" id = "productList">
+    </div>
+  </div>
   <!-- 카드 종료 -->
   <!-- 페이지네이션 -->
   <nav aria-label="Page navigation example">

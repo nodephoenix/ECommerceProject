@@ -78,10 +78,12 @@
     <title>🖼주문 완료🎨</title>
   </head>
   <body>
-    <% if(login) { %> 
-    <%- include('logoutheader.ejs') %> 
-    <% }else{ %>
-    <%-include('loginheader.ejs') %> <% } %>
+    <% if(admin) { %>
+      <%- include('adminlogoutheader.ejs') %> 
+      <% } else if(login) { %> 
+      <%- include('logoutheader.ejs') %>
+      <% } else { %>
+      <%-include('loginheader.ejs') %> <% } %>
     <!-- 탑바 -->
     <div class="top-bar">
       <h1 style="color: #0a174e; font-weight: bold">🖼주문 완료🎨</h1>

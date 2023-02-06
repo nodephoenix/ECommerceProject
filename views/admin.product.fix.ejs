@@ -92,6 +92,12 @@
     <title>🤴어드민- 전체상품 목록🤴</title>
   </head>
   <body>
+    <% if(admin) { %>
+      <%- include('adminlogoutheader.ejs') %> 
+      <% } else if(login) { %> 
+      <%- include('logoutheader.ejs') %>
+      <% } else { %>
+      <%-include('loginheader.ejs') %> <% } %>
     <!-- 탑바 -->
     <div class="top-bar">
       <h1 style="color: #0a174e; font-weight: bold">🤴관리자 페이지 - 상품수정🤴</h1>

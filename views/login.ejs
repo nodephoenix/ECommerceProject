@@ -85,7 +85,7 @@
           },
           success: function (response) {
             alert("로그인이 완료되었습니다!");
-            location.href = "/main";
+            location.href = "/";
           },
           error: function (error) {
             alert(error.responseJSON.error)
@@ -97,10 +97,7 @@
     <title>🖼그림사조 로그인🎨</title>
   </head>
   <body>
-    <% if(login) { %> 
-    <%- include('logoutheader.ejs') %> 
-    <% }else{ %>
-    <%-include('loginheader.ejs') %> <% } %>
+    <%-include('loginheader.ejs') %>
     <div class="top-bar">
       <h1 style="color: #0a174e; font-weight: bold">🖼그림사조 로그인🎨</h1>
     </div>

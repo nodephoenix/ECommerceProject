@@ -35,6 +35,7 @@ router.put(
   "/admin/products/:productId",
   authMiddleware,
   adminMiddleware,
+  upload.single("image"),
   adminController.editProducts
 );
 

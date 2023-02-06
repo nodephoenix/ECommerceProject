@@ -5,6 +5,8 @@
 const jwt = require("jsonwebtoken");
 const supertest = require("supertest");
 const app = require("../../src/app");
+const path = require("path");
+const fs = require("fs");
 
 const db = require("../../sequelize/models/index.js");
 const seederHelper = require("../helper/seeder.helper");
@@ -14,7 +16,7 @@ const sequelize = db.sequelize;
 let token;
 beforeAll(async () => {
   if (process.env.NODE_ENV === "test") {
-    await sequelize.sync({ force: true });
+    await sequelize.sync();
   } else {
     throw new Error("NODE_ENV가 test 환경으로 설정되어 있지 않습니다.");
   }
@@ -34,60 +36,66 @@ beforeEach(async () => {
 describe("Admin Domain Integration Test", () => {
   test("POST api/admin/products (RegisterProducts)", async () => {
     const response = await supertest(app)
-    .post("/api/admin/products")
-    .set("Cookie", `x_auth=${token}`)
-    .send({})
+      .post("/api/admin/products")
+      .type("form")
+      .set("Cookie", [`x_auth=${token}`])
+      .attach("image", path.join(__dirname, "../file/cat.png"))
+      .field("productName", "해커고양이")
+      .field("desc", "코딩하는 신기한 고양이")
+      .field("price", 10000);
 
     expect(response.status).toEqual(201);
   });
 
   test("PUT api/admin/products/:productId (editProducts)", async () => {
     const response = await supertest(app)
-    .put("/api/admin/products/1")
-    .set("Cookie", `x_auth=${token}`)
-    .send({})
+      .put("/api/admin/products/1")
+      .type("form")
+      .set("Cookie", [`x_auth=${token}`])
+      .attach("image", path.join(__dirname, "../file/cat.png"))
+      .field("productName", "해커고양이")
+      .field("desc", "코딩하는 신기한 고양이")
+      .field("price", 10000);
 
     expect(response.status).toEqual(201);
   });
 
   test("DELETE api/admin/products/:productId (deleteProducts)", async () => {
     const response = await supertest(app)
-    .put("/api/admin/products/1")
-    .set("Cookie", `x_auth=${token}`)
-    .send({})
-
-    expect(response.status).toEqual(201);
-  });
-
-
-  test("GET api/admin/products (GetProducts)", async () => {
-    const response = await supertest(app)
-      .get("/api/admin/products")
-      .set("Cookie", `x_auth=${token}`)
+      .delete("/api/admin/products/1")
+      .set("Cookie", [`x_auth=${token}`])
       .send({});
 
     expect(response.status).toEqual(200);
   });
 
-  
+  test("GET api/admin/products (GetProducts)", async () => {
+    const response = await supertest(app)
+      .get("/api/admin/products")
+      .set("Cookie", [`x_auth=${token}`])
+      .send({});
+
+    expect(response.status).toEqual(200);
+  });
+
   test("PUT api/admin/products/:productId/status (putProductsStatus)", async () => {
     const response = await supertest(app)
-    .put("/api/admin/products/1/status")
-    .set("Cookie", `x_auth=${token}`)
-    .send({
-      status: 1
-    })
+      .put("/api/admin/products/1/status")
+      .set("Cookie", [`x_auth=${token}`])
+      .send({
+        status: 1,
+      });
 
     expect(response.status).toEqual(201);
   });
-  
+
   test("PUT api/admin/user/:userId/grade (putProductsStatus)", async () => {
     const response = await supertest(app)
-    .put("/api/admin/user/2/grade")
-    .set("Cookie", `x_auth=${token}`)
-    .send({
-      grade: 1
-    })
+      .put("/api/admin/user/2/grade")
+      .set("Cookie", [`x_auth=${token}`])
+      .send({
+        grade: 1,
+      });
 
     expect(response.status).toEqual(201);
   });

@@ -136,6 +136,7 @@
               let count = cartData[i]["Cart"]["count"];
               let productId = cartData[i]["Cart"]["product_id"];
               let cartDate = cartData[i]["Cart"]["updatedAt"];
+              let sumPrice = price * count
               let temp_html = `      <table style="margin: 20px auto 0 auto">
         <tr>
           <td style="width: 150px">
@@ -149,7 +150,7 @@
             <div class="card" style="width: 18rem">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">상품명: ${productName}</li>
-                <li class="list-group-item">가격: ${price}원</li>
+                <li class="list-group-item">가격: ${sumPrice}원</li>
                 <li class="list-group-item">담은 일자: ${cartDate}</li>
                 <li class="list-group-item">
                   수량:
@@ -195,7 +196,11 @@
             }
           },
           error: function (error) {
-            alert("목록 불러오기에 실패하였습니다.");
+            if(error.status === 401){
+              alert(error.responseJSON.errorMessage)
+              return window.location.replace('/login')
+            }
+            alert(error.responseJSON.errorMessage)
           },
         });
       }

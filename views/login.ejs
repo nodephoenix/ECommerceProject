@@ -87,8 +87,8 @@
             alert("로그인이 완료되었습니다!");
             location.href = "/main";
           },
-          error: function (request, status, error) {
-            alert(request.responseText);
+          error: function (error) {
+            alert(error.responseJSON.error)
           },
         });
       }

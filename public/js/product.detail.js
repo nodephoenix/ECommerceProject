@@ -74,6 +74,7 @@ function order(productId){
         alert(error.responseJSON.errorMessage)
         window.location.replace('/login')
       }
+      alert(error.responseJSON.errorMessage)
     }
   })
 }

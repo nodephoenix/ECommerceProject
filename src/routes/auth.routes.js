@@ -6,10 +6,10 @@ const router = express.Router();
 const AuthController = require("../controllers/auth.controllers.js");
 const authController = new AuthController();
 
-// 회원가입 API
+// 회원가입 API o
 router.post("/auth/register", authController.userRegister);
 
-// 로그인 API
+// 로그인 API o
 router.post("/auth/login", authController.userLogin);
 
 module.exports = router;

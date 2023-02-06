@@ -35,7 +35,10 @@ class AuthService {
 
   // 로그인 API
   userLogin = async (email, password) => {
-    const user = await this.authRepository.findUser(email);
+    try{const user = await this.authRepository.findUser(email);
+      if(!user) {
+        throw new Error("이메일 또는 패스워드를 확인해주세요")
+      }
     const { password: dbPassword, salt } = user;
 
     const hashPassword = crypto
@@ -55,6 +58,8 @@ class AuthService {
         issuer: "issuer", // 발행자
       });
       return token;
+    }}catch(error) {
+      throw new Error(error.message)
     }
   };
 }

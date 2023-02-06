@@ -10,19 +10,6 @@ const Carts = require('./carts.routes')
 const Orders = require('./orders.routes')
 
 
-router.get("/", (req, res) => {
-    res.render("views/index")
-});
-
-router.get("/", (req, res) => {
-    res.render("views/mypage")
-});
-
-router.get("/", (req, res) => {
-    res.render("views/productall")
-});
-
-
 router.use("/", [Auth, Users, Products, AdminProducts , Carts, Orders])
 
 module.exports = router;

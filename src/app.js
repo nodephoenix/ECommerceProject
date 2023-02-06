@@ -9,6 +9,9 @@ const path = require("path");
 const app = express();
 const http = Server(app);
 
+const home = require("./routes/index")
+app.use("/", home); 
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -22,7 +25,7 @@ app.set("views", path.join(__dirname, "../views"));
 app.use(express.static(path.join(__dirname, "../public"))); //정적파일, 이미지파일
 
 sequelize
-  .sync({ alter: true })
+  .sync({ force: false })
   .then(() => {
     console.log("데이터베이스 연결 성공!");
   })

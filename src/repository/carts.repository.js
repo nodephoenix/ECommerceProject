@@ -9,7 +9,6 @@ class CartsRepository {
       include: [
         {
           model: Product,
-          required: true,
           as: "carts",
         },
       ],

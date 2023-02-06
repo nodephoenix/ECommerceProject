@@ -73,8 +73,6 @@
       }
     </style>
     <script>
-      $(document).ready(function () {});
-
       function userlogin() {
         let email = $("#email").val();
         let password = $("#password").val();
@@ -87,6 +85,10 @@
           },
           success: function (response) {
             alert("로그인이 완료되었습니다!");
+            location.href = "/main";
+          },
+          error: function (request, status, error) {
+            alert(request.responseText);
           },
         });
       }

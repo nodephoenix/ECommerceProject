@@ -19,6 +19,9 @@
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"
     ></script>
+
+    <!-- JQuery import -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <!-- CSS -->
     <style>
       * {
@@ -127,26 +130,58 @@
           success: function (response) {
             let cartData = response.data;
             for (let i = 0; i < cartData.length; i++) {
-              let productName = cartData[carts]["id"];
-              let grade = rows[i]["grade"];
-              let comment = rows[i]["comment"];
-              let createdAt = rows[i]["createdAt"];
-              let temp_html = `            <div class="product-image inline-block">
-    <img
-      src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDGzHg%2FbtrXSxfvtYG%2FjgfqXjHXsLbtek9yidftEk%2Fimg.png"
-      class="img-thumbnail product-img"
-      alt="..."
-    />
-  </div>
-  <div class="card inline-block">
-    <div class="card-body">
-      <h4>상품 : 해커고양이</h4>
-      <hr />
-      <p>가격: 50$</p>
-      <p>주문일자: 23.02.02</p>
-      <p>아무내용: 하하하하</p>
-    </div>
-  </div>`;
+              console.log("확인", cartData["carts"]);
+
+              let productName = cartData["carts"][i]["productName"];
+              let price = cartData["carts"][i]["price"];
+              let image = cartData["carts"][i]["image"];
+              let count = cartData["carts"][i]["Cart"]["count"];
+              let cartDate = cartData["carts"][i]["Cart"]["updatedAt"];
+              let temp_html = `      <table style="margin: 20px auto 0 auto">
+        <tr>
+          <td style="width: 150px">
+            <img
+              src=${image}
+              class="img-thumbnail product-img"
+              alt="..."
+            />
+          </td>
+          <td style="width: 300px">
+            <div class="card" style="width: 18rem">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">상품명: ${productName}</li>
+                <li class="list-group-item">가격: ${price}</li>
+                <li class="list-group-item">담은 일자: ${cartDate}</li>
+                <li class="list-group-item">
+                  수량:
+                  <button
+                    type="button"
+                    class="btn btn-outline-success"
+                    id="minus"
+                  >
+                    -
+                  </button>
+                  ${count}
+                  <button
+                    type="button"
+                    class="btn btn-outline-success"
+                    id="plus"
+                  >
+                    +
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    style="margin-left: 35px"
+                  >
+                    삭제
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      </table>`;
               $("#cart-list").append(temp_html);
             }
           },
@@ -168,86 +203,96 @@
     </nav>
     <hr />
     <!-- 상품표시화면 -->
-    <table style="margin: 20px auto 0 auto">
-      <tr>
-        <td style="width: 150px">
-          <img
-            src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDGzHg%2FbtrXSxfvtYG%2FjgfqXjHXsLbtek9yidftEk%2Fimg.png"
-            class="img-thumbnail product-img"
-            alt="..."
-          />
-        </td>
-        <td style="width: 300px">
-          <div class="card" style="width: 18rem">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">상품명: 해커고양이</li>
-              <li class="list-group-item">가격: 50$</li>
-              <li class="list-group-item">
-                수량:
-                <button
-                  type="button"
-                  class="btn btn-outline-success"
-                  id="minus"
-                >
-                  -
-                </button>
-                1
-                <button type="button" class="btn btn-outline-success" id="plus">
-                  +
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  style="margin-left: 35px"
-                >
-                  삭제
-                </button>
-              </li>
-            </ul>
-          </div>
-        </td>
-      </tr>
-    </table>
-    <table style="margin: 20px auto 0 auto">
-      <tr>
-        <td style="width: 150px">
-          <img
-            src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDGzHg%2FbtrXSxfvtYG%2FjgfqXjHXsLbtek9yidftEk%2Fimg.png"
-            class="img-thumbnail product-img"
-            alt="..."
-          />
-        </td>
-        <td style="width: 300px">
-          <div class="card" style="width: 18rem">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">상품명: 해커고양이</li>
-              <li class="list-group-item">가격: 50$</li>
-              <li class="list-group-item">
-                수량:
-                <button
-                  type="button"
-                  class="btn btn-outline-success"
-                  id="minus"
-                >
-                  -
-                </button>
-                1
-                <button type="button" class="btn btn-outline-success" id="plus">
-                  +
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  style="margin-left: 35px"
-                >
-                  삭제
-                </button>
-              </li>
-            </ul>
-          </div>
-        </td>
-      </tr>
-    </table>
+    <div id="cart-list">
+      <table style="margin: 20px auto 0 auto">
+        <tr>
+          <td style="width: 150px">
+            <img
+              src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDGzHg%2FbtrXSxfvtYG%2FjgfqXjHXsLbtek9yidftEk%2Fimg.png"
+              class="img-thumbnail product-img"
+              alt="..."
+            />
+          </td>
+          <td style="width: 300px">
+            <div class="card" style="width: 18rem">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">상품명: 해커고양이</li>
+                <li class="list-group-item">가격: 50$</li>
+                <li class="list-group-item">
+                  수량:
+                  <button
+                    type="button"
+                    class="btn btn-outline-success"
+                    id="minus"
+                  >
+                    -
+                  </button>
+                  1
+                  <button
+                    type="button"
+                    class="btn btn-outline-success"
+                    id="plus"
+                  >
+                    +
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    style="margin-left: 35px"
+                  >
+                    삭제
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <table style="margin: 20px auto 0 auto">
+        <tr>
+          <td style="width: 150px">
+            <img
+              src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDGzHg%2FbtrXSxfvtYG%2FjgfqXjHXsLbtek9yidftEk%2Fimg.png"
+              class="img-thumbnail product-img"
+              alt="..."
+            />
+          </td>
+          <td style="width: 300px">
+            <div class="card" style="width: 18rem">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">상품명: 해커고양이</li>
+                <li class="list-group-item">가격: 50$</li>
+                <li class="list-group-item">
+                  수량:
+                  <button
+                    type="button"
+                    class="btn btn-outline-success"
+                    id="minus"
+                  >
+                    -
+                  </button>
+                  1
+                  <button
+                    type="button"
+                    class="btn btn-outline-success"
+                    id="plus"
+                  >
+                    +
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    style="margin-left: 35px"
+                  >
+                    삭제
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
     <!-- 상품금액 -->
     <div class="payment">
       <p>총 결제금액: 100$</p>

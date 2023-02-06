@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">그림사조</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/productall">장바구니</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/carts">주문내역</a>
+        <li class="nav-item">
+          <a class="nav-link" href="/mypage">마이페이지</a>
+        </li>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= login === true ? 'logout' : 'login' %>">
+            <%= login === true ? '로그아웃' : '로그인' %>
+          </a>
+        </li>
+    </div>
+  </div>
+</nav>

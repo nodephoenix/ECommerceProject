@@ -66,7 +66,7 @@ class OrdersService {
         order_id,
         user_id
       );
-      if (orderStautsChange !== 0) {
+      if (orderStautsChange === 1 | 2 | 3) {
         return this.code.badRequest("주문을 취소할 수 없습니다.");
       }
       const cancelData = await this.ordersRepository.cancelOrder(order_id);

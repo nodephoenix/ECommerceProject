@@ -2,103 +2,132 @@
 
 const express = require("express");
 const router = express.Router();
+const loginCheck = require("../middleware/logincheck");
 
-router.get("/", (req, res) => {
-  if (res.locals.user) {
-    res.render("index.ejs", { login: true });
+router.get("/", loginCheck, (req, res) => {
+  if (res.locals.user === 1) {
+    return res.render("index.ejs", { admin : true , login : false});
+  } else if(res.locals.user === 0) {
+    return res.render('index.ejs', { admin : false , login: true })
   }
-  res.render("index.ejs", { login: false });
+  return res.render("index.ejs", { admin : false, login: false });
 });
 
-router.get("/mypage", (req, res) => {
-  if (res.locals.user) {
-    res.render("mypage.ejs", { login: true });
+router.get("/mypage", loginCheck, (req, res) => {
+  if (res.locals.user === 1) {
+    return res.render("mypage.ejs", { admin : true , login : false});
+  } else if(res.locals.user === 0) {
+    return res.render('mypage.ejs', { admin : false , login: true })
   }
-  res.render("mypage.ejs", { login: false });
+  res.render("mypage.ejs", { admin : false, login: false });
 });
 
-router.get("/productall", (req, res) => {
-  if (res.locals.user) {
-    res.render("productall.ejs", { login: true });
+router.get("/productall", loginCheck, (req, res) => {
+  if (res.locals.user === 1) {
+    return res.render("productall.ejs", { admin : true , login : false});
+  } else if(res.locals.user === 0) {
+    return res.render('productall.ejs', { admin : false , login: true })
   }
-  res.render("productall.ejs", { login: false });
+  res.render("productall.ejs", { admin : false, login: false });
 });
 
-router.get("/product/detail", (req, res) => {
-  if (res.locals.user) {
-    res.render("product.detail.ejs", { login: true });
+router.get("/product/detail", loginCheck, (req, res) => {
+  if (res.locals.user === 1) {
+    return res.render("product.detail.ejs", { admin : true , login : false});
+  } else if(res.locals.user === 0) {
+    return res.render('product.detail.ejs', { admin : false , login: true })
   }
-  res.render("product.detail.ejs", { login: false });
+  res.render("product.detail.ejs", { admin : false, login: false });
 });
 
-router.get("/main", (req, res) => {
-  if (res.locals.user) {
-    res.render("main.ejs", { login: true });
+router.get("/carts", loginCheck, (req, res) => {
+  if (res.locals.user === 1) {
+    return res.render("carts.ejs", { admin : true , login : false});
+  } else if(res.locals.user === 0) {
+    return res.render('carts.ejs', { admin : false , login: true })
   }
-  res.render("main.ejs", { login: false });
+  res.render("carts.ejs", { admin : false, login: false });
 });
 
-router.get("/carts", (req, res) => {
-  if (res.locals.user) {
-    res.render("carts.ejs", { login: true });
+router.get("/login", loginCheck, (req, res) => {
+  if (res.locals.user === 1) {
+    return res.redirect('/')
+  } else if(res.locals.user === 0) {
+    return res.redirect('/')
   }
-  res.render("carts.ejs", { login: false });
+  res.render("login.ejs");
 });
 
-router.get("/login", (req, res) => {
-  if (res.locals.user) {
-    res.render("login.ejs", { login: true });
+router.get("/register", loginCheck, (req, res) => {
+  if (res.locals.user === 1) {
+    return res.render("register.ejs", { admin : true , login : false});
+  } else if(res.locals.user === 0) {
+    return res.render('register.ejs', { admin : false , login: true })
   }
-  res.render("login.ejs", { login: false });
+  res.render("register.ejs", { admin : false, login: false });
 });
 
-router.get("/register", (req, res) => {
-  if (res.locals.user) {
-    res.render("register.ejs", { login: true });
+router.get("/admin/product/list", loginCheck, (req, res) => {
+  if (res.locals.user === 1) {
+    return res.render("admin.all.product.ejs", { admin : true , login : false});
+  } else if(res.locals.user === 0) {
+    return res.render("admin.all.product.ejs", { admin : false , login: true })
   }
-  res.render("register.ejs", { login: false });
+  res.render("admin.all.product.ejs", { admin : false, login: false });
 });
 
-router.get("/admin/product/list", (req, res) => {
-  if (res.locals.user) {
-    res.render("admin.all.product.ejs", { login: true });
+router.get("/admin/members/list", loginCheck, (req, res) => {
+  if (res.locals.user === 1) {
+    return res.render("admin.member.list.ejs", { admin : true , login : false});
+  } else if(res.locals.user === 0) {
+    return res.render("admin.member.list.ejs", { admin : false , login: true })
   }
-  res.render("admin.all.product.ejs", { login: false });
+  res.render("admin.member.list.ejs", { admin : false, login: false });
 });
 
-router.get("/admin/members/list", (req, res) => {
-  if (res.locals.user) {
-    res.render("admin.member.list.ejs", { login: true });
+router.get("/admin/product/fix", loginCheck, (req, res) => {
+  if (res.locals.user === 1) {
+    return res.render("admin.product.fix.ejs", { admin : true , login : false});
+  } else if(res.locals.user === 0) {
+    return res.render("admin.product.fix.ejs", { admin : false , login: true })
   }
-  res.render("admin.member.list.ejs", { login: false });
+  res.render("admin.product.fix.ejs", { admin : false, login: false });
 });
 
-router.get("/admin/register/product", (req, res) => {
-  if (res.locals.user) {
-    res.render("admin.product.fix.ejs", { login: true });
+router.get("/admin/product/register", loginCheck, (req, res) => {
+  if (res.locals.user === 1) {
+    return res.render("admin.product.regist.ejs", { admin : true , login : false});
+  } else if(res.locals.user === 0) {
+    return res.render("admin.product.regist.ejs", { admin : false , login: true })
   }
-  res.render("admin.product.fix.ejs", { login: false });
+  res.render("admin.product.regist.ejs", { admin : false, login: false });
 });
 
-router.get("/admin/register/product", (req, res) => {
-  if (res.locals.user) {
-    res.render("admin.product.fix.ejs", { login: true });
+router.get("/order/detail", loginCheck, (req, res) => {
+  if (res.locals.user === 1) {
+    return res.render("order.check.ejs", { admin : true , login : false});
+  } else if(res.locals.user === 0) {
+    return res.render("order.check.ejs", { admin : false , login: true })
   }
-  res.render("admin.product.fix.ejs", { login: false });
+  res.render("order.check.ejs", { admin : false, login: false });
 });
 
-router.get("/order/detail", (req, res) => {
-  if (res.locals.user) {
-    res.render("order.check.ejs", { login: true });
+router.get("/order/success", loginCheck, (req, res) => {
+  if (res.locals.user === 1) {
+    return res.render("order.success.ejs", { admin : true , login : false});
+  } else if(res.locals.user === 0) {
+    return res.render("order.success.ejs", { admin : false , login: true })
   }
-  res.render("order.check.ejs", { login: false });
+  res.render("order.success.ejs", { admin : false, login: false });
 });
 
-router.get("/order/success", (req, res) => {
-  if (res.locals.user) {
-    res.render("order.success.ejs", { login: true });
+router.get("/order/history", loginCheck, (req, res) => {
+  if (res.locals.user === 1) {
+    return res.render("order.history.ejs", { admin : true , login : false});
+  } else if(res.locals.user === 0) {
+    return res.render("order.history.ejs", { admin : false , login: true })
   }
-  res.render("order.success.ejs", { login: false });
+  res.render("order.history.ejs", { admin : false, login: false });
 });
 
 module.exports = router;

@@ -85,10 +85,10 @@
           },
           success: function (response) {
             alert("로그인이 완료되었습니다!");
-            location.href = "/main";
+            location.href = "/";
           },
-          error: function (request, status, error) {
-            alert(request.responseText);
+          error: function (error) {
+            alert(error.responseJSON.error)
           },
         });
       }
@@ -97,6 +97,7 @@
     <title>🖼그림사조 로그인🎨</title>
   </head>
   <body>
+    <%-include('loginheader.ejs') %>
     <div class="top-bar">
       <h1 style="color: #0a174e; font-weight: bold">🖼그림사조 로그인🎨</h1>
     </div>

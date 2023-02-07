@@ -23,7 +23,9 @@ class ProductsService {
     return {productsInfo, pageNum} 
   };
 
-
+  adminProducts = async () => {
+    return await this.productsRepository.adminProducts()
+  };
   /**
    * @param {number} productId
    */ 

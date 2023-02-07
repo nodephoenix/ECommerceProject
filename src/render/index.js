@@ -6,11 +6,11 @@ const loginCheck = require("../middleware/logincheck");
 
 router.get("/", loginCheck, (req, res) => {
   if (res.locals.user === 1) {
-    return res.render("index.ejs", { admin: true, login: false });
+    return res.render("main.ejs", { admin: true, login: false });
   } else if (res.locals.user === 0) {
-    return res.render("index.ejs", { admin: false, login: true });
+    return res.render("main.ejs", { admin: false, login: true });
   }
-  return res.render("index.ejs", { admin: false, login: false });
+  return res.render("main.ejs", { admin: false, login: false });
 });
 
 router.get("/mypage", loginCheck, (req, res) => {

@@ -44,6 +44,7 @@ class CartsController {
           .json({ message: "장바구니 상품 수량이 변경되었습니다." });
       }
     } catch (error) {
+      console.error(error);
       res.status(404).json({ errorMessage: error.message });
     }
   };
@@ -59,7 +60,7 @@ class CartsController {
         .status(200)
         .json({ message: "담은 상품 수량이 변경되었습니다." });
     } catch (error) {
-      res.status(400).json({ errormessage: error.message });
+      res.status(400).json({ errorMessage: error.message });
     }
   };
 
@@ -71,7 +72,7 @@ class CartsController {
       await this.cartsService.deleteCart(productId, userId);
       res.status(200).json({ message: "장바구니 상품을 삭제했습니다." });
     } catch (error) {
-      res.status(400).json({ errormessage: error.message });
+      res.status(400).json({ errorMessage: error.message });
     }
   };
 
@@ -82,7 +83,7 @@ class CartsController {
       await this.cartsService.deleteAllCarts(userId);
       res.status(200).json({ message: "장바구니 상품을 전체 삭제했습니다." });
     } catch (error) {
-      res.status(400).json({ errormessage: error.message });
+      res.status(400).json({ errorMessage: error.message });
     }
   };
 }

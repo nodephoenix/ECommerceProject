@@ -13,10 +13,10 @@ function orderDetail() {
     data: {},
     success: function (response) {
       console.log(response)
-      // response.forEach(element => {
-      //   let temp_html = ``
-      //     $("#orderHistory").append(temp_html);
-      // });
+      response.forEach(element => {
+        let temp_html = ``
+          $("#orderHistory").append(temp_html);
+      });
     },
     error: function(error) {
       if(error.status === 401) {

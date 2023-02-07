@@ -15,8 +15,8 @@ module.exports = (sequelize, DataTypes) => {
       });
       models.User.belongsToMany(models.Product, {
         through: models.Cart,
-        foreignKey: 'user_id',
-        as: 'carts'
+        foreignKey: "user_id",
+        as: "carts",
       });
     }
   }
@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       password: DataTypes.STRING,
       salt: DataTypes.STRING,
       phone: DataTypes.STRING,
+      address: DataTypes.STRING,
       point: {
         type: Sequelize.INTEGER,
         defaultValue: 0,

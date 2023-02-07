@@ -23,13 +23,22 @@ class ProductsController {
       const curPage = Number(page)
       const pageSize = 8
       const productListData = await this.productsService.getProducts(curPage, pageSize);
+      console.log(productListData)
 
       res.status(200).json(productListData);
     } catch (err) {
       res.status(404).json({ errorMessage: err.message });
     }
   };
+  adminProducts = async (req, res, next) => {
+    try {
+      const productListData = await this.productsService.adminProducts();
 
+      res.status(200).json(productListData);
+    } catch(err){
+      res.status(404).json({ errorMessage: err.message });
+    }
+  };
   /**
    *
    * @param {Request} req

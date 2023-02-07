@@ -11,7 +11,8 @@ class ProductsRepository {
     return await productModel.findAll({
       raw: true,
       offset: offset,
-      limit : limit
+      limit: limit,
+      order: ["createdAt", "desc"],
     });
   };
 
@@ -23,6 +24,16 @@ class ProductsRepository {
       where: {
         id: productId,
       },
+      raw: true,
+    });
+  };
+
+  getPage = async () => {
+    return await productModel.findAndCountAll({});
+  };
+
+  adminProducts = async () => {
+    return await productModel.findAll({
       raw: true,
     });
   };

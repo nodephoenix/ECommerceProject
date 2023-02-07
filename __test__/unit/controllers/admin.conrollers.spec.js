@@ -9,17 +9,8 @@ const AdminService = require("../../../src/services/admin.service");
 const AdminController = require("../../../src/controllers/admin.controllers");
 jest.mock("../../../src/services/admin.service");
 
-const mockRequest = (data = {}) => {
-  const req = data;
-  return req;
-};
-
-const mockResponse = (data = {}) => {
-  const res = data;
-  res.status = jest.fn().mockReturnValue(res);
-  res.json = jest.fn().mockReturnValue(res);
-  return res;
-};
+const mockRequest = require("../../mock/request.mock");
+const mockResponse = require("../../mock/response.mock");
 
 /** @type {AdminController} */
 let adminController;

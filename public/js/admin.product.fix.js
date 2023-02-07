@@ -12,7 +12,6 @@ function getProductDetail() {
     url: `/api/products/${productId}`,
     data: {},
     success: function (response) {
-      console.log(response);
       let productId = response.id;
       let productName = response.productName;
       let desc = response.desc;
@@ -43,9 +42,6 @@ function getProductDetail() {
         <input type="price" class="form-control" id="price" />
         <label for="floatingInput">가격</label>
       </div>
-      <button type="button" class="btn btn-primary" style="font-size: 12px">
-        이미지 업로드
-      </button>
     </nav>`;
       $("#editItemInfo").append(temp_html);
       $("#productId").val(`${productId}`);
@@ -56,4 +52,31 @@ function getProductDetail() {
   });
 }
 
-// 상품 삭제
+// 상품 수정하기 버튼 클릭 시 수정
+function edtiProductDetail() {
+  const productId = $("#productId").val();
+  const productName = $("#productName").val();
+  const desc = $("#desc").val();
+  const price = $("#price").val();
+  const image = $("#uploadImage")[0].files[0];
+
+  const sendingData = new FormData();
+  sendingData.append("productName", productName);
+  sendingData.append("desc", desc);
+  sendingData.append("image", image);
+  sendingData.append("price", price);
+
+  $.ajax({
+    type: "put",
+    url: `/api/admin/products/${productId}`,
+    processData: false, // 데이터 객체를 문자열로 바꿀지에 대한 값이다. true면 일반문자...
+    contentType: false,
+    data: sendingData,
+    success: function (response) {
+      console.log(response);
+    },
+    error: function (error) {
+      console.log(error);
+    },
+  });
+}

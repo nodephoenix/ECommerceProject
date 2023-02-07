@@ -23,6 +23,7 @@ module.exports = {
         email: "5kiran@gmail.com",
         password: "5kiran",
         phone: "010-1234-5678",
+        address: "전라남도 여수시",
         createdAt: new Date(),
         updatedAt: new Date(),
         role: 1,
@@ -32,6 +33,7 @@ module.exports = {
         userName: "minzunim",
         email: "minzunim@gmail.com",
         password: "minzunim",
+        address: "서울시 영등포구",
         phone: "010-1234-5678",
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -42,6 +44,7 @@ module.exports = {
         userName: "nilee23",
         email: "nilee23@gmail.com",
         password: "nilee23",
+        address: "경상남도 진주시",
         phone: "010-1234-5678",
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -52,6 +55,7 @@ module.exports = {
         userName: "pyoja",
         email: "pyoja@gmail.com",
         password: "pyoja",
+        address: "서울시 마포구",
         phone: "010-1234-5678",
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -62,6 +66,7 @@ module.exports = {
         userName: "parkjin",
         email: "parkjin@gmail.com",
         password: "parkjin",
+        address: "전라남도 강진군",
         phone: "010-1234-5678",
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -76,6 +81,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('users', null, {})
+    await queryInterface.bulkDelete("users", null, {});
   },
 };

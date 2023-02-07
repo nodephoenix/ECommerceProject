@@ -6,11 +6,9 @@ const render = require("./render");
 const { Server } = require("http");
 const path = require("path");
 
-
 const app = express();
 const http = Server(app);
 
- 
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -25,7 +23,7 @@ app.use(express.static(path.join(__dirname, "../public"))); //정적파일, 이�
 app.use(express.static(path.join(__dirname, "../uploads"))); // 파일 업로드 폴더
 
 sequelize
-  .sync({ force: false })
+  .sync({ force: true })
   .then(() => {
     console.log("데이터베이스 연결 성공!");
   })

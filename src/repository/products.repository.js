@@ -7,9 +7,11 @@ const db = require("../../sequelize/models");
 const productModel = db["Product"];
 
 class ProductsRepository {
-  getProducts = async () => {
+  getProducts = async (offset, limit) => {
     return await productModel.findAll({
-      raw: true
+      raw: true,
+      offset: offset,
+      limit : limit
     });
   };
 

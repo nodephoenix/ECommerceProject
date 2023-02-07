@@ -6,12 +6,13 @@ function productDetail() {
   let query = window.location.search;
   let param = new URLSearchParams(query);
   let productId = param.get("productId");
-
+  console.log(productId)
   $.ajax({
     type: "GET",
-    url: `/api/products/${productId}`,
+    url: `/api/products/detail/${productId}`,
     data: {},
     success: function (response) {
+      console.log(response)
       let temp_html = `<div class="product-description">
                         <div class="product-image">
                           <img

@@ -6,11 +6,11 @@ const loginCheck = require("../middleware/logincheck");
 
 router.get("/", loginCheck, (req, res) => {
   if (res.locals.user === 1) {
-    return res.render("main.ejs", { admin: true, login: false });
+    return res.render("index.ejs", { admin: true, login: false });
   } else if (res.locals.user === 0) {
-    return res.render("main.ejs", { admin: false, login: true });
+    return res.render("index.ejs", { admin: false, login: true });
   }
-  return res.render("main.ejs", { admin: false, login: false });
+  return res.render("index.ejs", { admin: false, login: false });
 });
 
 router.get("/mypage", loginCheck, (req, res) => {
@@ -22,13 +22,13 @@ router.get("/mypage", loginCheck, (req, res) => {
   res.render("mypage.ejs", { admin: false, login: false });
 });
 
-router.get("/productall", loginCheck, (req, res) => {
+router.get("/products/list", loginCheck, (req, res) => {
   if (res.locals.user === 1) {
-    return res.render("productall.ejs", { admin: true, login: false });
+    return res.render("productList.ejs", { admin: true, login: false });
   } else if (res.locals.user === 0) {
-    return res.render("productall.ejs", { admin: false, login: true });
+    return res.render("productList.ejs", { admin: false, login: true });
   }
-  res.render("productall.ejs", { admin: false, login: false });
+  res.render("productList.ejs", { admin: false, login: false });
 });
 
 router.get("/product/detail", loginCheck, (req, res) => {

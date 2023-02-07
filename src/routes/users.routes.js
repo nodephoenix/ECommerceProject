@@ -13,7 +13,7 @@ const adminMiddleware = require("../middleware/adminMiddleware");
 router.get("/users/mypage", authMiddleware, usersController.userInfo);
 
 // 내 정보 수정 API x
-router.put("/users/mypage/", authMiddleware, usersController.updateUserInfo);
+router.put("/users/mypage", authMiddleware, usersController.updateUserInfo);
 
 // 유저 전체 불러오기
 router.get("/users/list", adminMiddleware, usersController.getUsers);

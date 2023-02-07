@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -68,29 +69,55 @@
         width: 300px;
         height: 30%;
       }
-      .col-sm-4 {
-        padding: 30px;
-        font-size: 20px;
-      }
-      p {
-        padding-bottom: 10px;
-      }
     </style>
-    <title>🖼마이페이지🎨</title>
+   
+
+    <title>🖼내 정보 수정🎨</title>
   </head>
   <body>
-    <% if(admin) { %> <%- include('adminlogoutheader.ejs') %> <% } else
-    if(login) { %> <%- include('logoutheader.ejs') %> <% } else { %>
-    <%-include('loginheader.ejs') %> <% } %>
     <div class="top-bar">
-      <h1 style="color: #0a174e; font-weight: bold">🖼마이페이지🎨</h1>
+      <h1 style="color: #0a174e; font-weight: bold">🖼내 정보 수정🎨</h1>
     </div>
-    <div class="container">
-      <!-- <h2 class="text-center">고객 정보</h2> -->
-      <hr />
-      <div class="row flex_center" id="mypage"></div>
+    <div class="input-bar">      
+      <div class="form-floating mb-3 input-content" style="margin-top: 15px">
+        <input
+          type="name"
+          class="form-control"
+          id="userName"
+          name="userName"
+          placeholder="이름"
+        />
+        <label for="floatingInput">이름</label>
+      </div>
+      <div class="form-floating mb-3 input-content" style="margin-top: 15px">
+        <input
+          type="phone"
+          class="form-control"
+          id="phone"
+          name="phone"
+          placeholder="전화번호"
+        />
+        <label for="floatingInput">전화번호</label>
+      </div>
+      <div class="form-floating mb-3 input-content" style="margin-top: 15px">
+        <input
+          type="address"
+          class="form-control"
+          id="address"
+          name="address"
+          placeholder="주소"
+        />
+        <label for="floatingInput">주소</label>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-success input-content"
+        style="width: 150px"
+        onclick="userModify()"
+      >
+        수정하기
+      </button>
     </div>
-    <script src="/js/logout.js"></script>
-    <script src="/js/mypage.js"></script>
+    <script src="/js/mypagefix.js"></script>
   </body>
 </html>

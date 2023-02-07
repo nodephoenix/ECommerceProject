@@ -14,7 +14,9 @@ class UsersController {
       const userInfo = await this.usersService.userInfo(userId);
       res.status(200).json({ data: userInfo });
     } catch {
-      res.status(this.code.Forbidden().status).json(this.code.Forbidden().message);
+      res
+        .status(this.code.Forbidden().status)
+        .json(this.code.Forbidden().message);
     }
   };
 
@@ -24,11 +26,23 @@ class UsersController {
       const userId = res.locals.user.id;
       const { userName, email, phone } = req.body;
       await this.usersService.updateUserInfo(userId, userName, email, phone);
-      res
-        .status(200)
-        .json({ message: "회원 정보 수정이 완료되었습니다." });
+      res.status(200).json({ message: "회원 정보 수정이 완료되었습니다." });
     } catch {
-      res.status(this.code.Forbidden().status).json(this.code.Forbidden().message);
+      res
+        .status(this.code.Forbidden().status)
+        .json(this.code.Forbidden().message);
+    }
+  };
+
+  // 모든 유저 불러오기
+  getUsers = async (req, res, next) => {
+    try {
+      const userData = await this.usersService.getUsers();
+      res.status(200).json({ data: userData });
+    } catch {
+      res
+        .status(this.code.Forbidden().status)
+        .json(this.code.Forbidden().message);
     }
   };
 

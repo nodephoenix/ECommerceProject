@@ -63,6 +63,14 @@ router.put(
   adminController.putProductsStatus
 );
 
+// admin 배송 상태 변경 API
+router.put(
+  "/admin/order/status/:orderId",
+  authMiddleware,
+  adminMiddleware,
+  adminController.putOrderStatus
+);
+
 // admin 회원 등급 변경(선택) API
 router.put(
   "/admin/user/:userId/grade",

@@ -67,6 +67,16 @@ class AdminRepository {
     );
   };
 
+  putOrderStatus = async (orderData) => {
+    return await orderData.save();
+  };
+
+  findOrder = async (orderId) => {
+    return await Order.findOne({
+      where: { id: orderId },
+    });
+  };
+
   /**
    * @param {number} userId
    * @param {number} grade

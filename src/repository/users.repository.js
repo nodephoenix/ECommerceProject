@@ -14,6 +14,10 @@ class UsersRepository {
     );
     return UpdateUserInfo;
   };
+
+  getUsers = async (req, res, next) => {
+    return await User.findAll({ raw: true });
+  };
 }
 
 module.exports = UsersRepository;

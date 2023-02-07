@@ -16,7 +16,12 @@ router.get("/users/mypage", authMiddleware, usersController.userInfo);
 router.put("/users/mypage", authMiddleware, usersController.updateUserInfo);
 
 // 유저 전체 불러오기
-router.get("/users/list", adminMiddleware, usersController.getUsers);
+router.get(
+  "/users/list",
+  authMiddleware,
+  adminMiddleware,
+  usersController.getUsers
+);
 
 // 로그아웃 API x
 router.post("/users/logout", authMiddleware, usersController.userLogout);

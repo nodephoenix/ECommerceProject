@@ -39,7 +39,7 @@ class UsersController {
     try {
       const userData = await this.usersService.getUsers();
       res.status(200).json({ data: userData });
-    } catch {
+    } catch (error) {
       res
         .status(this.code.Forbidden().status)
         .json(this.code.Forbidden().message);

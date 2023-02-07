@@ -16,16 +16,14 @@ const mockResponse = require("../../mock/response.mock");
 let authController;
 /** @type {jest.Mocked<AuthServiceType>} */
 let authService;
-describe("auth controller 유닛 테스트", () => {
-  /** @type {AuthController} */
-  let authController;
-  beforeEach(() => {
-    AuthService.mockClear();
-    authController = new AuthController();
-    authService = authController.authService;
-  });
+beforeEach(() => {
+  AuthService.mockClear();
+  authController = new AuthController();
+  authService = authController.authService;
+});
 
-  test("AuthController 인스턴스 생성 테스트", () => {
+describe("auth controller", () => {
+  test("인스턴스 생성", () => {
     expect(authController).toBeTruthy();
   });
 });

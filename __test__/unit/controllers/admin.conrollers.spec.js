@@ -19,8 +19,7 @@ let adminService;
 beforeEach(() => {
   AdminService.mockReset();
   adminController = new AdminController();
-  // 생성된 AdminService mock 인스턴스를 얻는다.
-  adminService = AdminService.mock.instances[0];
+  adminService = adminController.adminService;
 });
 
 describe("AdminController", () => {
@@ -30,8 +29,8 @@ describe("AdminController", () => {
 });
 
 describe("AdminController.registerProducts Test", () => {
-  test("registerProducts 메소드 성공", async () => {
-    const req = mockResponse({
+  test("Success", async () => {
+    const req = mockRequest({
       body: {
         productName: "모나리자",
         desc: "모나리자 그림",
@@ -59,7 +58,7 @@ describe("AdminController.registerProducts Test", () => {
 });
 
 describe("AdminController.editProducts Test", () => {
-  test("editProducts 메소드 성공", async () => {
+  test("Success", async () => {
     const req = mockRequest({
       params: {
         productId: "1",
@@ -94,7 +93,7 @@ describe("AdminController.editProducts Test", () => {
 });
 
 describe("AdminController.deleteProducts Test", () => {
-  test("deleteProducts 메소드 성공", async () => {
+  test("Success", async () => {
     const req = mockRequest({
       params: {
         productId: "1",
@@ -117,7 +116,7 @@ describe("AdminController.deleteProducts Test", () => {
 });
 
 describe("AdminController.getOrderProducts Test", () => {
-  test("getOrderProducts 메소드 성공", async () => {
+  test("Success", async () => {
     const req = mockRequest();
     const res = mockResponse();
     adminService.getOrderProducts.mockResolvedValue([]);
@@ -133,7 +132,7 @@ describe("AdminController.getOrderProducts Test", () => {
 });
 
 describe("AdminController.putProductsStatus Test", () => {
-  test("putProductsStatus 메소드 성공", async () => {
+  test("Success", async () => {
     const req = mockRequest({
       params: {
         productId: "1",
@@ -160,7 +159,7 @@ describe("AdminController.putProductsStatus Test", () => {
 });
 
 describe("AdminController.putUserGrade Test", () => {
-  test("putUserGrade 메소드 성공", async () => {
+  test("Success", async () => {
     const req = mockRequest({
       params: {
         userId: "1",

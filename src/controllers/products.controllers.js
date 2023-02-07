@@ -19,11 +19,14 @@ class ProductsController {
    */
   getProducts = async (req, res, next) => {
     try {
-      const productListData = await this.productsService.getProducts();
+      const { page } = req.params
+      const curPage = Number(page)
+      const pageSize = 8
+      const productListData = await this.productsService.getProducts(curPage, pageSize);
 
       res.status(200).json(productListData);
     } catch {
-      res.status(404).json({message : "망함"})
+      res.status(404).json({message : "예상하지 못한 에러가 발생"})
     }
   };
 

@@ -86,15 +86,15 @@ class OrdersService {
   orderDetail = async (orderId) => {
     try {
       const orderDetail = await this.ordersRepository.orderDetail(orderId);
-      if (!orderDetail.length) {
+      if (!orderDetail.items.length) {
         return this.code.badRequest("해당 건은 조회할 수 없습니다.");
       }
-      const orderDetailMap = orderDetail.map(detail => ({
-        image : detail.Product.image,
-        productName : detail.Product.productName,
-        createdAt : detail.createdAt,
-        count : detail.count, 
-        price : detail.Product.price
+      const orderDetailMap = orderDetail.items.map(detail => ({
+        image : detail.image,
+        productName : detail.productName,
+        createdAt : detail.Order_product.createdAt,
+        count : detail.Order_product.count, 
+        price : detail.price
       }))
 
       return this.code.ok(orderDetailMap, "주문 상세 조회");

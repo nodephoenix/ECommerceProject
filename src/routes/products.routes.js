@@ -9,6 +9,8 @@ const productsController = new ProductsController();
 // 전체 상품 목록 조회 API o
 router.get('/products/:page', productsController.getProducts);
 
+router.get('/products', productsController.adminProducts)
+
 // 상품 상세 목록 조회 o
 router.get('/products/detail/:productId', productsController.getProductDetail);
 

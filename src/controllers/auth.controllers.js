@@ -10,24 +10,32 @@ class AuthController {
   // 회원가입 API
   userRegister = async (req, res, next) => {
     try {
-      const { userName, email, password, confirmPassword, phone } = req.body;
+      const { userName, email, password, confirmPassword, phone, address } =
+        req.body;
       // 비밀번호 일치 여부
       if (password !== confirmPassword) {
-        return res.status(404).json({message : "비밀번호가 일치하지 않습니다."});
+        return res
+          .status(404)
+          .json({ message: "비밀번호가 일치하지 않습니다." });
       }
 
       // 비밀번호 특수문자, 영문, 숫자를 모두 사용, 8~15자리
       const passwordCheck =
         /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,15}$/;
       if (!passwordCheck.test(password)) {
-        return res
-          .status(400)
-          .json(
-            {message : "비밀번호는 8~15 자리, 특수문자, 영문, 숫자 모두 포함해야 합니다."}
-          );
+        return res.status(400).json({
+          message:
+            "비밀번호는 8~15 자리, 특수문자, 영문, 숫자 모두 포함해야 합니다.",
+        });
       }
 
-      await this.authService.userRegister(userName, email, password, phone);
+      await this.authService.userRegister(
+        userName,
+        email,
+        password,
+        phone,
+        address
+      );
       return res.status(200).json({ message: "회원가입이 완료되었습니다." });
     } catch (error) {
       return res

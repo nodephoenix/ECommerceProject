@@ -21,7 +21,6 @@
     ></script>
     <!-- JQuery import -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
     <!-- CSS -->
     <style>
       * {
@@ -45,6 +44,19 @@
         background-repeat: no-repeat;
         background-size: cover;
       }
+      .flex_center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+      }
+      .main {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
 
       .top-bar {
         display: flex;
@@ -53,34 +65,29 @@
         width: 100%;
         height: 15%;
       }
-
-      .product-img {
+      .input-bar {
+        padding-top: 100px;
+        font-weight: bold;
+      }
+      .input-content {
+        display: block;
+        margin: auto;
         width: 300px;
-        height: 300px;
+        height: 30%;
+      }
+      .product-img {
+        width: 125px;
+        height: 125px;
       }
       .detail {
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
-        height: 50%;
+        height: 23%;
       }
       .inline-block {
         display: inline-block;
-      }
-      .card {
-        margin-left: 20px;
-        height: 200px;
-        width: 500px;
-        font-weight: bold;
-      }
-      .bottom-text {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        font-size: 3rem;
-        color: #0a174e;
       }
       .mid-bar {
         display: flex;
@@ -91,8 +98,12 @@
         color: #014b22;
         cursor: pointer;
       }
-      .text-content {
-        padding-left: 50px;
+      .register {
+        position: absolute;
+        right: 300px;
+        width: 80px;
+        height: 30px;
+        font-size: 12px;
       }
     </style>
 
@@ -105,33 +116,30 @@
     <!-- 탑바 -->
     <div class="top-bar">
       <h1 style="color: #0a174e; font-weight: bold">
-        🤴관리자 페이지 - 상품수정🤴
+        🤴관리자 페이지 - 상품🤴
       </h1>
     </div>
     <nav class="mid-bar">
       <div onclick="location.href='list'">전체 상품</div>
+      <div onclick="location.href='order'">주문 상품</div>
       <div
         style="margin-left: 150px"
         onclick="location.href='/admin/members/list'"
       >
         회원 관리
       </div>
-    </nav>
-    <hr />
-    <!-- 내용 -->
-    <nav class="detail" id="editItemInfo"></nav>
-    <!-- 수정버튼 -->
-    <nav class="bottom-text">
       <button
         type="button"
-        onclick="edtiProductDetail()"
-        class="btn btn-success"
-        style="font-size: 2rem"
+        class="btn btn-dark register"
+        onclick="location.href='/admin/product/register'"
       >
-        수정하기
+        상품등록
       </button>
     </nav>
+    <hr />
+    <!-- 시작 -->
+    <div id="adminProductList"></div>
     <script src="/js/logout.js"></script>
-    <script src="/js/admin.product.fix.js"></script>
+    <script src="/js/admin.order.product.js"></script>
   </body>
 </html>

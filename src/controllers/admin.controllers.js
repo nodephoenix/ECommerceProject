@@ -37,7 +37,7 @@ class AdminController {
       });
       /** @type {{productName: string; desc: string; price: number; image: string | null;}} */
       const body = req.body;
-      body.image = req.file?.filename || null;
+      body.image = req.file?.filename ? "/" + req.file.filename : null;
       const validate = await bodySchema.validateAsync(body).catch(() => false);
       if (!validate) {
         return res.status(400).json({
@@ -75,7 +75,7 @@ class AdminController {
       const { productId } = req.params;
       /** @type {{productName: string; desc: string; price: number; image: string;}} */
       const body = req.body;
-      body.image = req.file?.filename;
+      body.image = req.file?.filename ? "/" + req.file.filename : null;
       const paramValidate = await paramsSchema
         .validateAsync(req.params)
         .catch(() => false);

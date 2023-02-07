@@ -76,6 +76,15 @@ router.get("/admin/product/list", loginCheck, (req, res) => {
   res.render("admin.all.product.ejs", { admin: false, login: false });
 });
 
+router.get("/admin/product/order", loginCheck, (req, res) => {
+  if (res.locals.user === 1) {
+    return res.render("admin.order.product.ejs", { admin: true, login: false });
+  } else if (res.locals.user === 0) {
+    return res.render("admin.order.product.ejs", { admin: false, login: true });
+  }
+  res.render("admin.order.product.ejs", { admin: false, login: false });
+});
+
 router.get("/admin/members/list", loginCheck, (req, res) => {
   if (res.locals.user === 1) {
     return res.render("admin.member.list.ejs", { admin: true, login: false });

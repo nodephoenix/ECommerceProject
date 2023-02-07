@@ -100,7 +100,7 @@
       }
       .register {
         position: absolute;
-        right: 600px;
+        right: 300px;
         width: 80px;
         height: 30px;
         font-size: 12px;
@@ -120,108 +120,26 @@
       </h1>
     </div>
     <nav class="mid-bar">
-      <div>전체 상품</div>
-      <div style="margin-left: 150px">회원 관리</div>
-      <button type="button" class="btn btn-dark register">상품등록</button>
+      <div onclick="location.href='list'">전체 상품</div>
+      <div onclick="location.href='order'">주문 상품</div>
+      <div
+        style="margin-left: 150px"
+        onclick="location.href='/admin/members/list'"
+      >
+        회원 관리
+      </div>
+      <button
+        type="button"
+        class="btn btn-dark register"
+        onclick="location.href='/admin/product/register'"
+      >
+        상품등록
+      </button>
     </nav>
     <hr />
     <!-- 시작 -->
-    <table style="margin: 20px auto 0 auto">
-      <tr>
-        <td style="width: 150px">
-          <img
-            src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDGzHg%2FbtrXSxfvtYG%2FjgfqXjHXsLbtek9yidftEk%2Fimg.png"
-            class="img-thumbnail product-img"
-            alt="..."
-          />
-        </td>
-        <td style="width: 300px">
-          <div class="card" style="width: 18rem">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">상품명: 해커고양이</li>
-              <li class="list-group-item">가격: 50$</li>
-              <li class="list-group-item">수량: 7개</li>
-            </ul>
-          </div>
-        </td>
-        <td style="width: 180px">
-          <nav>
-            <button
-              type="button"
-              class="btn btn-primary"
-              style="margin-left: 30px"
-            >
-              수정
-            </button>
-            <button type="button" class="btn btn-danger">삭제</button>
-          </nav>
-        </td>
-      </tr>
-    </table>
-    <table style="margin: 20px auto 0 auto">
-      <tr>
-        <td style="width: 150px">
-          <img
-            src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDGzHg%2FbtrXSxfvtYG%2FjgfqXjHXsLbtek9yidftEk%2Fimg.png"
-            class="img-thumbnail product-img"
-            alt="..."
-          />
-        </td>
-        <td style="width: 300px">
-          <div class="card" style="width: 18rem">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">상품명: 해커고양이</li>
-              <li class="list-group-item">가격: 50$</li>
-              <li class="list-group-item">수량: 7개</li>
-            </ul>
-          </div>
-        </td>
-        <td style="width: 180px">
-          <nav>
-            <button
-              type="button"
-              class="btn btn-primary"
-              style="margin-left: 30px"
-            >
-              수정
-            </button>
-            <button type="button" class="btn btn-danger">삭제</button>
-          </nav>
-        </td>
-      </tr>
-    </table>
-    <table style="margin: 20px auto 0 auto">
-      <tr>
-        <td style="width: 150px">
-          <img
-            src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDGzHg%2FbtrXSxfvtYG%2FjgfqXjHXsLbtek9yidftEk%2Fimg.png"
-            class="img-thumbnail product-img"
-            alt="..."
-          />
-        </td>
-        <td style="width: 300px">
-          <div class="card" style="width: 18rem">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">상품명: 해커고양이</li>
-              <li class="list-group-item">가격: 50$</li>
-              <li class="list-group-item">수량: 7개</li>
-            </ul>
-          </div>
-        </td>
-        <td style="width: 180px">
-          <nav>
-            <button
-              type="button"
-              class="btn btn-primary"
-              style="margin-left: 30px"
-            >
-              수정
-            </button>
-            <button type="button" class="btn btn-danger">삭제</button>
-          </nav>
-        </td>
-      </tr>
-    </table>
+    <div id="adminProductList"></div>
     <script src="/js/logout.js"></script>
+    <script src="/js/admin.all.product.js"></script>
   </body>
 </html>

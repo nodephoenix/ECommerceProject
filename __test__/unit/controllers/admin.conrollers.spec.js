@@ -9,36 +9,28 @@ const AdminService = require("../../../src/services/admin.service");
 const AdminController = require("../../../src/controllers/admin.controllers");
 jest.mock("../../../src/services/admin.service");
 
-const mockRequest = (data = {}) => {
-  const req = data;
-  return req;
-};
+const mockRequest = require("../../mock/request.mock");
+const mockResponse = require("../../mock/response.mock");
 
-const mockResponse = (data = {}) => {
-  const res = data;
-  res.status = jest.fn().mockReturnValue(res);
-  res.json = jest.fn().mockReturnValue(res);
-  return res;
-};
+/** @type {AdminController} */
+let adminController;
+/** @type {jest.Mocked<AdminServiceType>} */
+let adminService;
+beforeEach(() => {
+  AdminService.mockClear();
+  adminController = new AdminController();
+  adminService = adminController.adminService;
+});
 
-describe("admin controller 유닛 테스트", () => {
-  /** @type {AdminController} */
-  let adminController;
-  /** @type {jest.Mocked<AdminServiceType>} */
-  let adminService;
-  beforeEach(() => {
-    AdminService.mockReset();
-    adminController = new AdminController();
-    // 생성된 AdminService mock 인스턴스를 얻는다.
-    adminService = AdminService.mock.instances[0];
-  });
-
+describe("AdminController", () => {
   test("AdminController 인스턴스 생성 테스트", () => {
     expect(adminController).toBeTruthy();
   });
+});
 
-  test("registerProducts 메소드 성공", async () => {
-    const req = mockResponse({
+describe("AdminController.registerProducts Test", () => {
+  test("Success", async () => {
+    const req = mockRequest({
       body: {
         productName: "모나리자",
         desc: "모나리자 그림",
@@ -63,8 +55,10 @@ describe("admin controller 유닛 테스트", () => {
       message: "상품 등록이 완료되었습니다.",
     });
   });
+});
 
-  test("editProducts 메소드 성공", async () => {
+describe("AdminController.editProducts Test", () => {
+  test("Success", async () => {
     const req = mockRequest({
       params: {
         productId: "1",
@@ -96,8 +90,10 @@ describe("admin controller 유닛 테스트", () => {
       message: "상품 정보가 변경되었습니다.",
     });
   });
+});
 
-  test("deleteProducts 메소드 성공", async () => {
+describe("AdminController.deleteProducts Test", () => {
+  test("Success", async () => {
     const req = mockRequest({
       params: {
         productId: "1",
@@ -117,8 +113,10 @@ describe("admin controller 유닛 테스트", () => {
       message: "상품을 삭제하였습니다.",
     });
   });
+});
 
-  test("getOrderProducts 메소드 성공", async () => {
+describe("AdminController.getOrderProducts Test", () => {
+  test("Success", async () => {
     const req = mockRequest();
     const res = mockResponse();
     adminService.getOrderProducts.mockResolvedValue([]);
@@ -131,8 +129,10 @@ describe("admin controller 유닛 테스트", () => {
     expect(res.json).toHaveBeenCalledTimes(1);
     expect(res.json).toHaveBeenCalledWith([]);
   });
+});
 
-  test("putProductsStatus 메소드 성공", async () => {
+describe("AdminController.putProductsStatus Test", () => {
+  test("Success", async () => {
     const req = mockRequest({
       params: {
         productId: "1",
@@ -156,8 +156,10 @@ describe("admin controller 유닛 테스트", () => {
       message: "상품 상태를 변경하였습니다.",
     });
   });
+});
 
-  test("putUserGrade 메소드 성공", async () => {
+describe("AdminController.putUserGrade Test", () => {
+  test("Success", async () => {
     const req = mockRequest({
       params: {
         userId: "1",

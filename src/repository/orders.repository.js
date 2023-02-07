@@ -91,14 +91,16 @@ class OrdersRepository {
 
   orderDetail = async (order_id) => {
     try {
-      const orderDetailList = await this.orderProduct.findAll({
-        where: { order_id: order_id },
+      const orderDetailList = await this.order.findOne({
+        where: { id: order_id },
         include : [
           {
-            model : Product
+            model : Product,
+            as: 'items'
           }
         ]
       });
+      console.log(orderDetailList)
       return orderDetailList;
     } catch (err){
       console.log(err)

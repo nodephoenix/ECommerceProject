@@ -26,8 +26,8 @@ class ProductsController {
       console.log(productListData)
 
       res.status(200).json(productListData);
-    } catch {
-      res.status(404).json({message : "예상하지 못한 에러가 발생"})
+    } catch (err) {
+      res.status(404).json({ errorMessage: err.message });
     }
   };
 
@@ -38,11 +38,20 @@ class ProductsController {
    * @param {NextFunction} next
    */
   getProductDetail = async (req, res, next) => {
-    const { productId } = req.params;
-    console.log(productId)
-    const productDetail = await this.productsService.getProductDetail(Number(productId));
+    
 
-    res.status(200).json(productDetail)
+    try {
+
+      const { productId } = req.params;
+    
+      const productDetail = await this.productsService.getProductDetail(
+        Number(productId)
+        );
+        
+        res.status(200).json(productDetail);
+      } catch (e) {
+        res.status(500).json({errorMessage: e.message})
+      }
   };
 }
 

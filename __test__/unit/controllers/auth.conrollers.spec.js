@@ -43,6 +43,7 @@ describe("AuthController.userRegister", () => {
         password: "test1234yo!",
         confirmPassword: "test1234yo!",
         phone: "010-1234-5678",
+        address: '디스이즈 스파르타군'
       },
     });
     const res = mockResponse();
@@ -52,7 +53,8 @@ describe("AuthController.userRegister", () => {
       req.body.userName,
       req.body.email,
       req.body.password,
-      req.body.phone
+      req.body.phone,
+      req.body.address
     );
     expect(res.status).toHaveBeenCalledTimes(1);
     expect(res.status).toHaveBeenCalledWith(200);
@@ -69,6 +71,7 @@ describe("AuthController.userRegister", () => {
         password: "test1234yo!",
         confirmPassword: "test1234yo!2",
         phone: "010-1234-5678",
+        address: '디스이즈 스파르타군'
       },
     });
     const res = mockResponse();
@@ -89,6 +92,7 @@ describe("AuthController.userRegister", () => {
         password: "testpassword",
         confirmPassword: "testpassword",
         phone: "010-1234-5678",
+        address: '디스이즈 스파르타군'
       },
     });
     const res = mockResponse();

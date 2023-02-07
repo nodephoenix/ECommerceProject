@@ -19,6 +19,8 @@
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"
     ></script>
+    <!-- JQuery import -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <!-- CSS -->
     <style>
       * {
@@ -90,7 +92,8 @@
     <title>🤴어드민 회원관리🤴</title>
   </head>
   <body>
-    <% if(admin) { %> <%- include('adminlogoutheader.ejs') %> <% } else if(login) { %> <%- include('logoutheader.ejs') %> <% } else { %>
+    <% if(admin) { %> <%- include('adminlogoutheader.ejs') %> <% } else
+    if(login) { %> <%- include('logoutheader.ejs') %> <% } else { %>
     <%-include('loginheader.ejs') %> <% } %>
     <!-- 탑바 -->
     <div class="top-bar">
@@ -151,5 +154,6 @@
         </tbody>
       </table>
     </nav>
+    <script src="/js/logout.js"></script>
   </body>
 </html>

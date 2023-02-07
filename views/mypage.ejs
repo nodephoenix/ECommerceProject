@@ -18,6 +18,8 @@
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"
     ></script>
+    <!-- JQuery import -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <!-- CSS -->
     <style>
       * {
@@ -30,7 +32,11 @@
         height: 100%;
       }
       body {
-        background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
+        background: linear-gradient(
+          to right,
+          rgb(242, 112, 156),
+          rgb(255, 148, 114)
+        );
         background-repeat: no-repeat;
         background-size: cover;
       }
@@ -73,6 +79,11 @@
     <title>🖼마이페이지🎨</title>
   </head>
   <body>
+    <% if(admin) { %> <%- include('adminlogoutheader.ejs') %> <% } else
+    if(login) { %> <%- include('logoutheader.ejs') %> <% } else { %>
+    <%-include('loginheader.ejs') %> <% } %> <<<<<<< Updated upstream
+    <div class="badge bg-primary text-wrap" style="width: 6rem">마이페이지</div>
+    ======= >>>>>>> Stashed changes
     <div class="top-bar">
       <h1 style="color: #0a174e; font-weight: bold">🖼마이페이지🎨</h1>
     </div>
@@ -91,5 +102,10 @@
         </div>
       </div>
     </div>
+    <<<<<<< Updated upstream
+    <script src="/js/logout.js"></script>
+    =======
+    <script src="/js/logout.js"></script>
+    >>>>>>> Stashed changes
   </body>
 </html>

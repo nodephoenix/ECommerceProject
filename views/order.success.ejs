@@ -19,6 +19,8 @@
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"
     ></script>
+    <!-- JQuery import -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <!-- CSS -->
     <style>
       * {
@@ -32,7 +34,11 @@
       }
       body {
         /* background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbdByfl%2FbtrVf7i5Uq5%2FjJ5afu7vrUKkgNGmzP2kAk%2Fimg.jpg"); */
-        background-image: linear-gradient(109.6deg, rgba(156, 252, 248, 1) 11.2%, rgba(110, 123, 251, 1) 91.1%);
+        background-image: linear-gradient(
+          109.6deg,
+          rgba(156, 252, 248, 1) 11.2%,
+          rgba(110, 123, 251, 1) 91.1%
+        );
         background-repeat: no-repeat;
         background-size: cover;
       }
@@ -78,12 +84,9 @@
     <title>🖼주문 완료🎨</title>
   </head>
   <body>
-    <% if(admin) { %>
-      <%- include('adminlogoutheader.ejs') %> 
-      <% } else if(login) { %> 
-      <%- include('logoutheader.ejs') %>
-      <% } else { %>
-      <%-include('loginheader.ejs') %> <% } %>
+    <% if(admin) { %> <%- include('adminlogoutheader.ejs') %> <% } else
+    if(login) { %> <%- include('logoutheader.ejs') %> <% } else { %>
+    <%-include('loginheader.ejs') %> <% } %>
     <!-- 탑바 -->
     <div class="top-bar">
       <h1 style="color: #0a174e; font-weight: bold">🖼주문 완료🎨</h1>
@@ -110,5 +113,6 @@
     <nav class="bottom-text">
       <p>구매해주셔서 감사합니다</p>
     </nav>
+    <script src="/js/logout.js"></script>
   </body>
 </html>

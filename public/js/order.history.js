@@ -32,7 +32,7 @@ function ordersList() {
                               </div>
                             </td>
                             <td>
-                              <button type="button" class="btn btn-success" style="margin-left: 20px">조회</button>
+                              <button type="button" class="btn btn-success" style="margin-left: 20px" onclick="location.href='/order/detail?orderId=${element.id}'">조회</button>
                               <button type="button" class="btn btn-danger" id="cancel" onclick="cancelOrder(${element.id})">취소</button>
                             </td>
                           </tr>

@@ -3,10 +3,10 @@
 const OrdersRepository = require("../repository/orders.repository.js");
 const Status = require("../middleware/status.code");
 
-const { Order, Order_product, Cart } = require("../../sequelize/models");
+const { Order, Order_product, Cart , Product} = require("../../sequelize/models");
 
 class OrdersService {
-  ordersRepository = new OrdersRepository(Order, Order_product, Cart);
+  ordersRepository = new OrdersRepository(Order, Order_product, Cart, Product);
   code = new Status();
 
   orderArt = async (userId, productId, count) => {
@@ -89,8 +89,15 @@ class OrdersService {
       if (!orderDetail.length) {
         return this.code.badRequest("해당 건은 조회할 수 없습니다.");
       }
+      const orderDetailMap = orderDetail.map(detail => ({
+        image : detail.Product.image,
+        productName : detail.Product.productName,
+        createdAt : detail.createdAt,
+        count : detail.count, 
+        price : detail.Product.price
+      }))
 
-      return this.code.ok(orderDetail, "주문 상세 조회");
+      return this.code.ok(orderDetailMap, "주문 상세 조회");
     } catch {
       throw new Error();
     }

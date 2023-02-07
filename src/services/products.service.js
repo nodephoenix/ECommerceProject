@@ -16,9 +16,10 @@ class ProductsService {
       start = 0 + (page - 1) * pageSize
     }
     const productCount = await this.productsRepository.getPage()
+    const productsInfo = await this.productsRepository.getProducts(start, pageSize)
+
     const resultPage = productCount.count / pageSize
     const pageNum = Math.ceil(resultPage)
-    const productsInfo = await this.productsRepository.getProducts(start, pageSize)
 
     return {productsInfo, pageNum} 
   };

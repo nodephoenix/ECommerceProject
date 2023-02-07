@@ -21,22 +21,24 @@ const mockResponse = (data = {}) => {
   return res;
 };
 
-describe("admin controller 유닛 테스트", () => {
-  /** @type {AdminController} */
-  let adminController;
-  /** @type {jest.Mocked<AdminServiceType>} */
-  let adminService;
-  beforeEach(() => {
-    AdminService.mockReset();
-    adminController = new AdminController();
-    // 생성된 AdminService mock 인스턴스를 얻는다.
-    adminService = AdminService.mock.instances[0];
-  });
+/** @type {AdminController} */
+let adminController;
+/** @type {jest.Mocked<AdminServiceType>} */
+let adminService;
+beforeEach(() => {
+  AdminService.mockReset();
+  adminController = new AdminController();
+  // 생성된 AdminService mock 인스턴스를 얻는다.
+  adminService = AdminService.mock.instances[0];
+});
 
+describe("AdminController", () => {
   test("AdminController 인스턴스 생성 테스트", () => {
     expect(adminController).toBeTruthy();
   });
+});
 
+describe("AdminController.registerProducts Test", () => {
   test("registerProducts 메소드 성공", async () => {
     const req = mockResponse({
       body: {
@@ -63,7 +65,9 @@ describe("admin controller 유닛 테스트", () => {
       message: "상품 등록이 완료되었습니다.",
     });
   });
+});
 
+describe("AdminController.editProducts Test", () => {
   test("editProducts 메소드 성공", async () => {
     const req = mockRequest({
       params: {
@@ -96,7 +100,9 @@ describe("admin controller 유닛 테스트", () => {
       message: "상품 정보가 변경되었습니다.",
     });
   });
+});
 
+describe("AdminController.deleteProducts Test", () => {
   test("deleteProducts 메소드 성공", async () => {
     const req = mockRequest({
       params: {
@@ -117,7 +123,9 @@ describe("admin controller 유닛 테스트", () => {
       message: "상품을 삭제하였습니다.",
     });
   });
+});
 
+describe("AdminController.getOrderProducts Test", () => {
   test("getOrderProducts 메소드 성공", async () => {
     const req = mockRequest();
     const res = mockResponse();
@@ -131,7 +139,9 @@ describe("admin controller 유닛 테스트", () => {
     expect(res.json).toHaveBeenCalledTimes(1);
     expect(res.json).toHaveBeenCalledWith([]);
   });
+});
 
+describe("AdminController.putProductsStatus Test", () => {
   test("putProductsStatus 메소드 성공", async () => {
     const req = mockRequest({
       params: {
@@ -156,7 +166,9 @@ describe("admin controller 유닛 테스트", () => {
       message: "상품 상태를 변경하였습니다.",
     });
   });
+});
 
+describe("AdminController.putUserGrade Test", () => {
   test("putUserGrade 메소드 성공", async () => {
     const req = mockRequest({
       params: {

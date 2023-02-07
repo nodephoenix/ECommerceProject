@@ -6,11 +6,9 @@ const render = require("./render");
 const { Server } = require("http");
 const path = require("path");
 
-
 const app = express();
 const http = Server(app);
 
- 
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

@@ -62,13 +62,20 @@ class OrdersService {
 
   cancelOrder = async (order_id, user_id) => {
     try {
-      const orderStautsChange = await this.ordersRepository.orderStatusChange(
-        order_id,
-        user_id
-      );
-    
-      const cancelData = await this.ordersRepository.cancelOrder(order_id);
-      return this.code.ok(cancelData, "주문이 취소되었습니다.");
+      const findOrderStatus = await this.ordersRepository.findOrder(order_id)
+      console.log(findOrderStatus.status)
+
+      if(findOrderStatus.status === 0) {
+        const orderStautsChange = await this.ordersRepository.orderStatusChange(
+          order_id,
+          user_id
+        );
+
+        const cancelData = await this.ordersRepository.cancelOrder(order_id);
+        return this.code.ok(cancelData, "주문이 취소되었습니다.");
+      }
+
+      return this.code.badRequest('주문 취소가 불가능 합니다.')
     } catch {
       throw new Error();
     }

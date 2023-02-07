@@ -78,6 +78,12 @@ class OrdersRepository {
     }
   };
 
+  findOrder = async (order_id) => {
+    const orderData = await this.order.findByPk(order_id)
+
+    return orderData
+  }
+
   orderList = async (user_id) => {
     try {
       const orderListData = await this.order.findAll({

@@ -49,10 +49,11 @@ function cancelOrder(orderId){
     data: {},
     success: function (response) {
       alert(response)
-      window.location.reload();
+      window.location.replace('/order/history')
     },
     error: function(error) {
       alert(error.responseJSON)
+      window.location.replace('/order/history')
     }
   })
 }

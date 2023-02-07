@@ -12,5 +12,6 @@ function userModify(){
         data: {userName, phone, address},
         success: function (response) {
            alert(response.message)
+           window.location.replace('/mypage')
         }
 })}

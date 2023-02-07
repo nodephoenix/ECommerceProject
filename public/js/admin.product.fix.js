@@ -27,7 +27,7 @@ function getProductDetail() {
     <!-- 텍스트 입력 -->
     <nav class="text-content">
       <div class="form-floating mb-3 input-content">
-        <input type="number" class="form-control" id="productId" />
+        <input type="number" class="form-control" id="productId" readonly/>
         <label for="floatingInput">상품번호</label>
       </div>
       <div class="form-floating mb-3 input-content">
@@ -41,6 +41,9 @@ function getProductDetail() {
       <div class="form-floating mb-3 input-content">
         <input type="number" class="form-control" id="price" />
         <label for="floatingInput">가격</label>
+      </div>
+      <div>
+      <input type="file" name="image" id="uploadImage" />
       </div>
     </nav>`;
       $("#editItemInfo").append(temp_html);

@@ -130,28 +130,34 @@
       <!-- 텍스트 입력 -->
       <nav class="text-content">
         <div class="form-floating mb-3 input-content">
-          <input type="email" class="form-control" id="floatingInput" />
+          <input type="text" class="form-control" id="productName" />
           <label for="floatingInput">상품명</label>
         </div>
         <div class="form-floating mb-3 input-content">
-          <input type="email" class="form-control" id="floatingInput" />
-          <label for="floatingInput">가격</label>
+          <input type="text" class="form-control" id="desc" />
+          <label for="floatingInput">설명</label>
         </div>
         <div class="form-floating mb-3 input-content">
-          <input type="email" class="form-control" id="floatingInput" />
-          <label for="floatingInput">수량</label>
+          <input type="number" class="form-control" id="price" />
+          <label for="floatingInput">가격</label>
         </div>
-        <button type="button" class="btn btn-primary" style="font-size: 12px">
-          이미지 업로드
-        </button>
+        <div>
+          <input type="file" name="image" id="uploadImage" />
+        </div>
       </nav>
     </nav>
     <!-- 등록버튼 -->
     <nav class="bottom-text">
-      <button type="button" class="btn btn-success" style="font-size: 2rem">
+      <button
+        type="button"
+        onclick="registerProduct()"
+        class="btn btn-success"
+        style="font-size: 2rem"
+      >
         등록하기
       </button>
     </nav>
-    <script src="/public/js/logout.js"></script>
+    <script src="/js/logout.js"></script>
+    <script src="/js/admin.product.regist.js"></script>
   </body>
 </html>

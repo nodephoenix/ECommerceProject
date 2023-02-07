@@ -27,19 +27,19 @@ function getProductDetail() {
     <!-- 텍스트 입력 -->
     <nav class="text-content">
       <div class="form-floating mb-3 input-content">
-        <input type="productId" class="form-control" id="productId" />
+        <input type="number" class="form-control" id="productId" />
         <label for="floatingInput">상품번호</label>
       </div>
       <div class="form-floating mb-3 input-content">
-        <input type="productName" class="form-control" id="productName" />
+        <input type="text" class="form-control" id="productName" />
         <label for="floatingInput">상품명</label>
       </div>
       <div class="form-floating mb-3 input-content">
-        <input type="desc" class="form-control" id="desc" />
+        <input type="text" class="form-control" id="desc" />
         <label for="floatingInput">설명</label>
       </div>
       <div class="form-floating mb-3 input-content">
-        <input type="price" class="form-control" id="price" />
+        <input type="number" class="form-control" id="price" />
         <label for="floatingInput">가격</label>
       </div>
     </nav>`;
@@ -73,10 +73,11 @@ function edtiProductDetail() {
     contentType: false,
     data: sendingData,
     success: function (response) {
-      console.log(response);
+      alert("상품 정보가 수정되었습니다.");
+      window.location.reload();
     },
     error: function (error) {
-      console.log(error);
+      alert(error.responseJSON.message);
     },
   });
 }

@@ -23,9 +23,9 @@ function adminProductList() {
                                 <td style="width: 300px">
                                   <div class="card" style="width: 18rem">
                                       <ul class="list-group list-group-flush">
-                                      <li class="list-group-item">상품번호: ${element.id}</li>
-                                      <li class="list-group-item">카테고리: ${element.category}</li>
+                                      <li class="list-group-item">상품번호: ${element.id}<span></li>
                                       <li class="list-group-item">상품명: ${element.productName}</li>
+                                      <li class="list-group-item">설명: ${element.desc}</li>
                                       <li class="list-group-item">가격: ${element.price}원</li>
                                     </ul>
                                   </div>
@@ -36,7 +36,7 @@ function adminProductList() {
                                       type="button"
                                       class="btn btn-primary"
                                       style="margin-left: 30px"
-                                      onclick="location.href='fix'"
+                                      onclick="location.href='/admin/product/fix?productId=${element.id}'"
                                     >
                                       수정
                                     </button>

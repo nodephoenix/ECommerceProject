@@ -100,7 +100,7 @@
       }
       .register {
         position: absolute;
-        right: 600px;
+        right: 300px;
         width: 80px;
         height: 30px;
         font-size: 12px;
@@ -120,9 +120,20 @@
       </h1>
     </div>
     <nav class="mid-bar">
-      <div>전체 상품</div>
-      <div style="margin-left: 150px">회원 관리</div>
-      <button type="button" class="btn btn-dark register">상품등록</button>
+      <div onclick="location.href='list'">전체 상품</div>
+      <div
+        style="margin-left: 150px"
+        onclick="location.href='/admin/members/list'"
+      >
+        회원 관리
+      </div>
+      <button
+        type="button"
+        class="btn btn-dark register"
+        onclick="location.href='/admin/product/register'"
+      >
+        상품등록
+      </button>
     </nav>
     <hr />
     <!-- 시작 -->

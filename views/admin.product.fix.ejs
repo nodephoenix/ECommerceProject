@@ -110,43 +110,23 @@
     </div>
     <nav class="mid-bar">
       <div onclick="location.href='list'">전체 상품</div>
-      <div style="padding-left: 150px">회원 관리</div>
+      <div
+        style="margin-left: 150px"
+        onclick="location.href='/admin/members/list'"
+      >
+        회원 관리
+      </div>
     </nav>
     <hr />
     <!-- 내용 -->
-    <nav class="detail">
-      <div class="product-image inline-block">
-        <img
-          src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDGzHg%2FbtrXSxfvtYG%2FjgfqXjHXsLbtek9yidftEk%2Fimg.png"
-          class="img-thumbnail product-img"
-          alt="..."
-        />
-      </div>
-      <!-- 텍스트 입력 -->
-      <nav class="text-content">
-        <div class="form-floating mb-3 input-content">
-          <input type="email" class="form-control" id="floatingInput" />
-          <label for="floatingInput">상품명</label>
-        </div>
-        <div class="form-floating mb-3 input-content">
-          <input type="email" class="form-control" id="floatingInput" />
-          <label for="floatingInput">가격</label>
-        </div>
-        <div class="form-floating mb-3 input-content">
-          <input type="email" class="form-control" id="floatingInput" />
-          <label for="floatingInput">수량</label>
-        </div>
-        <button type="button" class="btn btn-primary" style="font-size: 12px">
-          이미지 업로드
-        </button>
-      </nav>
-    </nav>
+    <nav class="detail" id="editItemInfo"></nav>
     <!-- 수정버튼 -->
     <nav class="bottom-text">
       <button type="button" class="btn btn-success" style="font-size: 2rem">
         수정하기
       </button>
     </nav>
-    <script src="/public/js/logout.js"></script>
+    <script src="/js/logout.js"></script>
+    <script src="/js/admin.product.fix.js"></script>
   </body>
 </html>

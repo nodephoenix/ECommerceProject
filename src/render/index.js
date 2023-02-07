@@ -136,4 +136,14 @@ router.get("/order/history", loginCheck, (req, res) => {
   res.render("order.history.ejs", { admin: false, login: false });
 });
 
+router.get("/mypage/fix", loginCheck, (req, res) => {
+  if (res.locals.user === 1) {
+    return res.render("mypagefix.ejs", { admin: true, login: false });
+  } else if (res.locals.user === 0) {
+    return res.render("mypagefix.ejs", { admin: false, login: true });
+  }
+  res.render("mypagefix.ejs", { admin: false, login: false });
+});
+
+
 module.exports = router;

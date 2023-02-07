@@ -7,9 +7,9 @@ class UsersRepository {
     return userInfo;
   };
 
-  updateUserInfo = async (userId, userName, email, phone) => {
+  updateUserInfo = async (userId, userName, address, phone) => {
     const UpdateUserInfo = await User.update(
-      { userName, email, phone },
+      { userName, address, phone },
       { where: { id: userId } }
     );
     return UpdateUserInfo;

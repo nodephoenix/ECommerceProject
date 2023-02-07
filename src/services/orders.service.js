@@ -90,9 +90,10 @@ class OrdersService {
         return this.code.badRequest("해당 건은 조회할 수 없습니다.");
       }
       const orderDetailMap = orderDetail.map(detail => ({
+        image : detail.Product.image,
         productName : detail.Product.productName,
         createdAt : detail.createdAt,
-        count : detail.Product.count, 
+        count : detail.count, 
         price : detail.Product.price
       }))
 

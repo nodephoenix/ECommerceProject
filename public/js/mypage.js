@@ -14,7 +14,6 @@ function mypage() {
         <p><strong>주소:</strong> ${response.data.address}</p>
         <p><strong>전화번호:</strong> ${response.data.phone}</p>
         <button type="button" class="btn btn-primary" onclick="location.href='/mypage/fix'">수정</button>
-        <button type="button" class="btn btn-primary">삭제</button>
       </div>`
       $("#mypage").append(temp_html)
     },

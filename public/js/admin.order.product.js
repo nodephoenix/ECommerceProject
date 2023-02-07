@@ -8,6 +8,7 @@ function adminOrderProducts() {
     url: "/api/admin/products",
     data: {},
     success: function (response) {
+      console.log(response)
       let statusArray = [
         "출고 준비",
         "출고 완료",
@@ -20,7 +21,7 @@ function adminOrderProducts() {
                               <tr>
                                 <td style="width: 150px">
                                   <img
-                                    src="${element.items[0].image}"
+                                    src="${element.items[0]?.image}"
                                     class="img-thumbnail product-img"
                                     alt="..."
                                   />

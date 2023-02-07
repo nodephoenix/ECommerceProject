@@ -10,7 +10,7 @@ const productsController = new ProductsController();
 router.get('/products/:page', productsController.getProducts);
 
 // 상품 상세 목록 조회 o
-router.get('/products/:productId', productsController.getProductDetail);
+router.get('/products/detail/:productId', productsController.getProductDetail);
 
 
 module.exports = router;

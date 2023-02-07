@@ -17,7 +17,7 @@ let adminController;
 /** @type {jest.Mocked<AdminServiceType>} */
 let adminService;
 beforeEach(() => {
-  AdminService.mockReset();
+  AdminService.mockClear();
   adminController = new AdminController();
   adminService = adminController.adminService;
 });

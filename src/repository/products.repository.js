@@ -11,7 +11,8 @@ class ProductsRepository {
     return await productModel.findAll({
       raw: true,
       offset: offset,
-      limit : limit
+      limit : limit,
+      order : ['createdAt',"desc"]
     });
   };
 
@@ -26,6 +27,10 @@ class ProductsRepository {
       raw: true,
     });
   };
+
+  getPage = async() => {
+    return await productModel.findAndCountAll({})
+  }
 }
 
 module.exports = ProductsRepository;

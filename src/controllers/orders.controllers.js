@@ -21,7 +21,7 @@ class OrdersController {
 
       res.status(orderInfo.status).json(orderInfo.message);
     } catch {
-      res.status(this.code.Found().status).json(this.code.Found().message);
+      res.status(this.code.NotFound().status).json(this.code.NotFound().message);
     }
   };
 
@@ -32,7 +32,7 @@ class OrdersController {
 
       res.status(orderCartInfo.status).json(orderCartInfo.message);
     } catch {
-      res.status(this.code.Found().status).json(this.code.Found().message);
+      res.status(this.code.NotFound().status).json(this.code.NotFound().message);
     }
   };
 
@@ -44,7 +44,7 @@ class OrdersController {
 
       res.status(cancelOrder.status).json(cancelOrder.message);
     } catch {
-      res.status(this.code.Found().status).json(this.code.Found().message);
+      res.status(this.code.NotFound().status).json(this.code.NotFound().message);
     }
   };
 
@@ -55,7 +55,7 @@ class OrdersController {
 
       res.status(orderList.status).json(orderList.data);
     } catch {
-      res.status(this.code.Found().status).json(this.code.Found().message);
+      res.status(this.code.NotFound().status).json(this.code.NotFound().message);
     }
   };
 
@@ -69,7 +69,7 @@ class OrdersController {
       }
       res.status(orderDetail.status).json(orderDetail.data);
     } catch {
-      res.status(this.code.Found().status).json(this.code.Found().message);
+      res.status(this.code.NotFound().status).json(this.code.NotFound().message);
     }
   };
 }

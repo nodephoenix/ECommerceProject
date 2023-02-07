@@ -104,11 +104,7 @@
     <title>🤴어드민- 전체상품 목록🤴</title>
   </head>
   <body>
-    <% if(admin) { %>
-    <%- include('adminlogoutheader.ejs') %> 
-    <% } else if(login) { %> 
-    <%- include('logoutheader.ejs') %>
-    <% } else { %>
+    <% if(admin) { %> <%- include('adminlogoutheader.ejs') %> <% } else if(login) { %> <%- include('logoutheader.ejs') %> <% } else { %>
     <%-include('loginheader.ejs') %> <% } %>
     <!-- 탑바 -->
     <div class="top-bar">

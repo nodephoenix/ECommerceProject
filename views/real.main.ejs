@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>🖼그림사조 홈화면🎨</title>
+    <!-- //네비바 -->
+    <body>
+      <header id="header">
+      </header>
+
+</head>
+<style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      body {
+        background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(255,209,67,1) 0%, rgba(255,145,83,1) 90% );
+        background-repeat: repeat;
+        background-size: auto;
+      }
+      .text-center{
+        /* 제목 */
+        font-weight: bolder;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        color:#392062;
+      }
+      #text{
+        font-size: 18px;
+      }
+</style>
+<body>
+
+  <div class="d-flex h-100">
+    <div class="align-self-center mx-auto">
+      <h1 class="text-center">🖼Welcome to 그림사조 갤러리🖼</h1>
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <img src="../public/9.png" alt="Shopping Mall" class="img-fluid">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mx-auto text-center" id="text">
+          <p>그림은 천마디 말보다 가치가 있지만,</p>
+          <p>명작은 값을 매길 수 없다.</p>
+          <a href="#" class="btn btn-primary">입장하기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

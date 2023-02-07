@@ -40,7 +40,7 @@ function adminProductList() {
                                     >
                                       수정
                                     </button>
-                                    <button type="button" class="btn btn-danger" onclick="deleteItem(${element.id})">삭제</button>
+                                    <button type="button" class="btn btn-danger">삭제</button>
                                   </nav>
                                 </td>
                               </tr>
@@ -51,20 +51,6 @@ function adminProductList() {
   });
 }
 
-// 상품 삭제
-function deleteItem(productId) {
-  const check = confirm("상품을 삭제하시겠습니까?");
-  if (!check) {
-    return window.location.reload();
-  }
+// 상품 수정
 
-  $.ajax({
-    type: "delete",
-    url: `/api/admin/products/${productId}`,
-    data: { productId: productId },
-    success: function (response) {
-      alert("상품이 삭제되었습니다.");
-      window.location.reload();
-    },
-  });
-}
+// 상품 삭제

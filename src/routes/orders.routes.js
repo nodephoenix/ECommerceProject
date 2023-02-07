@@ -14,10 +14,10 @@ router.post("/orders", authMiddleware, ordersController.orderArt);
 // 장바구니 상품 주문하기 API o
 router.post("/orders/carts", authMiddleware, ordersController.orderCart);
 
-// 주문 취소하기 API x
+// 주문 취소하기 API o
 router.put("/orders/:orderId", authMiddleware, ordersController.cancelOrder);
 
-// 나의 주문 이력 조회 API x
+// 나의 주문 이력 조회 API o
 router.get("/orders/list", authMiddleware, ordersController.myOrdersList);
 
 // 자기 주문 상세 내역 조회 API x

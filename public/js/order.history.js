@@ -9,7 +9,6 @@ function ordersList() {
     url: `/api/orders/list`,
     data: {},
     success: function (response) {
-      console.log(response);
       response.forEach(element => {
         let temp_html = `<table style="margin: 20px auto 0 auto">
                           <tr>
@@ -33,13 +32,35 @@ function ordersList() {
                               </div>
                             </td>
                             <td>
-                              <button type="button" class="btn btn-success" style="margin-left: 20px">조회</button>
-                              <button type="button" class="btn btn-danger">취소</button>
+                              <button type="button" class="btn btn-success" style="margin-left: 20px" onclick="location.href='/order/detail?orderId=${element.id}'">조회</button>
+                              <button type="button" class="btn btn-danger" id="cancel" onclick="cancelOrder(${element.id})">취소</button>
                             </td>
                           </tr>
                         </table>`
           $("#orderHistory").append(temp_html);
       });
     },
+    error: function(error) {
+      if(error.status === 401) {
+        alert(error.responseJSON.errorMessage)
+        return window.location.replace('/login')
+      }
+      alert(error.responseJSON.errorMessage)
+    }
   });
+}
+
+function cancelOrder(orderId){
+  $.ajax({
+    type: "PUT",
+    url: `/api/orders/${orderId}`,
+    data: {},
+    success: function (response) {
+      alert(response)
+      window.location.reload();
+    },
+    error: function(error) {
+      alert(error.responseJSON)
+    }
+  })
 }

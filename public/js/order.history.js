@@ -33,7 +33,7 @@ function ordersList() {
                             </td>
                             <td>
                               <button type="button" class="btn btn-success" style="margin-left: 20px">조회</button>
-                              <button type="button" class="btn btn-danger" onclick="cancelOrder(${element.id})">취소</button>
+                              <button type="button" class="btn btn-danger" id="cancel" onclick="cancelOrder(${element.id})">취소</button>
                             </td>
                           </tr>
                         </table>`
@@ -41,6 +41,10 @@ function ordersList() {
       });
     },
     error: function(error) {
+      if(error.status === 401) {
+        alert(error.responseJSON.errorMessage)
+        return window.location.replace('/login')
+      }
       alert(error.responseJSON.errorMessage)
     }
   });
@@ -52,10 +56,10 @@ function cancelOrder(orderId){
     url: `/api/orders/${orderId}`,
     data: {},
     success: function (response) {
-      console.log(response)
+      alert(response)
+      window.location.reload();
     },
     error: function(error) {
-      console.log(error)
       alert(error.responseJSON)
     }
   })

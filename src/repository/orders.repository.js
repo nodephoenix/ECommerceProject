@@ -1,5 +1,5 @@
 "use strict";
-const { Product } =require('../../sequelize/models')
+const { Product, User } =require('../../sequelize/models')
 
 class OrdersRepository {
   constructor(Order, Order_product, Cart) {
@@ -82,6 +82,9 @@ class OrdersRepository {
     try {
       const orderListData = await this.order.findAll({
         where: { user_id: user_id },
+        include : [{
+          model: User
+        }]
       });
       return orderListData;
     } catch {

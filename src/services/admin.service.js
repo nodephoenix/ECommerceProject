@@ -50,6 +50,19 @@ class AdminService {
     return this.adminRepository.putProductsStatus(productId, status);
   }
 
+  async putOrderStatus(orderId) {
+    const orderData = await this.adminRepository.findOrder(orderId);
+    const orderStatus = orderData.status;
+    if (orderStatus === 4) {
+      return { message: "상태 변경 불가" };
+    }
+    orderData.status = orderStatus + 1;
+    const orderChangeData = await this.adminRepository.putOrderStatus(
+      orderData
+    );
+    return { message: "상태 변경 완료" };
+  }
+
   /**
    *
    * @param {number} userId

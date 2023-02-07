@@ -21,6 +21,11 @@ class UsersService {
     );
     return updateUserinfo;
   };
+
+  // 모든 유저 불러오기
+  getUsers = async (req, res, next) => {
+    return await this.usersRepository.getUsers();
+  };
 }
 
 module.exports = UsersService;

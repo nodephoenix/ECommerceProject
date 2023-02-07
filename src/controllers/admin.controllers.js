@@ -18,6 +18,7 @@ class AdminController {
     this.deleteProducts = this.deleteProducts.bind(this);
     this.getOrderProducts = this.getOrderProducts.bind(this);
     this.putProductsStatus = this.putProductsStatus.bind(this);
+    this.putOrderStatus = this.putOrderStatus.bind(this);
     this.putUserGrade = this.putUserGrade.bind(this);
   }
 
@@ -148,6 +149,18 @@ class AdminController {
     }
   }
 
+  async putOrderStatus(req, res, next) {
+    try {
+      const { orderId } = req.params;
+      const orders = await this.adminService.putOrderStatus(orderId);
+      return res.status(200).json(orders);
+    } catch (error) {
+      console.log("error", error);
+      return res.status(404).json({
+        message: "알 수 없는 오류가 일어났습니다.",
+      });
+    }
+  }
   /**
    *
    * @param {Request} req

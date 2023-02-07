@@ -9,7 +9,7 @@ function getProductDetail() {
 
   $.ajax({
     type: "GET",
-    url: `/api/products/${productId}`,
+    url: `/api/products/detail/${productId}`,
     data: {},
     success: function (response) {
       let productId = response.id;

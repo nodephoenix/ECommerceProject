@@ -2,6 +2,18 @@
 // @ts-check
 
 const express = require("express");
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./uploads");
+  },
+  filename: function (req, file, cb) {
+    const extArray = file.mimetype.split("/");
+    const extension = extArray[extArray.length - 1];
+    cb(null, file.fieldname + "-" + Date.now() + "." + extension);
+  },
+});
+const upload = multer({ storage: storage });
 const router = express.Router();
 
 const AdminController = require("../controllers/admin.controllers.js");
@@ -14,6 +26,7 @@ router.post(
   "/admin/products",
   authMiddleware,
   adminMiddleware,
+  upload.single("image"),
   adminController.registerProducts
 );
 
@@ -22,6 +35,7 @@ router.put(
   "/admin/products/:productId",
   authMiddleware,
   adminMiddleware,
+  upload.single("image"),
   adminController.editProducts
 );
 

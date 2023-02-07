@@ -1,11 +1,17 @@
 "use strict";
 
-const { Cart } = require("../../sequelize/models");
+const { Cart, Product, User } = require("../../sequelize/models");
 
 class CartsRepository {
   getCarts = async (userId) => {
-    const CartData = await Cart.findAll({
-      where: { user_id: userId },
+    const CartData = await User.findOne({
+      where: { id: userId },
+      include: [
+        {
+          model: Product,
+          as: "carts",
+        },
+      ],
     });
     return CartData;
   };

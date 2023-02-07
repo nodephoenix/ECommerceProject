@@ -19,6 +19,9 @@
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"
     ></script>
+
+    <!-- JQuery import -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <!-- CSS -->
     <style>
       * {
@@ -32,7 +35,11 @@
       }
       body {
         /* background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbdByfl%2FbtrVf7i5Uq5%2FjJ5afu7vrUKkgNGmzP2kAk%2Fimg.jpg"); */
-        background-image: linear-gradient(109.6deg, rgba(156, 252, 248, 1) 11.2%, rgba(110, 123, 251, 1) 91.1%);
+        background-image: linear-gradient(
+          109.6deg,
+          rgba(156, 252, 248, 1) 11.2%,
+          rgba(110, 123, 251, 1) 91.1%
+        );
         /* background-image: radial-gradient(circle farthest-corner at 52.1% -29.6%, rgba(144, 17, 105, 1) 0%, rgba(51, 0, 131, 1) 100.2%); */
         /* background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114)); */
         background-repeat: no-repeat;
@@ -110,10 +117,187 @@
         font-size: 30px;
       }
     </style>
+    <script>
+      $(document).ready(function () {
+        getCarts();
+      });
+      
+      function getCarts() {
+        let sum = 0
 
+        $.ajax({
+          method: "GET",
+          url: "/api/carts",
+          data: {},
+          success: function (response) {
+            let cartData = response.data.carts;
+            for (let i = 0; i < cartData.length; i++) {
+              let productName = cartData[i]["productName"];
+              let price = cartData[i]["price"];
+              let image = cartData[i]["image"];
+              let count = cartData[i]["Cart"]["count"];
+              let productId = cartData[i]["Cart"]["product_id"];
+              let cartDate = cartData[i]["Cart"]["updatedAt"];
+              let sumPrice = price * count
+              sum = sum + sumPrice
+              let temp_html = `      <table style="margin: 20px auto 0 auto">
+        <tr>
+          <td style="width: 150px">
+            <img
+              src=${image}
+              class="img-thumbnail product-img"
+              alt="..."
+            />
+          </td>
+          <td style="width: 300px">
+            <div class="card" style="width: 18rem">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">상품명: ${productName}</li>
+                <li class="list-group-item">가격: ${sumPrice}원</li>
+                <li class="list-group-item">담은 일자: ${cartDate}</li>
+                <li class="list-group-item">
+                  수량:
+                  <button
+                    type="button"
+                    class="btn btn-outline-success"
+                    id="minus" onclick="minus(${productId})"
+                  >
+                    -
+                  </button>
+                  <span id="${productId}count">${count}</span>
+                  <button
+                    type="button"
+                    class="btn btn-outline-success"
+                    id="plus" onclick="plus(${productId})"
+                  >
+                    +
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    style="margin-left: 35px"
+                    onclick="editCount(${productId})"
+                  >
+                    수정
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    style="margin-left: 35px"
+                    onclick="deleteItem(${productId})"
+                  >
+                    삭제
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      </table>
+      `;
+              $("#cart-list").append(temp_html);
+            }
+            document.getElementById('sumPrice').innerHTML = `${sum} 원`
+          },
+          error: function (error) {
+            if(error.status === 401){
+              alert(error.responseJSON.errorMessage)
+              return window.location.replace('/login')
+            }
+            alert(error.responseJSON.errorMessage)
+          },
+        });
+      }
+
+      // 수량 증가시키기
+      function plus(productId) {
+        let count = document.getElementById(`${productId}count`).innerText;
+        return (document.getElementById(`${productId}count`).innerText = Number(count) + 1);
+      }
+
+      // 수량 감소시키기
+      function minus(productId) {
+        let count = document.getElementById(`${productId}count`).innerText;
+        if (count <= 1) {
+          return count;
+        }
+        return (document.getElementById(`${productId}count`).innerText = Number(count) - 1);
+      }
+
+      // 수량 수정하기
+      function editCount(productId) {
+        let count = Number(document.getElementById(`${productId}count`).innerText);
+
+        $.ajax({
+          type: "PUT",
+          url: `/api/carts/${productId}`,
+          data: { productId: productId, count: count },
+          success: function (response) {
+            alert("담은 수량이 변경되었습니다.");
+            window.location.reload();
+          },
+        });
+      }
+
+      // 단일 상품 삭제하기
+      function deleteItem(productId) {
+        const check = confirm("상품을 삭제하시겠습니까?");
+        if(!check) {
+          return window.location.reload();
+        }
+
+        $.ajax({
+          type: "delete",
+          url: `/api/carts/${productId}`,
+          data: { productId: productId },
+          success: function (response) {
+            alert("상품이 장바구니에서 삭제되었습니다."); 
+          },
+        });
+      }
+
+      // 전체 상품 구매하기
+      function orderCart() {
+        const check = confirm("전체 상품을 주문하시겠습니까?");
+        if(!check){
+          return window.location.reload();
+        }
+        
+        $.ajax({
+          type: "POST",
+          url: `/api/orders/carts`,
+          data: {},
+          success: function (response) {
+            alert("주문이 완료되었습니다.");
+            window.location.reload();
+          },
+        });
+      }
+
+      // 장바구니 비우기
+      function deleteAllItems() {
+        $.ajax({
+          type: "DELETE",
+          url: `/api/carts`,
+          data: {},
+          success: function (response) {
+            confirm("장바구니를 비우시겠습니까?");
+            alert("장바구니 전체 상품이 삭제되었습니다.");
+            window.location.reload();
+          },
+        });
+      }
+
+    </script>
     <title>🖼장바구니🎨</title>
   </head>
   <body>
+    <% if(admin) { %>
+      <%- include('adminlogoutheader.ejs') %> 
+      <% } else if(login) { %> 
+      <%- include('logoutheader.ejs') %>
+      <% } else { %>
+      <%-include('loginheader.ejs') %> <% } %>
     <!-- 탑바 -->
     <div class="top-bar">
       <h1 style="color: #0a174e; font-weight: bold">🖼장바구니🎨</h1>
@@ -123,62 +307,38 @@
     </nav>
     <hr />
     <!-- 상품표시화면 -->
-    <table style="margin: 20px auto 0 auto">
-      <tr>
-        <td style="width: 150px">
-          <img
-            src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDGzHg%2FbtrXSxfvtYG%2FjgfqXjHXsLbtek9yidftEk%2Fimg.png"
-            class="img-thumbnail product-img"
-            alt="..."
-          />
-        </td>
-        <td style="width: 300px">
-          <div class="card" style="width: 18rem">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">상품명: 해커고양이</li>
-              <li class="list-group-item">가격: 50$</li>
-              <li class="list-group-item">
-                수량: <button type="button" class="btn btn-outline-success" id="minus">-</button> 1
-                <button type="button" class="btn btn-outline-success" id="plus">+</button>
-                <button type="button" class="btn btn-danger" style="margin-left: 35px">삭제</button>
-              </li>
-            </ul>
-          </div>
-        </td>
-      </tr>
-    </table>
-    <table style="margin: 20px auto 0 auto">
-      <tr>
-        <td style="width: 150px">
-          <img
-            src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDGzHg%2FbtrXSxfvtYG%2FjgfqXjHXsLbtek9yidftEk%2Fimg.png"
-            class="img-thumbnail product-img"
-            alt="..."
-          />
-        </td>
-        <td style="width: 300px">
-          <div class="card" style="width: 18rem">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">상품명: 해커고양이</li>
-              <li class="list-group-item">가격: 50$</li>
-              <li class="list-group-item">
-                수량: <button type="button" class="btn btn-outline-success" id="minus">-</button> 1
-                <button type="button" class="btn btn-outline-success" id="plus">+</button>
-                <button type="button" class="btn btn-danger" style="margin-left: 35px">삭제</button>
-              </li>
-            </ul>
-          </div>
-        </td>
-      </tr>
-    </table>
-    <!-- 상품금액 -->
+    <div id="cart-list"></div>
+    <!-- 상품금액 --> 
     <div class="payment">
-      <p>총 결제금액: 100$</p>
+      <p id="sumPrice">총 결제금액: 0원</p>
     </div>
     <!-- 하단 버튼바 -->
     <nav class="bottom-text" style="margin-top: 20px">
-      <button type="button" class="btn btn-success" style="font-weight: bold">구매하기</button>
-      <button type="button" class="btn btn-danger" style="margin-left: 20px; font-weight: bold">장바구니 비우기</button>
+      <span id="order">
+        <button
+          type="button"
+          class="btn btn-success"
+          style="font-weight: bold"
+          onclick="orderCart()"
+        >
+          구매하기
+        </button>
+      </span>
+      <span id="deleteAllItems">
+        <button
+        type="button"
+        class="btn btn-danger"
+        style="margin-left: 20px; font-weight: bold"
+        onclick="deleteAllItems()"
+        >
+        장바구니 비우기
+        </button>
+      </span>
+    </nav>     
     </nav>
+    <script>
+      // 장바구니 전체 삭제
+    </script>
   </body>
 </html>
+

@@ -47,7 +47,6 @@
         justify-content: center;
         height: 100%;
       }
-
       .input-bar {
         padding-top: 100px;
       }
@@ -57,31 +56,21 @@
         width: 300px;
         height: 30%;
       }
-
       .top-bar {
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
-        height: 25%;
-      }
-
-      .btn-top1 {
-        position: absolute;
-        top: 95px;
-        right: 400px;
-      }
-      .btn-top2 {
-        position: absolute;
-        top: 95px;
-        right: 300px;
+        height: 15%;
       }
       .product-description {
+        /* display: block; */
         text-align: center;
       }
       .product-img {
-        width: 400px;
-        height: 400px;
+        margin-top: 120px;
+        width: 250px;
+        height: 250px;
       }
       .detail {
         display: flex;
@@ -95,44 +84,24 @@
         font-weight: bold;
       }
     </style>
-
-    <title>🖼제품 상세 페이지🎨</title>
+    <title>:액자에_담긴_그림:제품 상세 페이지:예술:</title>
   </head>
   <body>
+    <% if(admin) { %>
+      <%- include('adminlogoutheader.ejs') %> 
+      <% } else if(login) { %> 
+      <%- include('logoutheader.ejs') %>
+      <% } else { %>
+      <%-include('loginheader.ejs') %> <% } %>
     <!-- 탑바 -->
     <div class="top-bar">
-      <h1 style="color: #0a174e; font-weight: bold">🖼제품 상세 페이지🎨</h1>
-      <!-- <button type="button" class="btn btn-dark btn-top1">회원가입</button>
-      <button type="button " class="btn btn-dark btn-top2">로그인</button> -->
+      <h1 style="color: #0A174E; font-weight: bold">:액자에_담긴_그림:제품 상세 페이지:예술:</h1>
     </div>
     <!-- 이미지 -->
     <nav class="detail">
-      <div class="product-description">
-        <div class="product-image">
-          <img
-            src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDGzHg%2FbtrXSxfvtYG%2FjgfqXjHXsLbtek9yidftEk%2Fimg.png"
-            class="img-thumbnail product-img"
-            alt="..."
-          />
-        </div>
-        <!-- 상품설명 -->
-        <div class="product-details">
-          <hr />
-          <br />
-          <h2>해커 고양이</h2>
-          <p>어둠속의 고양이가 해킹하는 모습을 그린 작품</p>
-          <h3>Price: $50</h3>
-          <br />
-          <div class="counter">
-            <li class="list-group-item">
-              수량: <button type="button" class="btn btn-outline-primary" id="minus">-</button> 1
-              <button type="button" class="btn btn-outline-primary" id="plus">+</button>
-            </li>
-          </div>
-          <button type="button" class="btn btn-success">구매하기</button>
-          <button type="button" class="btn btn-success" style="margin-left: 20px">카트담기</button>
-        </div>
-      </div>
     </nav>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="/js/product.detail.js"></script>
   </body>
 </html>
+    

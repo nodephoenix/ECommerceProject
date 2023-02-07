@@ -22,3 +22,7 @@ npm-debug.log*
 
 node_modules
 .env
+
+# 업로드 폴더
+/uploads
+!/uploads/.gitkeep

@@ -52,15 +52,13 @@ class AuthService {
         throw new Error("이메일 또는 비밀번호 확인해주세요");
       }
 
-      if (dbPassword === hashPassword) {
-        // jwt 토큰 생성
-        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET_KEY, {
-          algorithm: "HS256", // 해싱 알고리즘
-          expiresIn: process.env.JWT_EXPIRES_IN, // 토큰 유효 기간
-          issuer: "issuer", // 발행자
-        });
-        return token;
-      }
+      // jwt 토큰 생성
+      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET_KEY, {
+        algorithm: "HS256", // 해싱 알고리즘
+        expiresIn: process.env.JWT_EXPIRES_IN, // 토큰 유효 기간
+        issuer: "issuer", // 발행자
+      });
+      return token;
     } catch (error) {
       throw new Error(error.message);
     }

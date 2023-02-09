@@ -57,9 +57,6 @@ class AdminService {
       return { message: "상태 변경 불가" };
     }
     orderData.status = orderStatus + 1;
-    const orderChangeData = await this.adminRepository.putOrderStatus(
-      orderData
-    );
     return { message: "상태 변경 완료" };
   }
 

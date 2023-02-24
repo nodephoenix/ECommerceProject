@@ -1,5 +1,5 @@
 ---
-name: Custom issue template
+name: feature template
 about: Describe this issue template's purpose here.
 title: "\U0001F680 [feature]"
 labels: ''
